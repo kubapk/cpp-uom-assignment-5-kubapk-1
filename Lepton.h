@@ -1,26 +1,26 @@
 /*
 ____________________________________________
-PARTICLE CLASS
-(Part of PHYS30762 Assignment 4)
+LEPTON CLASS
+(Part of PHYS30762 Assignment 5)
 ____________________________________________
-This header file (interface) defines a class for a particle.
+This header file (interface) defines a class for a lepton particle.
 
 Created by Kuba Kane (ID: 11019699)
 Created on Sun 22 Mar 2026
 */
 
 //Include guard
-#ifndef PARTICLE_H
-#define PARTICLE_H
+#ifndef LEPTON_H
+#define LEPTON_H
 
 #include<iostream>
 #include<string>
 #include "FourMomentum.h"
 using std::string;
 
-class Particle
+class Lepton
 {
-private:
+protected:
     string name{"electron"};
     FourMomentum momentum;
     //FourMomentum is an object whose only data member is a unique_ptr, which need not be specified
@@ -32,22 +32,22 @@ private:
 
 public:
     //Default constructor
-    Particle() = default; //takes values as above
+    Lepton() = default; //takes values as above
 
     //Declare parameterised constructor
-    Particle(const string& name_in, const FourMomentum& momentum_in);
+    Lepton(const string& name_in, const FourMomentum& momentum_in);
     //Since the objects are large here, they are passed by reference to avoid unnecessary copying
     
     //Destructor
-    ~Particle() {}
+    ~Lepton() {}
 
     //Copy constructors
-    Particle(const Particle&) = default;
-    Particle(Particle&&) = default;
+    Lepton(const Lepton&) = default;
+    Lepton(Lepton&&) = default;
 
     //Assignment operators
-    Particle& operator=(const Particle&) = default;
-    Particle& operator=(Particle&&) = default;
+    Lepton& operator=(const Lepton&) = default;
+    Lepton& operator=(Lepton&&) = default;
 
     //Setters
     void set_name(const string& name_in);
@@ -59,7 +59,7 @@ public:
     FourMomentum& get_four_momentum() {return momentum;}
 
     //Prototyping friend functions
-    friend std::ostream& operator<<(std::ostream& os, const Particle& p);
+    friend std::ostream& operator<<(std::ostream& os, const Lepton& p);
 };
 
 

@@ -1,9 +1,9 @@
 /*
 ____________________________________________
 FOUR MOMENTUM CLASS
-(Part of PHYS30762 Assignment 4)
+(Part of PHYS30762 Assignment 5)
 ____________________________________________
-This header file (interface) defines a class for a particle.
+This header file (interface) defines a class for four momentum.
 
 Created by Kuba Kane (ID: 11019699)
 Created on Sun 22 Mar 2026

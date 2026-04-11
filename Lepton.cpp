@@ -1,10 +1,10 @@
 /*
 ____________________________________________
-PARTICLE IMPLEMENTATION
-(Part of PHYS30762 Assignment 4)
+LEPTON IMPLEMENTATION
+(Part of PHYS30762 Assignment 5)
 ____________________________________________
 This implementation file defines setters, constructors, and assignment
-operators for the "Particle" class.
+operators for the "Lepton" class.
 
 Created by Kuba Kane (ID: 11019699)
 Created on Wed 25 Mar 2026
@@ -13,12 +13,12 @@ Created on Wed 25 Mar 2026
 #include<iostream>
 #include<unordered_set> //to store unique elements
 #include <stdexcept>
-#include "Particle.h"
+#include "Lepton.h"
 
 
 //CONSTRUCTORS
 //Paramterised constructor
-Particle::Particle(const string& name_in, const FourMomentum& momentum_in) 
+Lepton::Lepton(const string& name_in, const FourMomentum& momentum_in) 
 {
     set_name(name_in); //Name check is done via setter to avoid code repetition
     set_four_momentum(momentum_in); //four_momentum_in can be passed in by the user using paramterised 
@@ -28,20 +28,20 @@ Particle::Particle(const string& name_in, const FourMomentum& momentum_in)
 
 //SETTERS
 //Setter for particle name
-void Particle::set_name(const string& name_in)
+void Lepton::set_name(const string& name_in)
 {
     name = validate_name(name_in);
 }
 
 
 //Setter for particle momentum
-void Particle::set_four_momentum(const FourMomentum& momentum_in) 
+void Lepton::set_four_momentum(const FourMomentum& momentum_in) 
 {momentum = momentum_in;}
 
 
 //MEMBER FUNCTIONS
 //Private member function to check for valid particle names
-string Particle::validate_name(const string& name_in)
+string Lepton::validate_name(const string& name_in)
 {
     static const std::unordered_set<string> valid_names = {
         "electron", "muon", "tau", "electron neutrino", "muon neutrino",
@@ -61,10 +61,10 @@ string Particle::validate_name(const string& name_in)
 
 
 //FRIEND FUNCTIONS
-//Friend function to print Particle data
-std::ostream& operator<<(std::ostream& os, const Particle& p)
+//Friend function to print Lepton data
+std::ostream& operator<<(std::ostream& os, const Lepton& p)
 {
-    os << "Particle: "<<p.name<<"\nFour momentum: "<<p.momentum;
+    os << "Lepton: "<<p.name<<"\nFour momentum: "<<p.momentum;
 
     return os;
 }
