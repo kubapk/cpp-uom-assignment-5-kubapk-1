@@ -29,13 +29,3 @@ Lepton::Lepton(const FourMomentum& momentum_in)
 //Setter for particle momentum
 void Lepton::set_four_momentum(const FourMomentum& momentum_in) 
 {momentum = momentum_in;}
-
-
-//FRIEND FUNCTIONS
-//Friend function to print Lepton data
-std::ostream& operator<<(std::ostream& os, const Lepton& p)
-{
-    os << "Lepton: \nFour momentum: "<<p.momentum;
-
-    return os;
-}

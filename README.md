@@ -9,4 +9,10 @@ This code was run on VSC using a Windows 11 device. The compilation line used wa
 
 
 ## Program Reasoning
-### Section 1
+### Unique or shared smart pointer
+FourMomentum class contains a unique smart pointer because...
+
+Changed Particle class name to Lepton
+Removed checks for particle name & particle name property of Lepton class
+Make momentum a protected member of Lepton class
+Add print function to Lepton class

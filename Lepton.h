@@ -51,8 +51,11 @@ public:
     const FourMomentum& get_four_momentum() const {return momentum;}
     FourMomentum& get_four_momentum() {return momentum;}
 
-    //Prototyping friend functions
-    friend std::ostream& operator<<(std::ostream& os, const Lepton& p);
+    //Member functions
+    void info()
+    {
+        std::cout<<"Lepton: four momentum = "<<momentum<<"e"<<std::endl;
+    }
 };
 
 
