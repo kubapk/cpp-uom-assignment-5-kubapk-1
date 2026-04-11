@@ -21,21 +21,16 @@ using std::string;
 class Lepton
 {
 protected:
-    string name{"electron"};
     FourMomentum momentum;
     //FourMomentum is an object whose only data member is a unique_ptr, which need not be specified
     //as it is handled by the default constructor within FourMomentum class (which specifies the unique
     //ptr to a vector of four "0.0" doubles)
-
-    //Private member function to check if name is valid
-    static string validate_name(const string& name_in);
-
 public:
     //Default constructor
     Lepton() = default; //takes values as above
 
     //Declare parameterised constructor
-    Lepton(const string& name_in, const FourMomentum& momentum_in);
+    Lepton(const FourMomentum& momentum_in);
     //Since the objects are large here, they are passed by reference to avoid unnecessary copying
     
     //Destructor
@@ -50,11 +45,9 @@ public:
     Lepton& operator=(Lepton&&) = default;
 
     //Setters
-    void set_name(const string& name_in);
     void set_four_momentum(const FourMomentum& momentum_in);
 
     //Getters
-    const string& get_name() const {return name;}
     const FourMomentum& get_four_momentum() const {return momentum;}
     FourMomentum& get_four_momentum() {return momentum;}
 
