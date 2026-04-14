@@ -25,6 +25,9 @@ protected:
     //FourMomentum is an object whose only data member is a unique_ptr, which need not be specified
     //as it is handled by the default constructor within FourMomentum class (which specifies the unique
     //ptr to a vector of four "0.0" doubles)
+
+    void base_info() const;
+    //private function to print info in base Lepton class which can be reused
 public:
     //Default constructor
     Lepton() = default; //takes values as above
@@ -34,7 +37,7 @@ public:
     //Since the objects are large here, they are passed by reference to avoid unnecessary copying
     
     //Destructor
-    ~Lepton() {}
+    virtual ~Lepton() {}
 
     //Copy constructors
     Lepton(const Lepton&) = default;
@@ -52,11 +55,7 @@ public:
     FourMomentum& get_four_momentum() {return momentum;}
 
     //Member functions
-    void info()
-    {
-        std::cout<<"Four momentum = "<<momentum<<std::endl;
-        //Move to implementation?
-    }
+    virtual void info() const = 0;
 
     //Prototyping friend functions
     friend FourMomentum operator+(const Lepton& lep1, const Lepton& lep2);

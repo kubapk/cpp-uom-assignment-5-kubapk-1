@@ -29,3 +29,35 @@ Lepton::Lepton(const FourMomentum& momentum_in)
 //Setter for particle momentum
 void Lepton::set_four_momentum(const FourMomentum& momentum_in) 
 {momentum = momentum_in;}
+
+
+//MEMBER FUNCTIONS
+//Protected function to print base info
+void Lepton::base_info() const
+{
+    std::cout<<"Four-momentum: "<<momentum<<std::endl;
+}
+
+
+//FRIEND FUNCTIONS
+//Friend function to add FourMomentum of 2 leptons
+FourMomentum operator+(const Lepton& lep1, const Lepton& lep2)
+{
+    //Using (+, -, -, -) convention for Minkowski matrix (dot product)
+    return(FourMomentum(
+        lep1.momentum.get_E()+lep2.momentum.get_E(),
+        lep1.momentum.get_px()+lep2.momentum.get_px(),
+        lep1.momentum.get_py()+lep2.momentum.get_py(),
+        lep1.momentum.get_pz()+lep2.momentum.get_pz()));
+}
+
+
+//Friend function to take dot product of 2 leptons
+double dotProduct(const Lepton& lep1, const Lepton& lep2)
+//p.q = E_p*E_q - p_x*q_x - p_y*q_y - p_z*p_z
+{
+    return(lep1.momentum.get_E()*lep2.momentum.get_E()
+    - lep1.momentum.get_px()*lep2.momentum.get_px()
+    - lep1.momentum.get_py()*lep2.momentum.get_py()
+    - lep1.momentum.get_pz()*lep2.momentum.get_pz());
+}

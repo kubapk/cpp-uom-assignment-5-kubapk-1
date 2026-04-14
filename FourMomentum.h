@@ -63,10 +63,6 @@ public:
     //get_E() is a const function which returns a reference to a const double (ensures *this
     //is not modified)
 
-    //Prototyping member functions (overload operators)
-    FourMomentum operator+(const FourMomentum& fm) const;
-    double dotProduct(const FourMomentum& fm) const;
-
     //Prototyping friend functions
     friend std::ostream& operator<<(std::ostream& os, const FourMomentum& fm);
 };
