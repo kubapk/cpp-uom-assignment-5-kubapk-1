@@ -29,3 +29,4 @@ Why not have operations as member functions of Particle class? This implies that
  - Electrons, muons, taus and neutrinos class - add all of them as separate implementation & header files?
  - Pg7 PPT: sums two four-vectors = sums two four momenta that are hosted in a particle class
  - Check where all consts need to go 
+ - QUICK: make lepton an abstract class, define friend functions, remove friend funcs from momentum class - then just do new changes to electron/muon etc. How will you implement everything? Idea of invariant mass being well defined and not energy? 
