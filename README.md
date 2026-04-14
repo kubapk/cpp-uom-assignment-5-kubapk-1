@@ -40,4 +40,4 @@ Actually both seem to have the problem: What if the user uses a setter to set a 
 
  Solution: Remove setters from FourMomentum object - only allow everything to be set through Lepton class. Problem - lepton class doesn't have mass? So new setters & getters for all derived classes from Lepton?? Even if you just had a check which allowed E input and checked that together with px, py, pz it gave correct invariant mass, the user could later chang px and break this.
 
- Once that is done, you need to add mass and charge proeprties to derived classes, and think of adding more relating to interaction with particle detector. Once you have that idea clear, but not implemented, add antiparticle structure to classes.
+ Once that is done, you need to add mass and charge proeprties to derived classes, and think of adding more relating to interaction with particle detector. Once you have that idea clear, but not implemented, add antiparticle structure to classes. NOT TOO LONG ON THIS - THERE IS MUCH MORE BEYOND!
