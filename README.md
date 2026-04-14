@@ -20,6 +20,10 @@ In assignment 4, the FourMomentum class contained member function `operator+` wh
 
 Why not have operations as member functions of Particle class? This implies that the two FourMomentum objects are not equal - one FourMomentum needs to call another FourMomentum object with which it wishes to perform a sum or dotProduct operation. Member functions should represent what an object does by itself.
 
+### Invariant mass
+Including mass as a derived property is good because each particle in SM has different invariant mass. This however, links to the FourMomentum since $m^2 = E^2 - p^2$. So if a user defines (E, px, py, pz), this must give the same invariant mass. Set_px would crash because if user wanted to change it, invariant mass would change. Another option could be only let the user enter (px, py, pz) and find E based on the invariant mass. This would need to change dynamics of code at the moment, which requires a FourMomentum object to be entered, and as it is a requirement of the assignment to have Lepton class contain a FourMomentum object, it is hard to get around this. The FourMomentum class in some ways would need to take in the invariant mass in its constructors to perform the checks, as otherwise Lepton class would need to take in px, py, pz parameters as well as FourMomentum object which doesn't make much sense. Also, it assumes the user knows (px, py, pz) and doesn't know E, and it does not allow the reverse.
+
+Actually both seem to have the problem: What if the user uses a setter to set a momentum component afterwards?
 
 ## Notes 
  - Changed Particle class name to Lepton
@@ -31,3 +35,9 @@ Why not have operations as member functions of Particle class? This implies that
  - Check where all consts need to go 
  - QUICK: make lepton an abstract class, define friend functions, remove friend funcs from momentum class - then just do new changes to electron/muon etc. How will you implement everything? Idea of invariant mass being well defined and not energy? 
  - Need Lepton class to have constructor? Allowed if abstract?
+
+ - IDEA: change it to be Lepton containing smart pointer to FourMomentum object with E, px, py, pz. Base class (Lepton) allows user to enter these - tbh don't need to define it since its abstract so user shouldn't need to construct it. Then add mass property to derived classes - and give then a new constructor which allows you to find E from inputting px, py, pz. What if user uses set_px? test_electron.momentum.set_px(10) -> should change E
+
+ Solution: Remove setters from FourMomentum object - only allow everything to be set through Lepton class. Problem - lepton class doesn't have mass? So new setters & getters for all derived classes from Lepton?? Even if you just had a check which allowed E input and checked that together with px, py, pz it gave correct invariant mass, the user could later chang px and break this.
+
+ Once that is done, you need to add mass and charge proeprties to derived classes, and think of adding more relating to interaction with particle detector. Once you have that idea clear, but not implemented, add antiparticle structure to classes.
