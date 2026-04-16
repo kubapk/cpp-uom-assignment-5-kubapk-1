@@ -54,11 +54,13 @@ public:
     Lepton& operator=(Lepton&&); //move operation
 
     //Setters
-    void set_mass(const double& mass_in);
-    void set_charge(const double& charge_in);
+    //Should not have setters for mass and charge as they are fixed properties of a 
+    //specific Lepton
     void set_px(const double& x_momentum_in);
     void set_py(const double& y_momentum_in);
     void set_pz(const double& z_momentum_in);
+    //Cannot have setter for FourMomentum as mass is a defined property and should not
+    //be entered by the user
 
     //Getters
     const FourMomentum& get_four_momentum() const {return *momentum_ptr;}
