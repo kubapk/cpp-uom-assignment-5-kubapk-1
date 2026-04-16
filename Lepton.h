@@ -23,9 +23,9 @@ class Lepton
 {
 protected:
     //Smart pointer to FourMomentum object
-    std::unique_ptr<FourMomentum> momentum_ptr;
     double mass;
     double charge;
+    std::unique_ptr<FourMomentum> momentum_ptr;
 
     //Protected function to print info in base Lepton class which can be reused
     void base_info() const;

@@ -25,15 +25,19 @@ class Electron : public Lepton
 {
 private:
     //Data members unique to the Electron
-
-public:
-    //Parameterised constructor (with new data members)
     
+public:
+    //Default constructor
+    Electron();
+
+    //Parameterised constructor (with new data members)
+    Electron(const double mass_in, const double charge_in, const double px_in,
+    const double py_in, const double pz_in);
 
     //Prototyping member functions
-    void info()
+    void info() const
     {
-        Lepton::info(); //call info function from Lepton
+        Lepton::base_info(); //call info function from Lepton
         //Print properties unique to electron
         //NEEDS TO BE MOVED TO IMPLEMENTATION FILE
     }

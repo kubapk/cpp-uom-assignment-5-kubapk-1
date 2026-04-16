@@ -82,8 +82,8 @@ void Lepton::set_px(const double& px_in)
     double pz = (*momentum_ptr).get_pz();
 
     //Set new four momentum with new px_in
-    momentum_ptr = std::make_unique<FourMomentum>((compute_energy(mass, px_in, py, pz), 
-    px_in, py, pz));
+    momentum_ptr = std::make_unique<FourMomentum>(compute_energy(mass, px_in, py, pz), 
+    px_in, py, pz);
 }
 
 //Setter for y momentum
@@ -94,8 +94,8 @@ void Lepton::set_py(const double& py_in)
     double pz = (*momentum_ptr).get_pz();
 
     //Set new four momentum with new px_in
-    momentum_ptr = std::make_unique<FourMomentum>((compute_energy(mass, px, py_in, pz), 
-    px, py_in, pz));
+    momentum_ptr = std::make_unique<FourMomentum>(compute_energy(mass, px, py_in, pz), 
+    px, py_in, pz);
 }
 
 //Setter for z momentum
@@ -106,8 +106,8 @@ void Lepton::set_pz(const double& pz_in)
     double py = (*momentum_ptr).get_py();
 
     //Set new four momentum with new px_in
-    momentum_ptr = std::make_unique<FourMomentum>((compute_energy(mass, px, py, pz_in), 
-    px, py, pz_in));
+    momentum_ptr = std::make_unique<FourMomentum>(compute_energy(mass, px, py, pz_in), 
+    px, py, pz_in);
 }
 
 
@@ -119,7 +119,7 @@ void Lepton::base_info() const
 }
 
 //Protected function to find energy
-static double compute_energy(const double mass_in, const double x_momentum_in, 
+double Lepton::compute_energy(const double mass_in, const double x_momentum_in, 
     const double y_momentum_in, const double z_momentum_in)
     // E^2 = m^2 + p^2
     {
