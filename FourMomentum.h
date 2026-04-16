@@ -15,14 +15,12 @@ Created on Sun 22 Mar 2026
 
 #include<iostream>
 #include<vector>
-#include<memory> //to use unique_ptr
 using std::vector;
 
 class FourMomentum
 {
 private:
-    //Declare "four_momentum_ptr" as a unique pointer to a vector of doubles
-    std::unique_ptr<vector<double>> four_momentum_ptr;
+    double energy, x_momentum, y_momentum, z_momentum; //MeV
     
     //Private function to check energy is not negative
     static void validate_energy(const double E);
@@ -38,30 +36,14 @@ public:
     //Declare destructor
     ~FourMomentum();
 
-    //Declare copy constructors
-    FourMomentum(const FourMomentum&); //copy operation
-    FourMomentum(FourMomentum&&); //move operation 
-    //copy is const since copying should not change original copy
-    //move is not const since FourMomentum pointer passed in will be given new pointer (null)
-
-    //Declare assignment operators
-    FourMomentum& operator=(const FourMomentum&); //copy operation
-    FourMomentum& operator=(FourMomentum&&); //move operation
-
     //Setters
-    void set_E(const double energy_in);
-    void set_px(const double x_momentum_in);
-    void set_py(const double z_momentum_in);
-    void set_pz(const double y_momentum_in);
-    //Not const funcs as four momentum is modified
+    //Do not allow user to set components of FourMomentum object
 
     //Getters
-    const double& get_E() const {return (*four_momentum_ptr)[0];}
-    const double& get_px() const {return (*four_momentum_ptr)[1];}
-    const double& get_py() const {return (*four_momentum_ptr)[2];}
-    const double& get_pz() const {return (*four_momentum_ptr)[3];}
-    //get_E() is a const function which returns a reference to a const double (ensures *this
-    //is not modified)
+    const double& get_E() const {return energy;}
+    const double& get_px() const {return x_momentum;}
+    const double& get_py() const {return y_momentum;}
+    const double& get_pz() const {return z_momentum;}
 
     //Prototyping friend functions
     friend std::ostream& operator<<(std::ostream& os, const FourMomentum& fm);

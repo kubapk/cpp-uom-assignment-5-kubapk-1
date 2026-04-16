@@ -11,18 +11,24 @@ Created on Wed 25 Mar 2026
 */
 
 #include<iostream>
-#include<unordered_set> //to store unique elements
+#include<memory> //for smart pointer
 #include <stdexcept>
+#include <cmath> //for sqrt
 #include "Lepton.h"
 
 
 //CONSTRUCTORS
+//Default constructor
+
+
+
 //Paramterised constructor
-Lepton::Lepton(const FourMomentum& momentum_in) 
-{
-    set_four_momentum(momentum_in); //four_momentum_in can be passed in by the user using paramterised 
-    //constructor FourMomentum(E, px, py, pz)
-}
+Lepton::Lepton(const double mass_in, const double charge_in, const double px_in,
+    const double py_in, const double pz_in) :
+    mass{mass_in}, charge{charge_in}, 
+    momentum_ptr{std::make_unique<FourMomentum>(compute_energy(mass_in, px_in, py_in, pz_in), 
+    px_in, py_in, pz_in)} 
+    {}
 
 
 //SETTERS
@@ -37,6 +43,15 @@ void Lepton::base_info() const
 {
     std::cout<<"Four-momentum: "<<momentum<<std::endl;
 }
+
+//Protected function to find energy
+static double compute_energy(const double mass_in, const double x_momentum_in, 
+    const double y_momentum_in, const double z_momentum_in)
+    // E^2 = m^2 + p^2
+    {
+        return std::sqrt(mass_in*mass_in + x_momentum_in*x_momentum_in + y_momentum_in*y_momentum_in
+        + z_momentum_in*z_momentum_in);
+    }
 
 
 //FRIEND FUNCTIONS

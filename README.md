@@ -25,6 +25,9 @@ Including mass as a derived property is good because each particle in SM has dif
 
 Actually both seem to have the problem: What if the user uses a setter to set a momentum component afterwards?
 
+### 0/3/5 rule
+//
+
 ## Notes 
  - Changed Particle class name to Lepton
  - Removed checks for particle name & particle name property of Lepton class
@@ -35,6 +38,7 @@ Actually both seem to have the problem: What if the user uses a setter to set a 
  - Check where all consts need to go 
  - QUICK: make lepton an abstract class, define friend functions, remove friend funcs from momentum class - then just do new changes to electron/muon etc. How will you implement everything? Idea of invariant mass being well defined and not energy? 
  - Need Lepton class to have constructor? Allowed if abstract?
+ - Charge should be double or int?
 
  - IDEA: change it to be Lepton containing smart pointer to FourMomentum object with E, px, py, pz. Base class (Lepton) allows user to enter these - tbh don't need to define it since its abstract so user shouldn't need to construct it. Then add mass property to derived classes - and give then a new constructor which allows you to find E from inputting px, py, pz. What if user uses set_px? test_electron.momentum.set_px(10) -> should change E
 
