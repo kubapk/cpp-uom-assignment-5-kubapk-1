@@ -21,11 +21,12 @@ Created on Wed 25 Mar 2026
 //Paramterised constructor
 Lepton::Lepton(const double mass_in, const double charge_in, const double px_in,
     const double py_in, const double pz_in, bool is_anti) :
-    mass{mass_in}, 
-    charge{is_anti? -charge_in : charge_in}, //if true, if false
-    momentum_ptr{std::make_unique<FourMomentum>(compute_energy(mass_in, px_in, py_in, pz_in), 
-    px_in, py_in, pz_in)} 
-    {}
+        mass{mass_in}, 
+        charge{is_anti? -charge_in : charge_in}, //if true, if false
+        momentum_ptr{std::make_unique<FourMomentum>(compute_energy(mass_in, px_in, py_in, pz_in), 
+        px_in, py_in, pz_in)},
+        is_antiparticle{is_anti}
+        {}
 
 //Copy constructor
 //Smart pointers are not copyable by default, so we must do deep copy - copy elements manually

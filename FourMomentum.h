@@ -34,7 +34,7 @@ public:
         const double z_momentum_in);
 
     //Declare destructor
-    ~FourMomentum();
+    ~FourMomentum() = default;
 
     //Setters
     //Do not allow user to set components of FourMomentum object

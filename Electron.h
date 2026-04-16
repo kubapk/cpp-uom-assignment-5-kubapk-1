@@ -25,8 +25,10 @@ class Electron : public Lepton
 {
 private:
     //Data members unique to the Electron
-    static constexpr double electron_mass{0.511};
-    static constexpr double electron_charge{-1};
+    static constexpr double ELECTRON_MASS{0.511};
+    static constexpr double ELECTRON_CHARGE{-1};
+    //static constexpr bool is_stable{true};
+    //This is best to have as a property which can be printed in Lepton already
     
 public:
     //Default constructor

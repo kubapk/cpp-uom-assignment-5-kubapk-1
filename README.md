@@ -40,22 +40,22 @@ constexpr specifies that the value of an object or a function can be evaluated a
 Think of FourMomentum as an object. get_four_momentum will give us FourMomentum(E, px, py, pz), but if you print it out then it will use friend function to print it how you have specified.
 
 ### Antiparticle
-Introduce boolean parameter in Lepton base class, which is true if it is an antiparticle, and false if it is not. The charge is then set to be negative of inputted charge if antiparticle. Note the user can never in reality set the charge - derived classes specify this, and do not have setters for charge. If user does not specify boolean parameter it defaults to false. 
+Introduce boolean parameter in Lepton base class `is_antiparticle`, which is true if it is an antiparticle, and false if it is not. The charge is then set to be negative of inputted charge if antiparticle. Note the user can never in reality set the charge - derived classes specify this, and do not have setters for charge. If user does not specify boolean parameter it defaults to false. 
 
 Setting bool to be default false only needs to be done in class file, and not implementation file (in main constructor defined as in class file) - implementation takes whatever else.
 
+An issue ocurred where muon was printing as antimuon even though `is_antiparticle` is false by default. This arised because `is_antiparticle` was not updated using the constructor, meaning when the constructor was called, `is_antiparticle` was not updated. This required adding a line to constructor which set `is_antiparticle` to match input from constructor.
+
+Shouldn't be `const bool` because we want to print out a specific text in the `info()` function depending on value of bool. But can have `bool const` because it just means the Muon object which calls it cannot be modified. Also shouldn't be `static bool` as it depends on the time_in_detector specified for the specific Muon object (not idependent of object properties).
+
+### Destructor
+The destructor in FourMomentum was not defined (not even as default) in FourMomentum class when changes were made to remove the delete destructor message - this caused there to be an error when the FourMomentum object was attempted to be desrtoyed. This is a result of the line `std::unique_ptr<FourMomentum> momentum_ptr;` which when goes out of scope must have a defined destructor. 
+
 ## Notes 
- - Changed Particle class name to Lepton
- - Removed checks for particle name & particle name property of Lepton class
- - Make momentum a protected member of Lepton class
- - Add print function to Lepton class
- - Electrons, muons, taus and neutrinos class - add all of them as separate implementation & header files?
  - Pg7 PPT: sums two four-vectors = sums two four momenta that are hosted in a particle class
  - Check where all consts need to go 
- - QUICK: make lepton an abstract class, define friend functions, remove friend funcs from momentum class - then just do new changes to electron/muon etc. How will you implement everything? Idea of invariant mass being well defined and not energy? 
- - Need Lepton class to have constructor? Allowed if abstract?
- - Charge should be double or int? LEPTONS ALWAYS HAVE INT CHARGES
- - Potentially make get_mass and get_charge virtual funcs in Lepton class and override them in each derived class
+ - Charge should be double or int? LEPTONS ALWAYS HAVE INT CHARGES - more specific requirements? But user never gets to change charge.
+ - Potentially make get_mass and get_charge virtual funcs in Lepton class and override them in each derived class - bit more manual, code repeating
  - Change names of mass to rest mass and charge to relative charge?
  - Getters get_mass etc do not return unit while get_four_momentum does - but how to do units without printing in getters? Then cannot pass mass into something else.
  - Give number of decimal places to four momentum energy when calculated - see previous weeks
@@ -66,6 +66,11 @@ Setting bool to be default false only needs to be done in class file, and not im
  - Tau can have unique property - decay 
  - Have it so properties are always defined and never just in print function?
  - E.g. tau takes in some input number which the user can decide, and this is returned or some calculation is returned as a property of that particle - BUT JUST DO SIMPLE ONES FIRST SO THAT YOU HAVE THE IDEA OF DERIVED CLASSES - THESE CAN BE MODIFIED LATER!
+ - Has decayed as a data member of muon? That way is a specified property, and then can use getter to get that property - just ensure if time in detector is updated, so is has_decayed.
+ - Maximum time for time_in_detector? They shouldn't be able to enter 100s of years
+ - random decay times using exponential distributions
+ - Has decayed as a virtual func in Lepton and returns false in Electron?
+ - Time in detector doesn't make sense - cannot measure 10^-6 seconds of existence - see random decay times above
 
  - IDEA: change it to be Lepton containing smart pointer to FourMomentum object with E, px, py, pz. Base class (Lepton) allows user to enter these - tbh don't need to define it since its abstract so user shouldn't need to construct it. Then add mass property to derived classes - and give then a new constructor which allows you to find E from inputting px, py, pz. What if user uses set_px? test_electron.momentum.set_px(10) -> should change E
 
@@ -81,3 +86,7 @@ Setting bool to be default false only needs to be done in class file, and not im
  [3] https://www.geeksforgeeks.org/cpp/understanding-constexper-specifier-in-cpp/
 
  [4] https://www.geeksforgeeks.org/cpp/sqrt-sqrtl-sqrtf-cpp/
+
+
+- Changed Particle class name to Lepton
+ - Removed checks for particle name & particle name property of Lepton class

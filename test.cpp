@@ -4,6 +4,7 @@
 #include<vector>
 #include <stdexcept>
 #include "Electron.h"
+#include "Muon.h"
 using std::vector;
 
 
@@ -60,6 +61,29 @@ int main()
         std::cout<<"\nCreate positron"<<std::endl;
         Electron positron_1{Electron(0.0, 0.0, 0.0, true)};
         positron_1.info();
+
+        //Create a default muon
+        std::cout<<"\nCreating a muon"<<std::endl;
+        Muon muon_1{Muon()};
+        muon_1.info();
+        std::cout<<"\nMuon decayed? "<<muon_1.has_decayed()<<std::endl;
+        std::cout<<"\nMuon time in detector via getter: "
+        <<muon_1.get_time_in_detector()<<std::endl;
+
+        //Create muon via parameterised constructor
+        std::cout<<"\nCreating another muon"<<std::endl;
+        Muon muon_2{Muon(10, 10, 10, 1e-5)};
+        muon_2.info();
+
+        //Change muon time in detector
+        std::cout<<"\nChanging time in detector"<<std::endl;
+        muon_2.set_time_in_detector(1e-12);
+        muon_2.info();
+
+        //Create anti-muon via parameterised constructor
+        std::cout<<"\nCreating anti muon"<<std::endl;
+        Muon antimuon{Muon(10, 10, 10, 1e-10, true)};
+        antimuon.info();
 
     }
     catch(const std::exception& e)

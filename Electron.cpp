@@ -15,12 +15,12 @@ Created on Tue 14 Apr 2026
 //CONSTRUCTORS
 //Default constructor
 Electron::Electron() :
-    Lepton(electron_mass, electron_charge, 0, 0, 0)
+    Lepton(ELECTRON_MASS, ELECTRON_CHARGE, 0, 0, 0)
 {}
 
 //Paramterised constructor
 Electron::Electron(double px_in, double py_in, double pz_in, bool is_anti) :
-    Lepton(electron_mass, electron_charge, px_in, py_in, pz_in, is_anti)
+    Lepton(ELECTRON_MASS, ELECTRON_CHARGE, px_in, py_in, pz_in, is_anti)
 {}
 
 
@@ -33,6 +33,4 @@ void Electron::info() const
         std::cout<<"Particle: electron"<<std::endl;
 
     Lepton::base_info(); //call info function from Lepton
-    //Print properties unique to electron
-    //NEEDS TO BE MOVED TO IMPLEMENTATION FILE
 }
