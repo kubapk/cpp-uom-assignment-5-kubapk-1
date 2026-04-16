@@ -22,10 +22,9 @@ using std::string;
 class Lepton
 {
 protected:
-    //Smart pointer to FourMomentum object
     double mass;
     double charge;
-    std::unique_ptr<FourMomentum> momentum_ptr;
+    std::unique_ptr<FourMomentum> momentum_ptr; //Smart pointer to FourMomentum object
     bool is_antiparticle;
 
     //Protected function to print info in base Lepton class which can be reused

@@ -12,7 +12,7 @@ int main()
     try
     {
         //Cannot create a Lepton - it is an abstract class
-        //Lepton lepton_test{Lepton(FourMomentum(10, 2, 3, 1))};
+        //Lepton lepton_test{Lepton(10, 1, 0, 0, 0)};
 
         //Create an electron
         std::cout<<"\nCreating new electron"<<std::endl;

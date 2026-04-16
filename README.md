@@ -54,7 +54,7 @@ Setting bool to be default false only needs to be done in class file, and not im
  - Check where all consts need to go 
  - QUICK: make lepton an abstract class, define friend functions, remove friend funcs from momentum class - then just do new changes to electron/muon etc. How will you implement everything? Idea of invariant mass being well defined and not energy? 
  - Need Lepton class to have constructor? Allowed if abstract?
- - Charge should be double or int?
+ - Charge should be double or int? LEPTONS ALWAYS HAVE INT CHARGES
  - Potentially make get_mass and get_charge virtual funcs in Lepton class and override them in each derived class
  - Change names of mass to rest mass and charge to relative charge?
  - Getters get_mass etc do not return unit while get_four_momentum does - but how to do units without printing in getters? Then cannot pass mass into something else.
@@ -63,6 +63,9 @@ Setting bool to be default false only needs to be done in class file, and not im
  - Remove energy check as due to calculation from mass, the energy will always be positive?
  - Should bool be const? 
  - Include lepton name in Lepton class, so that it can be a property which you get and is later changed?
+ - Tau can have unique property - decay 
+ - Have it so properties are always defined and never just in print function?
+ - E.g. tau takes in some input number which the user can decide, and this is returned or some calculation is returned as a property of that particle - BUT JUST DO SIMPLE ONES FIRST SO THAT YOU HAVE THE IDEA OF DERIVED CLASSES - THESE CAN BE MODIFIED LATER!
 
  - IDEA: change it to be Lepton containing smart pointer to FourMomentum object with E, px, py, pz. Base class (Lepton) allows user to enter these - tbh don't need to define it since its abstract so user shouldn't need to construct it. Then add mass property to derived classes - and give then a new constructor which allows you to find E from inputting px, py, pz. What if user uses set_px? test_electron.momentum.set_px(10) -> should change E
 

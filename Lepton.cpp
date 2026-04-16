@@ -112,6 +112,7 @@ void Lepton::set_pz(const double& pz_in)
 //Protected function to print base info
 void Lepton::base_info() const
 {
+    std::cout<<"Spin: 0.5"<<std::endl;
     std::cout<<"Mass: "<<mass<<"MeV"<<std::endl;
     std::cout<<"Charge: "<<charge<<"e"<<std::endl;
     std::cout<<"Four-momentum: "<<*momentum_ptr<<std::endl;
