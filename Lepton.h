@@ -36,7 +36,7 @@ protected:
 
 public:
     //Default constructor
-    Lepton();
+    Lepton() = delete; //no "default lepton"
 
     //Declare parameterised constructor
     Lepton(const double mass_in, const double charge_in, const double px_in,
@@ -56,9 +56,9 @@ public:
     //Setters
     //Should not have setters for mass and charge as they are fixed properties of a 
     //specific Lepton
-    void set_px(const double& x_momentum_in);
-    void set_py(const double& y_momentum_in);
-    void set_pz(const double& z_momentum_in);
+    void set_px(const double& px_in);
+    void set_py(const double& py_in);
+    void set_pz(const double& pz_in);
     //Cannot have setter for FourMomentum as mass is a defined property and should not
     //be entered by the user
 

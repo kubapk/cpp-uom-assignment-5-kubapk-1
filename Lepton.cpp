@@ -115,16 +115,18 @@ void Lepton::set_pz(const double& pz_in)
 //Protected function to print base info
 void Lepton::base_info() const
 {
+    std::cout<<"Mass: "<<mass<<"MeV"<<std::endl;
+    std::cout<<"Charge: "<<charge<<"e"<<std::endl;
     std::cout<<"Four-momentum: "<<*momentum_ptr<<std::endl;
 }
 
 //Protected function to find energy
-double Lepton::compute_energy(const double mass_in, const double x_momentum_in, 
-    const double y_momentum_in, const double z_momentum_in)
+double Lepton::compute_energy(const double mass_in, const double px_in, 
+    const double py_in, const double pz_in)
     // E^2 = m^2 + p^2
     {
-        return std::sqrt(mass_in*mass_in + x_momentum_in*x_momentum_in + y_momentum_in*y_momentum_in
-        + z_momentum_in*z_momentum_in);
+        return std::sqrt(mass_in*mass_in + px_in*px_in + py_in*py_in
+        + pz_in*pz_in);
     }
 //Static function to ensure the energy cannot be modified by any setters or getters during run time 
 //- belongs to the class rather than any specific object of the class

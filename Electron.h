@@ -25,14 +25,15 @@ class Electron : public Lepton
 {
 private:
     //Data members unique to the Electron
+    static constexpr double electron_mass{0.511};
+    static constexpr double electron_charge{-1};
     
 public:
     //Default constructor
-    Electron();
+    Electron(); //electron at rest (px=py=pz=0)
 
     //Parameterised constructor (with new data members)
-    Electron(const double mass_in, const double charge_in, const double px_in,
-    const double py_in, const double pz_in);
+    Electron(const double px_in, const double py_in, const double pz_in);
 
     //Prototyping member functions
     void info() const

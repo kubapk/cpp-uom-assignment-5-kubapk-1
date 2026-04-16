@@ -28,6 +28,17 @@ Actually both seem to have the problem: What if the user uses a setter to set a 
 ### 0/3/5 rule
 The FourMomentum object has the data members E, px, py, pz which are all doubles. As there are no pointers involved (or any other objects of non-class type), we use the rule of 0 - FourMomentum object does not need to have user-defined special member functions. Since the Lepton class involves a smart pointer, we must implement the rule of 3 at least. As the assignment requires `std::move` of Electron (derived from Lepton), we need move semantics and so must implement the rule of 5.
 
+### Compile line
+Compile line must include all classes defined even if they are derived (code is still needed).
+
+### Static functions
+Even if in class they are static, in impelementation cannot be static - must be called from class name so that they are linked together.
+
+### constexpr
+constexpr specifies that the value of an object or a function can be evaluated at compile-time and the expression can be used in other constant expressions. Makes it obvious these are physical constants and there are no changes of setting this incorrectly. Useful for electron_mass and electron_charge as we don't ever want these values to change during compilation or run time. These were set to private data members, to keep it separate from the getter get_mass and get_charge - give user only one way to access them, and this is consistent across all derived classes.
+
+Think of FourMomentum as an object. get_four_momentum will give us FourMomentum(E, px, py, pz), but if you print it out then it will use friend function to print it how you have specified.
+
 ## Notes 
  - Changed Particle class name to Lepton
  - Removed checks for particle name & particle name property of Lepton class
@@ -39,9 +50,22 @@ The FourMomentum object has the data members E, px, py, pz which are all doubles
  - QUICK: make lepton an abstract class, define friend functions, remove friend funcs from momentum class - then just do new changes to electron/muon etc. How will you implement everything? Idea of invariant mass being well defined and not energy? 
  - Need Lepton class to have constructor? Allowed if abstract?
  - Charge should be double or int?
+ - Potentially make get_mass and get_charge virtual funcs in Lepton class and override them in each derived class
+ - Change names of mass to rest mass and charge to relative charge?
+ - Getters get_mass etc do not return unit while get_four_momentum does - but how to do units without printing in getters? Then cannot pass mass into something else.
+ - Give number of decimal places to four momentum energy when calculated - see previous weeks
+ - Allowed values for px, py, pz
+ - Remove energy check as due to calculation from mass, the energy will always be positive?
 
  - IDEA: change it to be Lepton containing smart pointer to FourMomentum object with E, px, py, pz. Base class (Lepton) allows user to enter these - tbh don't need to define it since its abstract so user shouldn't need to construct it. Then add mass property to derived classes - and give then a new constructor which allows you to find E from inputting px, py, pz. What if user uses set_px? test_electron.momentum.set_px(10) -> should change E
 
  Solution: Remove setters from FourMomentum object - only allow everything to be set through Lepton class. Problem - lepton class doesn't have mass? So new setters & getters for all derived classes from Lepton?? Even if you just had a check which allowed E input and checked that together with px, py, pz it gave correct invariant mass, the user could later chang px and break this.
 
  Once that is done, you need to add mass and charge proeprties to derived classes, and think of adding more relating to interaction with particle detector. Once you have that idea clear, but not implemented, add antiparticle structure to classes. NOT TOO LONG ON THIS - THERE IS MUCH MORE BEYOND!
+
+ ## References
+ [1] https://www.geeksforgeeks.org/cpp/pure-virtual-functions-and-abstract-classes/
+
+ [2] https://en.cppreference.com/w/cpp/language/rule_of_three.html
+
+ [3] https://www.geeksforgeeks.org/cpp/understanding-constexper-specifier-in-cpp/

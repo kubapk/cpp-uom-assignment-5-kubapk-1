@@ -14,9 +14,11 @@ Created on Tue 14 Apr 2026
 
 //CONSTRUCTORS
 //Default constructor
-//Electron::Electron() :
+Electron::Electron() :
+    Lepton(electron_mass, electron_charge, 0, 0, 0)
+{}
+
 //Paramterised constructor
-Electron::Electron(double mass_in, double charge_in,
-                   double px_in, double py_in, double pz_in)
-    : Lepton(mass_in, charge_in, px_in, py_in, pz_in)
+Electron::Electron(double px_in, double py_in, double pz_in) :
+    Lepton(electron_mass, electron_charge, px_in, py_in, pz_in)
 {}
