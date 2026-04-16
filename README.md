@@ -26,7 +26,7 @@ Including mass as a derived property is good because each particle in SM has dif
 Actually both seem to have the problem: What if the user uses a setter to set a momentum component afterwards?
 
 ### 0/3/5 rule
-//
+The FourMomentum object has the data members E, px, py, pz which are all doubles. As there are no pointers involved (or any other objects of non-class type), we use the rule of 0 - FourMomentum object does not need to have user-defined special member functions. Since the Lepton class involves a smart pointer, we must implement the rule of 3 at least. As the assignment requires `std::move` of Electron (derived from Lepton), we need move semantics and so must implement the rule of 5.
 
 ## Notes 
  - Changed Particle class name to Lepton

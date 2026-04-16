@@ -32,10 +32,46 @@ Lepton::Lepton(const double mass_in, const double charge_in, const double px_in,
 
 //Destructor
 //Copy constructor
-//Copy assignment operator
-//Move constructor 
-//Move assignment operator
+//Smart pointers are not copyable by default, so we must do deep copy - copy elements manually
+//Default copy constructor uses default constructor for FourMomentum
+//Here we enforce it to copy from object specified when constructing object,
+//i.e. "lep", the object we want to make a copy of
+//Don't need to use "new"  here - handled by smart pointer
+Lepton::Lepton(const Lepton& lep) :
+    momentum_ptr{std::make_unique<FourMomentum>(*lep.momentum_ptr)}
+    {}
 
+//Copy assignment operator
+Lepton& Lepton::operator=(const Lepton& lep)
+{
+    //Check for self-assignment using this = ref to original object in class
+    if(&lep == this) return *this;
+
+    //Smart pointers handle dynamic memory allocation 
+    //Manually copy momentum (deep copy) as smart pointer cannot do copy
+    momentum_ptr = std::make_unique<FourMomentum>(*lep.momentum_ptr);
+    return *this;
+}
+
+//Move constructor 
+//Don't need to use "delete" or "new" here - handled by smart pointer
+//Smart pointers have move semantics already - can use std::move here
+//std::move transfers the pointers with each other, so the new momentum_ptr becomes
+//the momentum_ptr of "lep"
+Lepton::Lepton(Lepton&& lep) :
+    momentum_ptr{std::move(lep.momentum_ptr)}
+    {}
+
+//Move assignment operator
+Lepton& Lepton::operator=(Lepton&& lep)
+{
+    //Check for self-assignment
+    if(&lep == this) return *this;
+
+    //Move by assignment
+    momentum_ptr = std::move(lep.momentum_ptr);
+    return *this; //return object with new momentum_ptr
+}
 
 //SETTERS
 //Setter for x momentum
@@ -50,6 +86,7 @@ void Lepton::set_px(const double& px_in)
     px_in, py, pz));
 }
 
+//Setter for y momentum
 void Lepton::set_py(const double& py_in)
 {
     //Get current px and pz
@@ -61,6 +98,7 @@ void Lepton::set_py(const double& py_in)
     px, py_in, pz));
 }
 
+//Setter for z momentum
 void Lepton::set_pz(const double& pz_in)
 {
     //Get current px and pz
