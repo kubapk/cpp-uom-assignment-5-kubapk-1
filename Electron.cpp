@@ -19,6 +19,20 @@ Electron::Electron() :
 {}
 
 //Paramterised constructor
-Electron::Electron(double px_in, double py_in, double pz_in) :
-    Lepton(electron_mass, electron_charge, px_in, py_in, pz_in)
+Electron::Electron(double px_in, double py_in, double pz_in, bool is_anti) :
+    Lepton(electron_mass, electron_charge, px_in, py_in, pz_in, is_anti)
 {}
+
+
+//MEMBER FUNCTIONS
+void Electron::info() const
+{
+    if(is_antiparticle) //i.e. if it is antiparticle
+        std::cout<<"Particle: positron"<<std::endl;
+    else
+        std::cout<<"Particle: electron"<<std::endl;
+
+    Lepton::base_info(); //call info function from Lepton
+    //Print properties unique to electron
+    //NEEDS TO BE MOVED TO IMPLEMENTATION FILE
+}

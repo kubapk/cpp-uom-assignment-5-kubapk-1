@@ -56,6 +56,11 @@ int main()
         Electron electron_2{Electron()};
         electron_2.info();
 
+        //Create a positron
+        std::cout<<"\nCreate positron"<<std::endl;
+        Electron positron_1{Electron(0.0, 0.0, 0.0, true)};
+        positron_1.info();
+
     }
     catch(const std::exception& e)
     {

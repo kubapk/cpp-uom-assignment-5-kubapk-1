@@ -26,6 +26,7 @@ protected:
     double mass;
     double charge;
     std::unique_ptr<FourMomentum> momentum_ptr;
+    bool is_antiparticle;
 
     //Protected function to print info in base Lepton class which can be reused
     void base_info() const;
@@ -40,7 +41,7 @@ public:
 
     //Declare parameterised constructor
     Lepton(const double mass_in, const double charge_in, const double px_in,
-    const double py_in, const double pz_in);
+    const double py_in, const double pz_in, bool is_anti = false);
     
     //Destructor
     virtual ~Lepton() {}

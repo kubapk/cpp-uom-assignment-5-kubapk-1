@@ -33,15 +33,10 @@ public:
     Electron(); //electron at rest (px=py=pz=0)
 
     //Parameterised constructor (with new data members)
-    Electron(const double px_in, const double py_in, const double pz_in);
+    Electron(const double px_in, const double py_in, const double pz_in, bool is_anti = false);
 
     //Prototyping member functions
-    void info() const
-    {
-        Lepton::base_info(); //call info function from Lepton
-        //Print properties unique to electron
-        //NEEDS TO BE MOVED TO IMPLEMENTATION FILE
-    }
+    void info() const; //override Lepton class info() function
 };
 
 

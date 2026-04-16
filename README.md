@@ -39,6 +39,11 @@ constexpr specifies that the value of an object or a function can be evaluated a
 
 Think of FourMomentum as an object. get_four_momentum will give us FourMomentum(E, px, py, pz), but if you print it out then it will use friend function to print it how you have specified.
 
+### Antiparticle
+Introduce boolean parameter in Lepton base class, which is true if it is an antiparticle, and false if it is not. The charge is then set to be negative of inputted charge if antiparticle. Note the user can never in reality set the charge - derived classes specify this, and do not have setters for charge. If user does not specify boolean parameter it defaults to false. 
+
+Setting bool to be default false only needs to be done in class file, and not implementation file (in main constructor defined as in class file) - implementation takes whatever else.
+
 ## Notes 
  - Changed Particle class name to Lepton
  - Removed checks for particle name & particle name property of Lepton class
@@ -56,6 +61,8 @@ Think of FourMomentum as an object. get_four_momentum will give us FourMomentum(
  - Give number of decimal places to four momentum energy when calculated - see previous weeks
  - Allowed values for px, py, pz
  - Remove energy check as due to calculation from mass, the energy will always be positive?
+ - Should bool be const? 
+ - Include lepton name in Lepton class, so that it can be a property which you get and is later changed?
 
  - IDEA: change it to be Lepton containing smart pointer to FourMomentum object with E, px, py, pz. Base class (Lepton) allows user to enter these - tbh don't need to define it since its abstract so user shouldn't need to construct it. Then add mass property to derived classes - and give then a new constructor which allows you to find E from inputting px, py, pz. What if user uses set_px? test_electron.momentum.set_px(10) -> should change E
 
@@ -69,3 +76,5 @@ Think of FourMomentum as an object. get_four_momentum will give us FourMomentum(
  [2] https://en.cppreference.com/w/cpp/language/rule_of_three.html
 
  [3] https://www.geeksforgeeks.org/cpp/understanding-constexper-specifier-in-cpp/
+
+ [4] https://www.geeksforgeeks.org/cpp/sqrt-sqrtl-sqrtf-cpp/

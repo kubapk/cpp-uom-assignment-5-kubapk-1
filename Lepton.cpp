@@ -18,19 +18,15 @@ Created on Wed 25 Mar 2026
 
 
 //CONSTRUCTORS
-//Default constructor
-
-
-
 //Paramterised constructor
 Lepton::Lepton(const double mass_in, const double charge_in, const double px_in,
-    const double py_in, const double pz_in) :
-    mass{mass_in}, charge{charge_in}, 
+    const double py_in, const double pz_in, bool is_anti) :
+    mass{mass_in}, 
+    charge{is_anti? -charge_in : charge_in}, //if true, if false
     momentum_ptr{std::make_unique<FourMomentum>(compute_energy(mass_in, px_in, py_in, pz_in), 
     px_in, py_in, pz_in)} 
     {}
 
-//Destructor
 //Copy constructor
 //Smart pointers are not copyable by default, so we must do deep copy - copy elements manually
 //Default copy constructor uses default constructor for FourMomentum
@@ -39,6 +35,7 @@ Lepton::Lepton(const double mass_in, const double charge_in, const double px_in,
 //Don't need to use "new"  here - handled by smart pointer
 Lepton::Lepton(const Lepton& lep) :
     momentum_ptr{std::make_unique<FourMomentum>(*lep.momentum_ptr)}
+    //Other properties of Lepton can use default constructors
     {}
 
 //Copy assignment operator
