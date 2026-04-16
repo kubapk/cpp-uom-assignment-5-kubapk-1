@@ -31,7 +31,7 @@ public:
     Neutrino(); //neutrino at rest (px=py=pz=0)
 
     //Parameterised constructor (with new data members)
-    Neutrino(const double px_in, const double py_in, const double pz_in, const double time_in, bool is_anti = false);
+    Neutrino(const double px_in, const double py_in, const double pz_in, bool is_anti = false);
 
     //Prototyping member functions
     void info() const;
