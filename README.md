@@ -3,7 +3,7 @@
 
 ## User Guidelines
 ### Running the program as-is
-This code was run on VSC using a Windows 11 device. The compilation line used was `TBC`. The program can then be run by calling the file `TBC`.
+This code was run on VSC using a Windows 11 device. The compilation line used was `g++ -std=c++17 test.cpp Neutrino.cpp Tau.cpp Muon.cpp Electron.cpp Lepton.cpp FourMomentum.cpp -o test.exe -Wall`. The program can then be run by calling the file `TBC`.
 
 ### Modifying the main file, `main.cpp`
 
