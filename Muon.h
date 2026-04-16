@@ -33,7 +33,7 @@ private:
     
 public:
     //Default constructor
-    Muon(); //electron at rest (px=py=pz=0)
+    Muon(); //muon at rest (px=py=pz=0) with no time in detector
 
     //Parameterised constructor (with new data members)
     Muon(const double px_in, const double py_in, const double pz_in, const double time_in, bool is_anti = false);

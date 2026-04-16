@@ -71,6 +71,8 @@ The destructor in FourMomentum was not defined (not even as default) in FourMome
  - random decay times using exponential distributions
  - Has decayed as a virtual func in Lepton and returns false in Electron?
  - Time in detector doesn't make sense - cannot measure 10^-6 seconds of existence - see random decay times above
+ - Random generator to generate a specific lifetime about mean lifetime - then this decay time becomes a property of the class
+ - Add getters for decay status? And particle name?
 
  - IDEA: change it to be Lepton containing smart pointer to FourMomentum object with E, px, py, pz. Base class (Lepton) allows user to enter these - tbh don't need to define it since its abstract so user shouldn't need to construct it. Then add mass property to derived classes - and give then a new constructor which allows you to find E from inputting px, py, pz. What if user uses set_px? test_electron.momentum.set_px(10) -> should change E
 

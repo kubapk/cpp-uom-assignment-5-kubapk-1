@@ -47,7 +47,6 @@ void Muon::info() const
     Lepton::base_info(); //call info function from Lepton
     std::cout<<"Mean lifetime: "<<MUON_MEAN_LIFETIME<<"s"<<std::endl;
     std::cout<<"Time in detector: "<<time_in_detector<<"s"<<std::endl;
-    std::cout<<"Decay status: "<<(has_decayed()? "Decayed" : "Not decayed")<<std::endl;
 }
 
 //Member function to check if muon has decayed

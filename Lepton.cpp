@@ -117,6 +117,7 @@ void Lepton::base_info() const
     std::cout<<"Mass: "<<mass<<"MeV"<<std::endl;
     std::cout<<"Charge: "<<charge<<"e"<<std::endl;
     std::cout<<"Four-momentum: "<<*momentum_ptr<<std::endl;
+    std::cout<<"Decay status: "<<(has_decayed()? "Decayed" : "Not decayed")<<std::endl;
 }
 
 //Protected function to find energy

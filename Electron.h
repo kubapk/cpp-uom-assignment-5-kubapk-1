@@ -39,6 +39,7 @@ public:
 
     //Prototyping member functions
     void info() const; //override Lepton class info() function
+    bool has_decayed() const {return false;}
 };
 
 

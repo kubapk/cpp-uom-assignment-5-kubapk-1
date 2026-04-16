@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include "Electron.h"
 #include "Muon.h"
+#include "Tau.h"
 using std::vector;
 
 
@@ -84,6 +85,11 @@ int main()
         std::cout<<"\nCreating anti muon"<<std::endl;
         Muon antimuon{Muon(10, 10, 10, 1e-10, true)};
         antimuon.info();
+
+        //Create anti-tau via parameterised constructor
+        std::cout<<"\nCreating anti tau"<<std::endl;
+        Tau antitau{Tau(10, 10, 10, 1e-10, true)};
+        antitau.info();
 
     }
     catch(const std::exception& e)

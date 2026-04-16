@@ -70,6 +70,7 @@ public:
 
     //Member functions
     virtual void info() const = 0;
+    virtual bool has_decayed() const = 0;
 
     //Prototyping friend functions
     friend FourMomentum operator+(const Lepton& lep1, const Lepton& lep2);
