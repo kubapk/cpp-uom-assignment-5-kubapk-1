@@ -35,10 +35,6 @@ private:
 
     //Variables
     NeutrinoFlavour flavour;
-    int generation{0};
-
-    //Functions
-    const int determine_generation(NeutrinoFlavour f);
     
 public:
     //Default constructor
@@ -49,8 +45,11 @@ public:
         const NeutrinoFlavour flavour_in, bool is_anti = false);
 
     //Getters
-    const string& get_flavour() const;
-    const int& get_generation() const;
+    const string get_flavour() const; //return by value so that string is not temporary
+    //MAKE PARTICLE NAME A PROPERTY - AND ALSO IS_ANTI A PROPERTY?
+    const int get_generation() const;
+    //getters do not have const in front as the string/int which is returned
+    //needs to be used - CHECK
 
     //Prototyping member functions
     void info() const;

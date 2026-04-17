@@ -6,6 +6,7 @@
 #include "Electron.h"
 #include "Muon.h"
 #include "Tau.h"
+#include "Neutrino.h"
 using std::vector;
 
 
@@ -90,6 +91,11 @@ int main()
         std::cout<<"\nCreating anti tau"<<std::endl;
         Tau antitau{Tau(10, 10, 10, 1e-10, true)};
         antitau.info();
+
+        //Create a muon neutrino
+        std::cout<<"\nCreating muon neutrino"<<std::endl;
+        Neutrino muon_neutrino{Neutrino(10, 0, 1, Neutrino::NeutrinoFlavour::Muon)};
+        muon_neutrino.info();
 
     }
     catch(const std::exception& e)

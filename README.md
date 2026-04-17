@@ -51,6 +51,12 @@ Shouldn't be `const bool` because we want to print out a specific text in the `i
 ### Destructor
 The destructor in FourMomentum was not defined (not even as default) in FourMomentum class when changes were made to remove the delete destructor message - this caused there to be an error when the FourMomentum object was attempted to be desrtoyed. This is a result of the line `std::unique_ptr<FourMomentum> momentum_ptr;` which when goes out of scope must have a defined destructor. 
 
+### Using const for functions (getters)
+In neutrino class used `get_flavour` to output a string for the flavour which is contained within the info function but which the user can also call (hence why it is public). Since it is used by the info function, it cannot be called by reference, as the string which is returned would be temporary (as it would be a pointer which goes out of scope at the end of the function). Therefore the function should be called by value. This also means any `const` in front of the function, which means any returned values from the function are "const", becomes redundant. This is because const only applies to temporary returned values
+
+### Assumptions
+Electron and Neutrino have has_decayed=false because they are stable particles so for any time in the detector they are most likely to not have decayed. To ensure this holds, and that the user can't enter arbitrarily large numbers, we set a limit on the time_in_detector. In the program logic, if during the maximum of time_in_detector the Lepton doesn't decay, it doesn't need that property and so it always has has_decayed=false.
+
 ## Notes 
  - Pg7 PPT: sums two four-vectors = sums two four momenta that are hosted in a particle class
  - Check where all consts need to go 
@@ -74,6 +80,9 @@ The destructor in FourMomentum was not defined (not even as default) in FourMome
  - Random generator to generate a specific lifetime about mean lifetime - then this decay time becomes a property of the class
  - Add getters for decay status? And particle name?
  - Enum which raises error for else case (types of neutrinos)
+ - Add oscillations to neutrino
+ - Use generation getter inside constructor for neutrino! And make sure flavour works in the same way!
+ - If something can be derived, don’t store it as a property of a class
 
  - IDEA: change it to be Lepton containing smart pointer to FourMomentum object with E, px, py, pz. Base class (Lepton) allows user to enter these - tbh don't need to define it since its abstract so user shouldn't need to construct it. Then add mass property to derived classes - and give then a new constructor which allows you to find E from inputting px, py, pz. What if user uses set_px? test_electron.momentum.set_px(10) -> should change E
 
