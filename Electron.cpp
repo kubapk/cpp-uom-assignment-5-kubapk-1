@@ -19,7 +19,7 @@ Electron::Electron() :
 {}
 
 //Paramterised constructor
-Electron::Electron(double px_in, double py_in, double pz_in, bool is_anti) :
+Electron::Electron(const double px_in, const double py_in, const double pz_in, bool is_anti) :
     Lepton(ELECTRON_MASS, ELECTRON_CHARGE, px_in, py_in, pz_in, is_anti)
 {}
 

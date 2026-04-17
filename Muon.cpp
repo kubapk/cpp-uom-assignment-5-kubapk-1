@@ -20,7 +20,7 @@ Muon::Muon() :
     {}
 
 //Paramterised constructor
-Muon::Muon(double px_in, double py_in, double pz_in, const double time_in, bool is_anti) :
+Muon::Muon(const double px_in, const double py_in, const double pz_in, const double time_in, bool is_anti) :
     Lepton(MUON_MASS, MUON_CHARGE, px_in, py_in, pz_in, is_anti),
     time_in_detector{time_in}
     {}

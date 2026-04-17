@@ -20,7 +20,7 @@ Tau::Tau() :
     {}
 
 //Paramterised constructor
-Tau::Tau(double px_in, double py_in, double pz_in, const double time_in, bool is_anti) :
+Tau::Tau(const double px_in, const double py_in, const double pz_in, const double time_in, bool is_anti) :
     Lepton(TAU_MASS, TAU_CHARGE, px_in, py_in, pz_in, is_anti),
     time_in_detector{time_in}
     {}

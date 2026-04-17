@@ -90,6 +90,8 @@ The destructor in FourMomentum was not defined (not even as default) in FourMome
 
  [4] https://www.geeksforgeeks.org/cpp/sqrt-sqrtl-sqrtf-cpp/
 
+ [5] https://www.geeksforgeeks.org/cpp/enum-classes-in-c-and-their-advantage-over-enum-datatype/
+
 
 - Changed Particle class name to Lepton
  - Removed checks for particle name & particle name property of Lepton class

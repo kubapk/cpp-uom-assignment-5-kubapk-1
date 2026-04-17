@@ -21,17 +21,36 @@ using std::string;
 
 class Neutrino : public Lepton
 {
+public:
+    //Enumerator class for neutrino flavour (public so user can access it)
+    //Defines a new class Flavour which has 3 specified possibilities
+    //Not defined outside class to control scope to just Neutrino class - 
+    //otherwise may be complication with Electron class etc.
+    enum class NeutrinoFlavour {Electron, Muon, Tau};
+    
 private:
-    //Data members unique to the muon
+    //Constants
     static constexpr double NEUTRINO_MASS{0}; //Do something about this!
     static constexpr double NEUTRINO_CHARGE{-1};
+
+    //Variables
+    NeutrinoFlavour flavour;
+    int generation{0};
+
+    //Functions
+    const int determine_generation(NeutrinoFlavour f);
     
 public:
     //Default constructor
     Neutrino(); //neutrino at rest (px=py=pz=0)
 
     //Parameterised constructor (with new data members)
-    Neutrino(const double px_in, const double py_in, const double pz_in, bool is_anti = false);
+    Neutrino(const double px_in, const double py_in, const double pz_in, 
+        const NeutrinoFlavour flavour_in, bool is_anti = false);
+
+    //Getters
+    const string& get_flavour() const;
+    const int& get_generation() const;
 
     //Prototyping member functions
     void info() const;
