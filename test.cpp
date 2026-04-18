@@ -97,6 +97,9 @@ int main()
         Neutrino muon_neutrino{Neutrino(10, 0, 1, Neutrino::NeutrinoFlavour::Muon)};
         muon_neutrino.info();
 
+        //Create invalid neutrino
+        //Neutrino neutrino_test{Neutrino(10, 0, 1, Neutrino::NeutrinoFlavour::Test)};
+
     }
     catch(const std::exception& e)
     {

@@ -54,6 +54,9 @@ The destructor in FourMomentum was not defined (not even as default) in FourMome
 ### Using const for functions (getters)
 In neutrino class used `get_flavour` to output a string for the flavour which is contained. It is also within the info function and the user can also call it (hence why it is public). As it is just returning a string which doesn't exist in memory before, the variable is temporary and so it should not be returned by reference (this would cause an error as the pointer would not have anything to point to once it goes out of scope at the end of the `get_flavour` function). Since the output of the function is temporary, there is no need to use `const get_flavour` as that would just set the temporary inside the function to a const, which goes out of scope anyway.
 
+### Neutrinos
+Default constructor must contain flavour as an input, as all neutrinos are born with a specific flavour.
+
 ### Assumptions
 Electron and Neutrino have has_decayed=false because they are stable particles so for any time in the detector they are most likely to not have decayed. To ensure this holds, and that the user can't enter arbitrarily large numbers, we set a limit on the time_in_detector. In the program logic, if during the maximum of time_in_detector the Lepton doesn't decay, it doesn't need that property and so it always has has_decayed=false.
 
@@ -83,6 +86,7 @@ Electron and Neutrino have has_decayed=false because they are stable particles s
  - Add oscillations to neutrino
  - Use generation getter inside constructor for neutrino! And make sure flavour works in the same way!
  - If something can be derived, don’t store it as a property of a class
+ - Default constructor of neutrino? Doesn't make sense to throw invalid argument as that is only case when default destructor used. While born with a definite flavor, a neutrino's flavor changes as it propagates through space, meaning it is not restricted to one flavor for its entire existence. Neutrinos only fully commit to a specific flavor when they interact with matter, behaving like one of the three standard types upon detection.
 
  - IDEA: change it to be Lepton containing smart pointer to FourMomentum object with E, px, py, pz. Base class (Lepton) allows user to enter these - tbh don't need to define it since its abstract so user shouldn't need to construct it. Then add mass property to derived classes - and give then a new constructor which allows you to find E from inputting px, py, pz. What if user uses set_px? test_electron.momentum.set_px(10) -> should change E
 

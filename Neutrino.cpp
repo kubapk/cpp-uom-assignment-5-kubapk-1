@@ -14,8 +14,9 @@ Created on Thu 16 Apr 2026
 
 //CONSTRUCTORS
 //Default constructor
-Neutrino::Neutrino() :
-    Lepton(NEUTRINO_MASS, NEUTRINO_CHARGE, 0, 0, 0)
+Neutrino::Neutrino(NeutrinoFlavour flavour_in) :
+    Lepton(NEUTRINO_MASS, NEUTRINO_CHARGE, 0, 0, 0),
+    flavour{flavour_in}
     {}
 
 //Paramterised constructor
@@ -36,7 +37,7 @@ string Neutrino::get_flavour() const
         case NeutrinoFlavour::Muon: return "muon neutrino";
         case NeutrinoFlavour::Tau: return "tau neutrino";
     }
-    throw std::invalid_argument("Invalid neutrino flavour");
+    throw std::invalid_argument("Invalid neutrino flavour - cannot get flavour");
 }
 
 //Getter for generation
@@ -48,7 +49,7 @@ int Neutrino::get_generation() const
         case NeutrinoFlavour::Muon: return 2;
         case NeutrinoFlavour::Tau: return 3;
     }
-    throw std::invalid_argument("Invalid ");
+    throw std::invalid_argument("Invalid neutrino flavour - cannot get generation");
 }
 
 
