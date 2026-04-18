@@ -134,7 +134,7 @@ double Lepton::compute_energy(const double mass_in, const double px_in,
 
 //FRIEND FUNCTIONS
 //Friend function to add FourMomentum of 2 leptons
-FourMomentum operator+(const Lepton& lep1, const Lepton& lep2)
+FourMomentum sum_momenta(const Lepton& lep1, const Lepton& lep2)
 {
     return(FourMomentum(
         lep1.momentum_ptr->get_E()+lep2.momentum_ptr->get_E(),
@@ -145,7 +145,7 @@ FourMomentum operator+(const Lepton& lep1, const Lepton& lep2)
 
 
 //Friend function to take dot product of 2 leptons
-double dotProduct(const Lepton& lep1, const Lepton& lep2)
+double dot_product_momenta(const Lepton& lep1, const Lepton& lep2)
 //p.q = E_p*E_q - p_x*q_x - p_y*q_y - p_z*p_z
 {
     return(lep1.momentum_ptr->get_E()*lep2.momentum_ptr->get_E()

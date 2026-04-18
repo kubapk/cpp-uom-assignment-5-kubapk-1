@@ -73,12 +73,12 @@ public:
     virtual bool has_decayed() const = 0;
 
     //Prototyping friend functions
-    friend FourMomentum operator+(const Lepton& lep1, const Lepton& lep2);
+    friend FourMomentum sum_momenta(const Lepton& lep1, const Lepton& lep2);
     //sum of four momenta of 2 lepton objects
     //leptons are const - should not be modified themselves
     //does not make sense for friend function to be const as it is not called
     //by a specific object 
-    friend double dotProduct(const Lepton& lep1, const Lepton& lep2);
+    friend double dot_product_momenta(const Lepton& lep1, const Lepton& lep2);
 };
 
 
