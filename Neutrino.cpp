@@ -33,9 +33,9 @@ string Neutrino::get_flavour() const
 {
     switch(flavour)
     {
-        case NeutrinoFlavour::Electron: return "electron neutrino";
-        case NeutrinoFlavour::Muon: return "muon neutrino";
-        case NeutrinoFlavour::Tau: return "tau neutrino";
+        case NeutrinoFlavour::Electron: return "electron";
+        case NeutrinoFlavour::Muon: return "muon";
+        case NeutrinoFlavour::Tau: return "tau";
     }
     throw std::invalid_argument("Invalid neutrino flavour - cannot get flavour");
 }
@@ -58,9 +58,9 @@ int Neutrino::get_generation() const
 void Neutrino::info() const
 {
     if(is_antiparticle)
-        std::cout<<"Particle: anti-neutrino"<<std::endl;
+        std::cout<<"Particle: anti "<<get_flavour()<<" neutrino"<<std::endl;
     else
-        std::cout<<"Particle: neutrino"<<std::endl;
+        std::cout<<"Particle: "<<get_flavour()<<" neutrino"<<std::endl;
 
     std::cout<<"Flavour: "<<get_flavour()<<std::endl;
     std::cout<<"Generation: "<<get_generation()<<std::endl;

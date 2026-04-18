@@ -87,6 +87,7 @@ Electron and Neutrino have has_decayed=false because they are stable particles s
  - Use generation getter inside constructor for neutrino! And make sure flavour works in the same way!
  - If something can be derived, don’t store it as a property of a class
  - Default constructor of neutrino? Doesn't make sense to throw invalid argument as that is only case when default destructor used. While born with a definite flavor, a neutrino's flavor changes as it propagates through space, meaning it is not restricted to one flavor for its entire existence. Neutrinos only fully commit to a specific flavor when they interact with matter, behaving like one of the three standard types upon detection.
+ - Default constructor of muon etc has is_anti, auto set to false so can be set to true
 
  - IDEA: change it to be Lepton containing smart pointer to FourMomentum object with E, px, py, pz. Base class (Lepton) allows user to enter these - tbh don't need to define it since its abstract so user shouldn't need to construct it. Then add mass property to derived classes - and give then a new constructor which allows you to find E from inputting px, py, pz. What if user uses set_px? test_electron.momentum.set_px(10) -> should change E
 
