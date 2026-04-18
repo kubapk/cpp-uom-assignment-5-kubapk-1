@@ -106,6 +106,8 @@ Electron and Neutrino have has_decayed=false because they are stable particles s
 
  [5] https://www.geeksforgeeks.org/cpp/enum-classes-in-c-and-their-advantage-over-enum-datatype/
 
+ [6] https://www.geeksforgeeks.org/cpp/range-based-loop-c/
+
 
 - Changed Particle class name to Lepton
  - Removed checks for particle name & particle name property of Lepton class
