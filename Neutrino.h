@@ -45,9 +45,9 @@ public:
         const NeutrinoFlavour flavour_in, bool is_anti = false);
 
     //Getters
-    const string get_flavour() const; //return by value so that string is not temporary
+    string get_flavour() const; //return by value so that string is not temporary
     //MAKE PARTICLE NAME A PROPERTY - AND ALSO IS_ANTI A PROPERTY?
-    const int get_generation() const;
+    int get_generation() const;
     //getters do not have const in front as the string/int which is returned
     //needs to be used - CHECK
 

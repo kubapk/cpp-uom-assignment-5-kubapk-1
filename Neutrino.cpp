@@ -28,7 +28,7 @@ Neutrino::Neutrino(const double px_in, const double py_in, const double pz_in,
 
 //GETTERS
 //Getter for flavour
-const string Neutrino::get_flavour() const
+string Neutrino::get_flavour() const
 {
     switch(flavour)
     {
@@ -40,7 +40,7 @@ const string Neutrino::get_flavour() const
 }
 
 //Getter for generation
-const int Neutrino::get_generation() const
+int Neutrino::get_generation() const
 {
     switch(flavour)
     {
