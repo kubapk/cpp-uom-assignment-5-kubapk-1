@@ -3,7 +3,11 @@ _____________________________TITLE_____________________________
 PHYS30762 Assignment 5 - Practising inheritance, smart pointers 
 and friendship
 _______________________________________________________________
-This C++ script...
+This C++ script creates a vector of different leptons (from 
+derived classes), and prints their info, and then sums & takes
+takes the dot product of the four momenta of 2 of the leptons.
+Electrons are also moved via pointers, and shared pointer is
+created for tau lepton.
 
 Created by Kuba Kane (ID: 11019699)
 Created on Sat 18 Apr 2026

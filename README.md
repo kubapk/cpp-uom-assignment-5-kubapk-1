@@ -21,9 +21,13 @@ In assignment 4, the FourMomentum class contained member function `operator+` wh
 Why not have operations as member functions of Particle class? This implies that the two FourMomentum objects are not equal - one FourMomentum needs to call another FourMomentum object with which it wishes to perform a sum or dotProduct operation. Member functions should represent what an object does by itself.
 
 ### Invariant mass
-Including mass as a derived property is good because each particle in SM has different invariant mass. This however, links to the FourMomentum since $m^2 = E^2 - p^2$. So if a user defines (E, px, py, pz), this must give the same invariant mass. Set_px would crash because if user wanted to change it, invariant mass would change. Another option could be only let the user enter (px, py, pz) and find E based on the invariant mass. This would need to change dynamics of code at the moment, which requires a FourMomentum object to be entered, and as it is a requirement of the assignment to have Lepton class contain a FourMomentum object, it is hard to get around this. The FourMomentum class in some ways would need to take in the invariant mass in its constructors to perform the checks, as otherwise Lepton class would need to take in px, py, pz parameters as well as FourMomentum object which doesn't make much sense. Also, it assumes the user knows (px, py, pz) and doesn't know E, and it does not allow the reverse.
+Including mass as a derived property is good because each particle in SM has different invariant mass. This however, links to the FourMomentum since $m^2 = E^2 - p^2$. So if a user defines (E, px, py, pz), this must give the same invariant mass. Set_px would crash because if user wanted to change it, invariant mass would change. Another option could be only let the user enter (px, py, pz) and find E based on the invariant mass. This would need to change dynamics of code at the moment, which requires a FourMomentum object to be entered, and as it is a requirement of the assignment to have Lepton class contain a FourMomentum object, it is hard to get around this. The FourMomentum class in some ways would need to take in the invariant mass in its constructors to perform the checks, as otherwise Lepton class would need to take in px, py, pz parameters as well as FourMomentum object which doesn't make much sense. Also, it assumes the user knows (px, py, pz) and doesn't know E, and it does not allow the reverse. 
 
-Actually both seem to have the problem: What if the user uses a setter to set a momentum component afterwards?
+### Modifying the FourMomentum class
+(See invariant mass above) The FourMomentum class was modified, as it originally contained just one private data member which was a pointer to a four-vector containing E, px, py, pz, which caused issues when creating derived classes which had derived (rest) masses (wouldn't necessarily obey the equation for invariant mass). This was resolved by making the FourMomentum class have E, px, py, pz as data members themselves, allowing the 3-momentum to be set by the user, and then using the invariant mass equation to determine the energy and define the FourMomentum object. This could work with keeping it as a four-vector within the FourMomentum class but logically doesn't make much sense (suggest FourMomentum vector is property of FourMomentum class), and is more difficult to modify.
+
+The issue with having setters adjusting px, py, pz later could only be resolved by removing them directly from the FourMomentum class, and instead only allowing them to be changed via the Lepton class. This is much easier when FourMomentum contains E, px, py, pz as members directly. 
+
 
 ### 0/3/5 rule
 The FourMomentum object has the data members E, px, py, pz which are all doubles. As there are no pointers involved (or any other objects of non-class type), we use the rule of 0 - FourMomentum object does not need to have user-defined special member functions. Since the Lepton class involves a smart pointer, we must implement the rule of 3 at least. As the assignment requires `std::move` of Electron (derived from Lepton), we need move semantics and so must implement the rule of 5.
@@ -60,8 +64,9 @@ Default constructor must contain flavour as an input, as all neutrinos are born 
 ### Assumptions
 Electron and Neutrino have has_decayed=false because they are stable particles so for any time in the detector they are most likely to not have decayed. To ensure this holds, and that the user can't enter arbitrarily large numbers, we set a limit on the time_in_detector. In the program logic, if during the maximum of time_in_detector the Lepton doesn't decay, it doesn't need that property and so it always has has_decayed=false.
 
+Charge of Leptons is always an integer, so charge changed to int everywhere.
+
 ## Notes 
- - Pg7 PPT: sums two four-vectors = sums two four momenta that are hosted in a particle class
  - Check where all consts need to go 
  - Charge should be double or int? LEPTONS ALWAYS HAVE INT CHARGES - more specific requirements? But user never gets to change charge.
  - Potentially make get_mass and get_charge virtual funcs in Lepton class and override them in each derived class - bit more manual, code repeating
@@ -88,10 +93,7 @@ Electron and Neutrino have has_decayed=false because they are stable particles s
  - If something can be derived, don’t store it as a property of a class
  - Default constructor of neutrino? Doesn't make sense to throw invalid argument as that is only case when default destructor used. While born with a definite flavor, a neutrino's flavor changes as it propagates through space, meaning it is not restricted to one flavor for its entire existence. Neutrinos only fully commit to a specific flavor when they interact with matter, behaving like one of the three standard types upon detection.
  - Default constructor of muon etc has is_anti, auto set to false so can be set to true
-
- - IDEA: change it to be Lepton containing smart pointer to FourMomentum object with E, px, py, pz. Base class (Lepton) allows user to enter these - tbh don't need to define it since its abstract so user shouldn't need to construct it. Then add mass property to derived classes - and give then a new constructor which allows you to find E from inputting px, py, pz. What if user uses set_px? test_electron.momentum.set_px(10) -> should change E
-
- Solution: Remove setters from FourMomentum object - only allow everything to be set through Lepton class. Problem - lepton class doesn't have mass? So new setters & getters for all derived classes from Lepton?? Even if you just had a check which allowed E input and checked that together with px, py, pz it gave correct invariant mass, the user could later chang px and break this.
+ - Do something which shared pointer to show performance usage (vectors of different particle detectors)
 
  Once that is done, you need to add mass and charge proeprties to derived classes, and think of adding more relating to interaction with particle detector. Once you have that idea clear, but not implemented, add antiparticle structure to classes. NOT TOO LONG ON THIS - THERE IS MUCH MORE BEYOND!
 

@@ -19,10 +19,10 @@ Created on Wed 25 Mar 2026
 
 //CONSTRUCTORS
 //Paramterised constructor
-Lepton::Lepton(const double mass_in, const double charge_in, const double px_in,
+Lepton::Lepton(const double mass_in, const int charge_in, const double px_in,
     const double py_in, const double pz_in, bool is_anti) :
         mass{mass_in}, 
-        charge{is_anti? -charge_in : charge_in}, //if true, if false
+        relative_charge{is_anti? -charge_in : charge_in}, //if true, if false
         momentum_ptr{std::make_unique<FourMomentum>(compute_energy(mass_in, px_in, py_in, pz_in), 
         px_in, py_in, pz_in)},
         is_antiparticle{is_anti}
@@ -115,7 +115,7 @@ void Lepton::base_info() const
 {
     std::cout<<"Spin: 0.5"<<std::endl;
     std::cout<<"Mass: "<<mass<<"MeV"<<std::endl;
-    std::cout<<"Charge: "<<charge<<"e"<<std::endl;
+    std::cout<<"Charge: "<<relative_charge<<"e"<<std::endl;
     std::cout<<"Four-momentum: "<<*momentum_ptr<<std::endl;
     std::cout<<"Decay status: "<<(has_decayed()? "Decayed" : "Not decayed")<<std::endl;
 }

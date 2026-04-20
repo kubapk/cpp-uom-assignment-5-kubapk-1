@@ -23,7 +23,7 @@ class Lepton
 {
 protected:
     double mass;
-    double charge;
+    int relative_charge;
     std::unique_ptr<FourMomentum> momentum_ptr; //Smart pointer to FourMomentum object
     bool is_antiparticle;
 
@@ -39,7 +39,7 @@ public:
     Lepton() = delete; //no "default lepton"
 
     //Declare parameterised constructor
-    Lepton(const double mass_in, const double charge_in, const double px_in,
+    Lepton(const double mass_in, const int charge_in, const double px_in,
     const double py_in, const double pz_in, bool is_anti = false);
     
     //Destructor
@@ -66,7 +66,7 @@ public:
     const FourMomentum& get_four_momentum() const {return *momentum_ptr;}
     FourMomentum& get_four_momentum() {return *momentum_ptr;} //const leptons - CHECK THIS
     const double& get_mass() const {return mass;}
-    const double& get_charge() const {return charge;}
+    const int& get_charge() const {return relative_charge;}
 
     //Member functions
     virtual void info() const = 0;
