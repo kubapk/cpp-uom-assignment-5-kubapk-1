@@ -68,7 +68,6 @@ Charge of Leptons is always an integer, so charge changed to int everywhere.
 
 ## Notes 
  - Check where all consts need to go 
- - Charge should be double or int? LEPTONS ALWAYS HAVE INT CHARGES - more specific requirements? But user never gets to change charge.
  - Potentially make get_mass and get_charge virtual funcs in Lepton class and override them in each derived class - bit more manual, code repeating
  - Change names of mass to rest mass and charge to relative charge?
  - Getters get_mass etc do not return unit while get_four_momentum does - but how to do units without printing in getters? Then cannot pass mass into something else.

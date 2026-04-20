@@ -19,7 +19,7 @@ int main()
 
         //Create an electron
         std::cout<<"\nCreating new electron"<<std::endl;
-        Electron electron_test{Electron(10, 10, 10)};
+        Electron electron_test{Electron(-10, -10, -10)};
 
         //Print out electron info
         electron_test.info();

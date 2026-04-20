@@ -120,6 +120,29 @@ int main()
         std::cout<<"\nFrom pointer 3: "<<std::endl;
         tau_ptr_3->info();
 
+
+        //TAU LEPTON SEEN BY MULTIPLE DETECTORS
+        //Must be vectors of shared pointers
+        vector<std::shared_ptr<Lepton>> detector_1_particles;
+        vector<std::shared_ptr<Lepton>> detector_2_particles;
+        detector_1_particles.push_back(tau_ptr);
+        detector_2_particles.push_back(tau_ptr);
+        std::cout<<"\n\nDectectors with same tau\n"<<string(60, '-')<<std::endl;
+        std::cout<<"Use count of shared pointer = "<<tau_ptr.use_count()<<std::endl;
+
+        std::cout<<"\nDetector 1 contains: "<<std::endl;
+        for(const auto& j : detector_1_particles)
+        {
+            j->info();
+        }
+
+        std::cout<<"\nDetector 2 contains: "<<std::endl;
+        for(const auto& k : detector_2_particles)
+        {
+            k->info();
+        }
+
+
     }
     catch(const std::exception& e)
     {
