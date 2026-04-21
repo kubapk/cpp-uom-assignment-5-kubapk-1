@@ -63,7 +63,8 @@ double Muon::validate_time(const double t)
         throw std::invalid_argument("Time cannot be negative");
 
     if(t > MAX_TIME)
-        throw std::invalid_argument("Time in detector cannot be greater than 1 year");
+        throw std::invalid_argument("Time in detector cannot be greater than "
+            "1 millisecond (1e-13s)");
 
     return t;
 }

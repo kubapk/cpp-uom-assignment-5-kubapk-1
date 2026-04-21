@@ -28,7 +28,6 @@ Including mass as a derived property is good because each particle in SM has dif
 
 The issue with having setters adjusting px, py, pz later could only be resolved by removing them directly from the FourMomentum class, and instead only allowing them to be changed via the Lepton class. This is much easier when FourMomentum contains E, px, py, pz as members directly. 
 
-
 ### 0/3/5 rule
 The FourMomentum object has the data members E, px, py, pz which are all doubles. As there are no pointers involved (or any other objects of non-class type), we use the rule of 0 - FourMomentum object does not need to have user-defined special member functions. Since the Lepton class involves a smart pointer, we must implement the rule of 3 at least. As the assignment requires `std::move` of Electron (derived from Lepton), we need move semantics and so must implement the rule of 5.
 
@@ -61,6 +60,11 @@ In neutrino class used `get_flavour` to output a string for the flavour which is
 ### Neutrinos
 Default constructor must contain flavour as an input, as all neutrinos are born with a specific flavour.
 
+
+### User input validation
+Added check on the user input for time in detector, so they could not enter a negative time, or an arbitarily large time (taken to be 1ms - WHY? CORRESPONDS TO HIGH ENERGY?). The 3-momentum can contain any positive or negative floats, but should not allow infinite values. If a user enters a very large momentum, it may overflow to `inf` which cannot be used in calculations. Infinite values must therefore be checked for and throw an error. This is done via FourMomentum class.
+
+
 ### Assumptions
 Electron and Neutrino have has_decayed=false because they are stable particles so for any time in the detector they are most likely to not have decayed. To ensure this holds, and that the user can't enter arbitrarily large numbers, we set a limit on the time_in_detector. In the program logic, if during the maximum of time_in_detector the Lepton doesn't decay, it doesn't need that property and so it always has has_decayed=false.
 
@@ -69,7 +73,6 @@ Charge of Leptons is always an integer, so charge changed to int everywhere.
 ## Notes 
  - Check where all consts need to go 
  - Potentially make get_mass and get_charge virtual funcs in Lepton class and override them in each derived class - bit more manual, code repeating
- - Change names of mass to rest mass and charge to relative charge?
  - Getters get_mass etc do not return unit while get_four_momentum does - but how to do units without printing in getters? Then cannot pass mass into something else.
  - Give number of decimal places to four momentum energy when calculated - see previous weeks
  - Allowed values for px, py, pz
@@ -84,18 +87,23 @@ Charge of Leptons is always an integer, so charge changed to int everywhere.
  - random decay times using exponential distributions
  - Time in detector doesn't make sense - cannot measure 10^-6 seconds of existence - see random decay times above
  - Random generator to generate a specific lifetime about mean lifetime - then this decay time becomes a property of the class
- - Add getters for decay status? And particle name?
+ - Add getters for decay status? NO - USER CAN GET THIS BY PARTICLE.HAS_DECAYED(), AND SINCE THIS CAN BE A DERIVED CALCULATION IT SHOULD NOT BE A PROPERTY And particle name getter & data member?
  - Enum which raises error for else case (types of neutrinos)
  - Add oscillations to neutrino
- - Use generation getter inside constructor for neutrino! And make sure flavour works in the same way!
  - If something can be derived, don’t store it as a property of a class
  - Default constructor of neutrino? Doesn't make sense to throw invalid argument as that is only case when default destructor used. While born with a definite flavor, a neutrino's flavor changes as it propagates through space, meaning it is not restricted to one flavor for its entire existence. Neutrinos only fully commit to a specific flavor when they interact with matter, behaving like one of the three standard types upon detection.
  - Default constructor of muon etc has is_anti, auto set to false so can be set to true
- - Do something which shared pointer to show performance usage (vectors of different particle detectors)
+ - Do something whith shared pointer to show performance usage (vectors of different particle detectors)
+ - Is there something you can do with gamma / beta or relativity as "time in detector" doesn't really make sense - at least be more specific about what you mean by this
+ - FourMomentum class must have constructor moved to private so that the user cannot access it directly.
+ 
 
- Once that is done, you need to add mass and charge proeprties to derived classes, and think of adding more relating to interaction with particle detector. Once you have that idea clear, but not implemented, add antiparticle structure to classes. NOT TOO LONG ON THIS - THERE IS MUCH MORE BEYOND!
+## Resolved
+ - Use generation getter inside constructor for neutrino! And make sure flavour works in the same way! GENERATION IS NOT PROPERTY (DATA MEMBER) OF NEUTRINO - IT IS DERVIVED FROM FLAVOUR
+ - Change names of mass to rest mass and charge to relative charge?
 
- ## References
+
+## References
  [1] https://www.geeksforgeeks.org/cpp/pure-virtual-functions-and-abstract-classes/
 
  [2] https://en.cppreference.com/w/cpp/language/rule_of_three.html

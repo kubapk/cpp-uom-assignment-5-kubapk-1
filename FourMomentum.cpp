@@ -10,7 +10,8 @@ Created on Tue 24 Mar 2026
 */
 
 #include<iostream>
-#include <stdexcept>
+#include<stdexcept>
+#include<cmath> //to check for infinite values
 #include "FourMomentum.h"
 
 
@@ -27,8 +28,8 @@ FourMomentum::FourMomentum(const double energy_in, const double x_momentum_in, c
     const double z_momentum_in) :
     energy{energy_in}, x_momentum{x_momentum_in}, y_momentum{y_momentum_in}, z_momentum{z_momentum_in}
 {
-    //Check energy is not less than or equal to 0
-    validate_energy(energy_in);
+    //Check momentum values are valid
+    validate_3_momentum(x_momentum_in, y_momentum_in, z_momentum_in);
 }
 
 
@@ -38,11 +39,11 @@ FourMomentum::FourMomentum(const double energy_in, const double x_momentum_in, c
 
 //MEMBER FUNCTIONS
 //Private member function to check for energy
-void FourMomentum::validate_energy(const double E)
+void FourMomentum::validate_3_momentum(const double px, const double py, const double pz)
 {
-    if(E < 0)
+    if(!std::isfinite(px) || !std::isfinite(py) || !std::isfinite(pz))
     {
-        throw std::invalid_argument("Energy in FourMomentum is negative. Energy must not be negative.");
+        throw std::invalid_argument("Momentum values are infinite. Momentum must be finite.");
     }
 }
 

@@ -23,7 +23,7 @@ private:
     double energy, x_momentum, y_momentum, z_momentum; //MeV
     
     //Private function to check energy is not negative
-    static void validate_energy(const double E);
+    static void validate_3_momentum(const double px, const double py, const double pz);
 
 public:
     //Declare default constructor
