@@ -55,3 +55,13 @@ bool Muon::has_decayed() const
     return time_in_detector >= MUON_MEAN_LIFETIME;
     //True if time is greater than mean lifetime
 }
+
+//Private member function to validate time input
+void Muon::validate_time(const double t)
+{
+    if(t < 0.0)
+        throw std::invalid_argument("Time cannot be negative");
+
+    if(t > MAX_TIME)
+        throw std::invalid_argument("Time in detector cannot be greater than 1 year");
+}

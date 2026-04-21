@@ -76,13 +76,12 @@ Charge of Leptons is always an integer, so charge changed to int everywhere.
  - Remove energy check as due to calculation from mass, the energy will always be positive?
  - Should bool be const? 
  - Include lepton name in Lepton class, so that it can be a property which you get and is later changed?
- - Tau can have unique property - decay 
+ - Tau can have unique property different from muon?
  - Have it so properties are always defined and never just in print function?
  - E.g. tau takes in some input number which the user can decide, and this is returned or some calculation is returned as a property of that particle - BUT JUST DO SIMPLE ONES FIRST SO THAT YOU HAVE THE IDEA OF DERIVED CLASSES - THESE CAN BE MODIFIED LATER!
  - Has decayed as a data member of muon? That way is a specified property, and then can use getter to get that property - just ensure if time in detector is updated, so is has_decayed.
- - Maximum time for time_in_detector? They shouldn't be able to enter 100s of years
+ - Maximum time for time_in_detector? They shouldn't be able to enter 100s of years - implement for muon & tau, use func which returns actual time (not void)
  - random decay times using exponential distributions
- - Has decayed as a virtual func in Lepton and returns false in Electron?
  - Time in detector doesn't make sense - cannot measure 10^-6 seconds of existence - see random decay times above
  - Random generator to generate a specific lifetime about mean lifetime - then this decay time becomes a property of the class
  - Add getters for decay status? And particle name?

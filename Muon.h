@@ -24,11 +24,14 @@ class Muon : public Lepton
 //remain private
 {
 private:
-    //Data members unique to the muon
+    //Static expressions
     static constexpr double MUON_MASS{105.7};
     static constexpr double MUON_CHARGE{-1};
     static constexpr double MUON_MEAN_LIFETIME{2.2e-6};
+    static constexpr double MAX_TIME{3600*24*365};
+    static void validate_time(const double t);
 
+    //Variables
     double time_in_detector{0};
     
 public:
