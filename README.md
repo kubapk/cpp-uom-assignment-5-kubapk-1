@@ -97,6 +97,7 @@ Charge of Leptons is always an integer, so charge changed to int everywhere.
  - Is there something you can do with gamma / beta or relativity as "time in detector" doesn't really make sense - at least be more specific about what you mean by this
  - FourMomentum class must have constructor moved to private so that the user cannot access it directly.
  - Can user use FourMomentum? If they shouldn't be able to use it, should it be a nested class? Right now user could set a FourMomentum object outside of Lepton and not obey invariant mass.
+ - Rule of 5 for derived classes? NO BECAUSE THEY DON'T HAVE SMART POINTER? CHECK
  
 
 ## Resolved
