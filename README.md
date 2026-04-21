@@ -93,7 +93,6 @@ Charge of Leptons is always an integer, so charge changed to int everywhere.
  - If something can be derived, don’t store it as a property of a class
  - Default constructor of neutrino? Doesn't make sense to throw invalid argument as that is only case when default destructor used. While born with a definite flavor, a neutrino's flavor changes as it propagates through space, meaning it is not restricted to one flavor for its entire existence. Neutrinos only fully commit to a specific flavor when they interact with matter, behaving like one of the three standard types upon detection.
  - Default constructor of muon etc has is_anti, auto set to false so can be set to true
- - Do something whith shared pointer to show performance usage (vectors of different particle detectors)
  - Is there something you can do with gamma / beta or relativity as "time in detector" doesn't really make sense - at least be more specific about what you mean by this
  - FourMomentum class must have constructor moved to private so that the user cannot access it directly.
  - Can user use FourMomentum? If they shouldn't be able to use it, should it be a nested class? Right now user could set a FourMomentum object outside of Lepton and not obey invariant mass.
@@ -103,6 +102,7 @@ Charge of Leptons is always an integer, so charge changed to int everywhere.
 ## Resolved
  - Use generation getter inside constructor for neutrino! And make sure flavour works in the same way! GENERATION IS NOT PROPERTY (DATA MEMBER) OF NEUTRINO - IT IS DERVIVED FROM FLAVOUR
  - Change names of mass to rest mass and charge to relative charge?
+ - Do something whith shared pointer to show performance usage (vectors of different particle detectors)
 
 
 ## References
@@ -121,5 +121,5 @@ Charge of Leptons is always an integer, so charge changed to int everywhere.
  [7] https://en.wikipedia.org/wiki/Particle_decay
 
 
-- Changed Particle class name to Lepton
+ - Changed Particle class name to Lepton
  - Removed checks for particle name & particle name property of Lepton class
