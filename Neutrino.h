@@ -38,7 +38,8 @@ private:
     
 public:
     //Default constructor
-    Neutrino(NeutrinoFlavour flavour_in); //neutrino at rest (px=py=pz=0)
+    Neutrino(NeutrinoFlavour flavour_in); //neutrino at rest (px=py=pz=0),
+    //compulsory to take flavour - cannot have flavourless neutrino
 
     //Parameterised constructor (with new data members)
     Neutrino(const double px_in, const double py_in, const double pz_in, 

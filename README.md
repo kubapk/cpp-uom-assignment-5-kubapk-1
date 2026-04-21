@@ -28,7 +28,9 @@ Including mass as a derived property is good because each particle in SM has dif
 
 The issue with having setters adjusting px, py, pz later could only be resolved by removing them directly from the FourMomentum class, and instead only allowing them to be changed via the Lepton class. This is much easier when FourMomentum contains E, px, py, pz as members directly. 
 
-Another issue with the FourMomentum class as it does not verify the invariant mass formula, and so a user could create a FourMomentum object with an invalid invariant mass. However, the Lepton class and any of its derived classses cannot take a FourMomentum object as an input, and so there is no benefit in the user creating a FourMomentum object. To be secure, FourMomentum object could have Lepton as a friend class, and its constructor as private, thus only allowing the FourMomentum constructor to be used via the Lepton class.
+Another issue with the FourMomentum class as it does not verify the invariant mass formula, and so a user could create a FourMomentum object with an invalid invariant mass. However, the Lepton class and any of its derived classses cannot take a FourMomentum object as an input, and so there is no benefit in the user creating a FourMomentum object. To be secure, FourMomentum object could have Lepton as a friend class, and its constructor as private, thus only allowing the FourMomentum constructor to be used via the Lepton class. If user whishes to extend to e.g. baryons or quarks, then these must also be friend classes of the FourMomentum class. 
+
+**Problem with this is classes derived from Lepton class cannot use FourMomentum object.**
 
 ### 0/3/5 rule
 The FourMomentum object has the data members E, px, py, pz which are all doubles. As there are no pointers involved (or any other objects of non-class type), we use the rule of 0 - FourMomentum object does not need to have user-defined special member functions. Since the Lepton class involves a smart pointer, we must implement the rule of 3 at least. As the assignment requires `std::move` of Electron (derived from Lepton), we need move semantics and so must implement the rule of 5. All derived classes inherit the constructors and assignment operators defined in Lepton base class, and since they do not have any pointers, we use rule of 0 for derived classes.
@@ -62,6 +64,8 @@ In neutrino class used `get_flavour` to output a string for the flavour which is
 ### Neutrinos
 Default constructor must contain flavour as an input, as all neutrinos are born with a specific flavour.
 
+Neutrinos cannot be entered with an invalid neutrino - must be called via enumerator which only has 3 options. If however there is an uninitialised variable `NeutrinoFlavour flavour;`, this could be passed through with an invalid (null) flavour. Hence the need for throw logic error if enumerator reaches end.
+
 
 ### User input validation
 Added check on the user input for time in detector, so they could not enter a negative time, or an arbitarily large time (taken to be 1ms - WHY? CORRESPONDS TO HIGH ENERGY?). The 3-momentum can contain any positive or negative floats, but should not allow infinite values. If a user enters a very large momentum, it may overflow to `inf` which cannot be used in calculations. Infinite values must therefore be checked for and throw an error. This is done via FourMomentum class.
@@ -74,22 +78,25 @@ Charge of Leptons is always an integer, so charge changed to int everywhere.
 
 ## Notes 
  - Check where all consts need to go 
- - Have all properties as data members (mass, charge, particle name, particle decay status) of the class - get_mass and get_charge virtual funcs in Lepton class and override them in each derived class 9
+ - Have all properties as data members (mass, charge, particle name, particle decay status) of the class - get_mass and get_charge virtual funcs in Lepton class and override them in each derived class 
  - If something can be derived, don’t store it as a property of a class
  - Should bool be const? 
  - Tau can have unique property different from muon?
+ - Time in detector and all of its checks are repeated in muon & tau - not good
  - E.g. tau takes in some input number which the user can decide, and this is returned or some calculation is returned as a property of that particle
  - random decay times using exponential distributions
  - Time in detector doesn't make sense - cannot measure 10^-6 seconds of existence - see random decay times above
  - Random generator to generate a specific lifetime about mean lifetime - then this decay time becomes a property of the class
- - Enum which raises error for else case (types of neutrinos)
- - Add oscillations to neutrino
- - Default constructor of neutrino? Doesn't make sense to throw invalid argument as that is only case when default destructor used. While born with a definite flavor, a neutrino's flavor changes as it propagates through space, meaning it is not restricted to one flavour for its entire existence. Neutrinos only fully commit to a specific flavor when they interact with matter, behaving like one of the three standard types upon detection.
+ - Add oscillations to neutrino. While born with a definite flavor, a neutrino's flavor changes as it propagates through space, meaning it is not restricted to one flavour for its entire existence. Neutrinos only fully commit to a specific flavor when they interact with matter, behaving like one of the three standard types upon detection.
  - Is there something you can do with gamma / beta or relativity as "time in detector" doesn't really make sense - at least be more specific about what you mean by this
  - FourMomentum class must have constructor moved to private so that the user cannot access it directly.
  - Can user use FourMomentum? Make Lepton a friend class of FourMomentum and FourMomentum constructor private - only Lepton can construct FourMomentum object, and not user.
  - Print which object (particle name) the energy is infinite for
- - Time in detector and all of its checks are repeated in muon & tau - not good
+
+ - DIFFERENTIATE TAU & MUO
+ - TIME IN DETECTOR - USE DISTANCE / VELOCITY INSTEAD
+ - DITRIBUTION AWAY FROM MEAN LIFETIME TO USE AS ACTUAL LIFETIME?
+
  
 
 ## Resolved

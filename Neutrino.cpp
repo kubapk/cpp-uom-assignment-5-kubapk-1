@@ -37,7 +37,7 @@ string Neutrino::get_flavour() const
         case NeutrinoFlavour::Muon: return "muon";
         case NeutrinoFlavour::Tau: return "tau";
     }
-    throw std::invalid_argument("Invalid neutrino flavour - cannot get flavour");
+    throw std::logic_error("Invalid neutrino flavour - cannot get flavour");
 }
 
 //Getter for generation
@@ -49,7 +49,7 @@ int Neutrino::get_generation() const
         case NeutrinoFlavour::Muon: return 2;
         case NeutrinoFlavour::Tau: return 3;
     }
-    throw std::invalid_argument("Invalid neutrino flavour - cannot get generation");
+    throw std::logic_error("Invalid neutrino flavour - cannot get generation");
 }
 
 
