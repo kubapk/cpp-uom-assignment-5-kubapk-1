@@ -12,8 +12,9 @@ Created on Wed 25 Mar 2026
 
 #include<iostream>
 #include<memory> //for smart pointer
-#include <stdexcept>
-#include <cmath> //for sqrt
+#include<stdexcept>
+#include<cmath> //for sqrt & finite check
+#include<iomanip> //for set precision
 #include "Lepton.h"
 
 
@@ -116,7 +117,7 @@ void Lepton::base_info() const
     std::cout<<"Spin: 0.5"<<std::endl;
     std::cout<<"Rest mass: "<<mass<<"MeV"<<std::endl;
     std::cout<<"Relative charge: "<<relative_charge<<"e"<<std::endl;
-    std::cout<<"Four-momentum: "<<*momentum_ptr<<std::endl;
+    std::cout<<"Four-momentum: "<<std::fixed<<std::setprecision(3)<<*momentum_ptr<<std::endl;
     std::cout<<"Decay status: "<<(has_decayed()? "Decayed" : "Not decayed")<<std::endl;
 }
 
@@ -125,8 +126,13 @@ double Lepton::compute_energy(const double mass_in, const double px_in,
     const double py_in, const double pz_in)
     // E^2 = m^2 + p^2
     {
-        return std::sqrt(mass_in*mass_in + px_in*px_in + py_in*py_in
+        double E = std::sqrt(mass_in*mass_in + px_in*px_in + py_in*py_in
         + pz_in*pz_in);
+
+        if(!std::isfinite(E))
+            throw std::overflow_error("Momentum values are too large. Energy is infinite.");
+
+        return E;
     }
 //Static function to ensure the energy cannot be modified by any setters or getters during run time 
 //- belongs to the class rather than any specific object of the class

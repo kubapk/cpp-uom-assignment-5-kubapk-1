@@ -22,7 +22,7 @@ Tau::Tau() :
 //Paramterised constructor
 Tau::Tau(const double px_in, const double py_in, const double pz_in, const double time_in, bool is_anti) :
     Lepton(TAU_MASS, TAU_CHARGE, px_in, py_in, pz_in, is_anti),
-    time_in_detector{time_in}
+    time_in_detector{validate_time(time_in)}
     {}
 
 
@@ -30,7 +30,7 @@ Tau::Tau(const double px_in, const double py_in, const double pz_in, const doubl
 //Setter for time_in_detector
 void Tau::set_time_in_detector(const double& time_in)
 {
-    time_in_detector = time_in;
+    time_in_detector = validate_time(time_in);
 }
 
 
@@ -52,4 +52,17 @@ void Tau::info() const
 bool Tau::has_decayed() const
 {
     return time_in_detector >= TAU_MEAN_LIFETIME;
+}
+
+//Private member function to validate time input
+double Tau::validate_time(const double t)
+{
+    if(t < 0.0)
+        throw std::invalid_argument("Time cannot be negative");
+
+    if(t > MAX_TIME)
+        throw std::invalid_argument("Time in detector cannot be greater than "
+            "1 second (1s)");
+
+    return t;
 }

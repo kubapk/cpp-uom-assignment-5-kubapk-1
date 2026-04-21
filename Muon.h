@@ -28,7 +28,7 @@ private:
     static constexpr double MUON_MASS{105.7};
     static constexpr double MUON_CHARGE{-1};
     static constexpr double MUON_MEAN_LIFETIME{2.2e-6};
-    static constexpr double MAX_TIME{1e-3}; //1 millisecond
+    static constexpr double MAX_TIME{1}; //1 second
     static double validate_time(const double t);
 
     //Variables

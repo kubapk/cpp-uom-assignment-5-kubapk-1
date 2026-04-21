@@ -43,7 +43,7 @@ void FourMomentum::validate_3_momentum(const double px, const double py, const d
 {
     if(!std::isfinite(px) || !std::isfinite(py) || !std::isfinite(pz))
     {
-        throw std::invalid_argument("Momentum values are infinite. Momentum must be finite.");
+        throw std::invalid_argument("Momentum values contain infinity. Momentum must be finite.");
     }
 }
 

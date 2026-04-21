@@ -16,10 +16,18 @@ int main()
     {
         //Cannot create a Lepton - it is an abstract class
         //Lepton lepton_test{Lepton(10, 1, 0, 0, 0)};
+        
+        //Create FourMomentum object
+        std::cout<<"\nCreating FourMomentum"<<std::endl;
+        FourMomentum test_momentum{FourMomentum(0, 10, 10, 10)};
+        std::cout<<"E = "<<test_momentum.get_E()<<std::endl;
+        std::cout<<"px = "<<test_momentum.get_px()<<std::endl;
+        std::cout<<"py = "<<test_momentum.get_py()<<std::endl;
+        std::cout<<"pz = "<<test_momentum.get_pz()<<std::endl;
 
         //Create an electron
         std::cout<<"\nCreating new electron"<<std::endl;
-        Electron electron_test{Electron(-10, -10, -10)};
+        Electron electron_test{Electron(20, -10, -10)};
 
         //Print out electron info
         electron_test.info();
@@ -79,7 +87,7 @@ int main()
 
         //Change muon time in detector
         std::cout<<"\nChanging time in detector"<<std::endl;
-        muon_2.set_time_in_detector(1e-12);
+        muon_2.set_time_in_detector(2);
         muon_2.info();
 
         //Create anti-muon via parameterised constructor

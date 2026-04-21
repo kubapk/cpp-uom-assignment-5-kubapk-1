@@ -22,11 +22,14 @@ using std::string;
 class Tau : public Lepton
 {
 private:
-    //Data members unique to the tau
+    //Constants
     static constexpr double TAU_MASS{1777};
     static constexpr double TAU_CHARGE{-1};
     static constexpr double TAU_MEAN_LIFETIME{2.9e-13};
+    static constexpr double MAX_TIME{1}; //1 second
+    static double validate_time(const double t);
 
+    //Variables
     double time_in_detector{0};
     
 public:

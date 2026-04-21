@@ -28,8 +28,10 @@ Including mass as a derived property is good because each particle in SM has dif
 
 The issue with having setters adjusting px, py, pz later could only be resolved by removing them directly from the FourMomentum class, and instead only allowing them to be changed via the Lepton class. This is much easier when FourMomentum contains E, px, py, pz as members directly. 
 
+Another issue with the FourMomentum class as it does not verify the invariant mass formula, and so a user could create a FourMomentum object with an invalid invariant mass. However, the Lepton class and any of its derived classses cannot take a FourMomentum object as an input, and so there is no benefit in the user creating a FourMomentum object. To be secure, FourMomentum object could have Lepton as a friend class, and its constructor as private, thus only allowing the FourMomentum constructor to be used via the Lepton class.
+
 ### 0/3/5 rule
-The FourMomentum object has the data members E, px, py, pz which are all doubles. As there are no pointers involved (or any other objects of non-class type), we use the rule of 0 - FourMomentum object does not need to have user-defined special member functions. Since the Lepton class involves a smart pointer, we must implement the rule of 3 at least. As the assignment requires `std::move` of Electron (derived from Lepton), we need move semantics and so must implement the rule of 5.
+The FourMomentum object has the data members E, px, py, pz which are all doubles. As there are no pointers involved (or any other objects of non-class type), we use the rule of 0 - FourMomentum object does not need to have user-defined special member functions. Since the Lepton class involves a smart pointer, we must implement the rule of 3 at least. As the assignment requires `std::move` of Electron (derived from Lepton), we need move semantics and so must implement the rule of 5. All derived classes inherit the constructors and assignment operators defined in Lepton base class, and since they do not have any pointers, we use rule of 0 for derived classes.
 
 ### Compile line
 Compile line must include all classes defined even if they are derived (code is still needed).
@@ -72,37 +74,29 @@ Charge of Leptons is always an integer, so charge changed to int everywhere.
 
 ## Notes 
  - Check where all consts need to go 
- - Potentially make get_mass and get_charge virtual funcs in Lepton class and override them in each derived class - bit more manual, code repeating
- - Getters get_mass etc do not return unit while get_four_momentum does - but how to do units without printing in getters? Then cannot pass mass into something else.
- - Give number of decimal places to four momentum energy when calculated - see previous weeks
- - Allowed values for px, py, pz
- - Remove energy check as due to calculation from mass, the energy will always be positive?
+ - Have all properties as data members (mass, charge, particle name, particle decay status) of the class - get_mass and get_charge virtual funcs in Lepton class and override them in each derived class 9
+ - If something can be derived, don’t store it as a property of a class
  - Should bool be const? 
- - Include lepton name in Lepton class, so that it can be a property which you get and is later changed?
  - Tau can have unique property different from muon?
- - Have it so properties are always defined and never just in print function?
- - E.g. tau takes in some input number which the user can decide, and this is returned or some calculation is returned as a property of that particle - BUT JUST DO SIMPLE ONES FIRST SO THAT YOU HAVE THE IDEA OF DERIVED CLASSES - THESE CAN BE MODIFIED LATER!
- - Has decayed as a data member of muon? That way is a specified property, and then can use getter to get that property - just ensure if time in detector is updated, so is has_decayed.
- - Maximum time for time_in_detector? They shouldn't be able to enter 100s of years - implement for muon & tau, use func which returns actual time (not void)
+ - E.g. tau takes in some input number which the user can decide, and this is returned or some calculation is returned as a property of that particle
  - random decay times using exponential distributions
  - Time in detector doesn't make sense - cannot measure 10^-6 seconds of existence - see random decay times above
  - Random generator to generate a specific lifetime about mean lifetime - then this decay time becomes a property of the class
- - Add getters for decay status? NO - USER CAN GET THIS BY PARTICLE.HAS_DECAYED(), AND SINCE THIS CAN BE A DERIVED CALCULATION IT SHOULD NOT BE A PROPERTY And particle name getter & data member?
  - Enum which raises error for else case (types of neutrinos)
  - Add oscillations to neutrino
- - If something can be derived, don’t store it as a property of a class
- - Default constructor of neutrino? Doesn't make sense to throw invalid argument as that is only case when default destructor used. While born with a definite flavor, a neutrino's flavor changes as it propagates through space, meaning it is not restricted to one flavor for its entire existence. Neutrinos only fully commit to a specific flavor when they interact with matter, behaving like one of the three standard types upon detection.
- - Default constructor of muon etc has is_anti, auto set to false so can be set to true
+ - Default constructor of neutrino? Doesn't make sense to throw invalid argument as that is only case when default destructor used. While born with a definite flavor, a neutrino's flavor changes as it propagates through space, meaning it is not restricted to one flavour for its entire existence. Neutrinos only fully commit to a specific flavor when they interact with matter, behaving like one of the three standard types upon detection.
  - Is there something you can do with gamma / beta or relativity as "time in detector" doesn't really make sense - at least be more specific about what you mean by this
  - FourMomentum class must have constructor moved to private so that the user cannot access it directly.
- - Can user use FourMomentum? If they shouldn't be able to use it, should it be a nested class? Right now user could set a FourMomentum object outside of Lepton and not obey invariant mass.
- - Rule of 5 for derived classes? NO BECAUSE THEY DON'T HAVE SMART POINTER? CHECK
+ - Can user use FourMomentum? Make Lepton a friend class of FourMomentum and FourMomentum constructor private - only Lepton can construct FourMomentum object, and not user.
+ - Print which object (particle name) the energy is infinite for
+ - Time in detector and all of its checks are repeated in muon & tau - not good
  
 
 ## Resolved
  - Use generation getter inside constructor for neutrino! And make sure flavour works in the same way! GENERATION IS NOT PROPERTY (DATA MEMBER) OF NEUTRINO - IT IS DERVIVED FROM FLAVOUR
  - Change names of mass to rest mass and charge to relative charge?
  - Do something whith shared pointer to show performance usage (vectors of different particle detectors)
+ - Add getters for decay status? NO - USER CAN GET THIS BY PARTICLE.HAS_DECAYED(), AND SINCE THIS CAN BE A DERIVED CALCULATION IT SHOULD NOT BE A PROPERTY And
 
 
 ## References
