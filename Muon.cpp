@@ -22,7 +22,7 @@ Muon::Muon() :
 //Paramterised constructor
 Muon::Muon(const double px_in, const double py_in, const double pz_in, const double time_in, bool is_anti) :
     Lepton(MUON_MASS, MUON_CHARGE, px_in, py_in, pz_in, is_anti),
-    time_in_detector{time_in}
+    time_in_detector{validate_time(time_in)}
     {}
 
 
@@ -30,7 +30,7 @@ Muon::Muon(const double px_in, const double py_in, const double pz_in, const dou
 //Setter for time_in_detector
 void Muon::set_time_in_detector(const double& time_in)
 {
-    time_in_detector = time_in;
+    time_in_detector = validate_time(time_in);
 }
 
 
@@ -57,11 +57,13 @@ bool Muon::has_decayed() const
 }
 
 //Private member function to validate time input
-void Muon::validate_time(const double t)
+double Muon::validate_time(const double t)
 {
     if(t < 0.0)
         throw std::invalid_argument("Time cannot be negative");
 
     if(t > MAX_TIME)
         throw std::invalid_argument("Time in detector cannot be greater than 1 year");
+
+    return t;
 }

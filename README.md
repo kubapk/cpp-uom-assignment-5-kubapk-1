@@ -108,6 +108,8 @@ Charge of Leptons is always an integer, so charge changed to int everywhere.
 
  [6] https://www.geeksforgeeks.org/cpp/range-based-loop-c/
 
+ [7] https://en.wikipedia.org/wiki/Particle_decay
+
 
 - Changed Particle class name to Lepton
  - Removed checks for particle name & particle name property of Lepton class
