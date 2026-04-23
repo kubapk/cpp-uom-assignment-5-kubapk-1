@@ -17,6 +17,7 @@ Created on Sun 22 Mar 2026
 #include<vector>
 using std::vector;
 
+
 class FourMomentum
 {
 private:
@@ -29,7 +30,7 @@ public:
     //Declare default constructor
     FourMomentum();
 
-    //Declare paramterised constructor
+    //Declare parameterised constructor
     FourMomentum(const double energy_in, const double x_momentum_in, const double y_momentum_in, 
         const double z_momentum_in);
 
