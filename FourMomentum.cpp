@@ -30,6 +30,10 @@ FourMomentum::FourMomentum(const double energy_in, const double px_in, const dou
 {
     //Check momentum values are valid
     validate_3_momentum(px_in, py_in, pz_in);
+
+    //Check energy is valid
+    if(energy_in*energy_in < px_in*px_in + py_in*py_in + pz_in*pz_in)
+            throw std::invalid_argument("Invalid energy for FourMomentum");
 }
 
 
@@ -37,7 +41,7 @@ FourMomentum::FourMomentum(const double energy_in, const double px_in, const dou
 //No setters for FourMomentum - do not allow user to change these
 
 
-//MEMBER FUNCTIONS
+//PRIVATE MEMBER FUNCTIONS
 //Private member function to check px, py, pz are not infinite
 void FourMomentum::validate_3_momentum(const double px, const double py, const double pz)
 {
@@ -45,6 +49,13 @@ void FourMomentum::validate_3_momentum(const double px, const double py, const d
     {
         throw std::invalid_argument("Momentum values contain infinity. Momentum must be finite.");
     }
+}
+
+//Private member function to validate mass
+void FourMomentum::validate_mass(const double mass_in)
+{
+    if(mass_in < 0 || mass_in > 1e6) //1TeV
+        throw std::invalid_argument("Mass must be between 0 MeV and 1 TeV (1e6MeV)");
 }
 
 //Private member function to find energy given 3-momentum
@@ -65,19 +76,12 @@ double FourMomentum::compute_energy(const double mass_in, const double px_in,
         return E;
     }
 
-//Private member function to validate mass
-void FourMomentum::validate_mass(const double mass_in)
-{
-    if(mass_in < 0 || mass_in > 1e6) //1TeV
-        throw std::invalid_argument("Mass must be between 0 MeV and 1 TeV (1e6MeV)");
-}
 
+//PUBLIC MEMBER FUNCTIONS
 //Public member function to find FourMomentum from mass
 FourMomentum FourMomentum::four_momentum_from_mass(const double mass_in, const double px_in, 
     const double py_in, const double pz_in)
     {
-        validate_mass(mass_in);
-
         return FourMomentum(compute_energy(mass_in, px_in, py_in, pz_in), 
         px_in, py_in, pz_in);
     }
@@ -86,9 +90,6 @@ FourMomentum FourMomentum::four_momentum_from_mass(const double mass_in, const d
 FourMomentum FourMomentum::four_momentum_from_energy(const double energy_in, const double px_in, 
     const double py_in, const double pz_in)
     {
-        if(energy_in*energy_in < px_in*px_in + py_in*py_in + pz_in*pz_in)
-            throw std::invalid_argument("Invalid energy for FourMomentum");
-
         return FourMomentum(energy_in, px_in, py_in, pz_in);
     }
 

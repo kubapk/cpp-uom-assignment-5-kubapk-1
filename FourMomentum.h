@@ -34,12 +34,12 @@ private:
     //Private function to check px, py, pz are not infinite
     static void validate_3_momentum(const double px, const double py, const double pz);
 
-    //Private function to find energy given 3-momentum
-    static double compute_energy(const double mass_in, const double px_in, 
-    const double py_in, const double pz_in);
-
     //Private function to check is valid mass
     static void validate_mass(const double mass_in);
+
+    //Private function to find energy given 3-momentum & mass
+    static double compute_energy(const double mass_in, const double px_in, 
+    const double py_in, const double pz_in);
 
 public:
     //Declare destructor

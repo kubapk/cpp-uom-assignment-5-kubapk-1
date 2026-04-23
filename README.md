@@ -5,6 +5,8 @@
 ### Running the program as-is
 This code was run on VSC using a Windows 11 device. The compilation line used was `g++ -std=c++17 main.cpp Neutrino.cpp Tau.cpp Muon.cpp Electron.cpp Lepton.cpp FourMomentum.cpp -o main.exe -Wall`. The program can then be run by calling the file `main.exe`.
 
+Test code: `g++ -std=c++17 test.cpp Neutrino.cpp Tau.cpp Muon.cpp Electron.cpp Lepton.cpp FourMomentum.cpp -o test.exe -Wall`
+
 ### Modifying the main file, `main.cpp`
 
 
@@ -73,6 +75,8 @@ Neutrinos cannot be entered with an invalid neutrino - must be called via enumer
 ### Class input validation
 Added check on the user input for time in detector, so they could not enter a negative time, or an arbitarily large time (taken to be 1ms - WHY? CORRESPONDS TO HIGH ENERGY?). The 3-momentum can contain any positive or negative floats, but should not allow infinite values. If a user enters a very large momentum, it may overflow to `inf` which cannot be used in calculations. Infinite values must therefore be checked for and throw an error. This is done via FourMomentum class.
 
+Validations in FourMomentum class are always done via constructor if possible (there are no setters). Energy can be found via mass using static function to compute energy - this requires mass as an input. FourMomentum function which finds FourMomentum from mass uses the compute energy function so no further checks are needed.
+
 ### Assumptions
 Electron and Neutrino have has_decayed=false because they are stable particles so for any time in the detector they are most likely to not have decayed. To ensure this holds, and that the user can't enter arbitrarily large numbers, we set a limit on the time_in_detector. In the program logic, if during the maximum of time_in_detector the Lepton doesn't decay, it doesn't need that property and so it always has has_decayed=false.
 
@@ -93,14 +97,11 @@ A muon decays into electron, antineutrino and muon neutrino at about 100% probab
  - Time in detector doesn't make sense - cannot measure 10^-6 seconds of existence - see random decay times above
  - Random generator to generate a specific lifetime about mean lifetime - then this decay time becomes a property of the class
  - Is there something you can do with gamma / beta or relativity as "time in detector" doesn't really make sense - at least be more specific about what you mean by this
- - Can user use FourMomentum? FourMomentum class must have constructor moved to private so that the user cannot access it directly. Make Lepton a friend class of FourMomentum and FourMomentum constructor private - only Lepton can construct FourMomentum object, and not user.
  - Print which object (particle name) the energy is infinite for (class input checks)
  - Control invalid inputs for DecayMode?
  - Cannot set precision of results because then everything afterwards is set to 2dp - confirm this
  - Decay output for muon? Base lepton class
  - Time in detector or not? Justify max value.
- - Daughter products generated as vector? NO
- - Check mass input for FourMomentum function
 
  - DIFFERENTIATE TAU & MUO
  - TIME IN DETECTOR - USE DISTANCE / VELOCITY INSTEAD

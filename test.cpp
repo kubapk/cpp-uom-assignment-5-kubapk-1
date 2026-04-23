@@ -110,7 +110,7 @@ int main()
 
         //Create tau via constructor
         std::cout<<"\nCreating tau"<<std::endl;
-        Tau tau_2{Tau(0, 0, 1, 1e-14)};
+        Tau tau_2{Tau(0, 0, 1, 1)};
         tau_2.info();
 
 
