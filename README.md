@@ -85,23 +85,17 @@ A muon decays into electron, antineutrino and muon neutrino at about 100% probab
  - Have all properties as data members (mass, charge, particle name, particle decay status) of the class - get_mass and get_charge virtual funcs in Lepton class and override them in each derived class 
  - If something can be derived, don’t store it as a property of a class
  - Should bool be const? 
- - Tau can have unique property different from muon?
  - Time in detector and all of its checks are repeated in muon & tau - not good
- - E.g. tau takes in some input number which the user can decide, and this is returned or some calculation is returned as a property of that particle
- - random decay times using exponential distributions
  - Time in detector doesn't make sense - cannot measure 10^-6 seconds of existence - see random decay times above
  - Random generator to generate a specific lifetime about mean lifetime - then this decay time becomes a property of the class
- - Add oscillations to neutrino. While born with a definite flavor, a neutrino's flavor changes as it propagates through space, meaning it is not restricted to one flavour for its entire existence. Neutrinos only fully commit to a specific flavor when they interact with matter, behaving like one of the three standard types upon detection.
  - Is there something you can do with gamma / beta or relativity as "time in detector" doesn't really make sense - at least be more specific about what you mean by this
- - FourMomentum class must have constructor moved to private so that the user cannot access it directly.
- - Can user use FourMomentum? Make Lepton a friend class of FourMomentum and FourMomentum constructor private - only Lepton can construct FourMomentum object, and not user.
- - Print which object (particle name) the energy is infinite for
- - Make FourMomentum only accessible to lepton class (must declare lepton class in the same line)
- - Check 2dp for all outputs in info func
+ - Can user use FourMomentum? FourMomentum class must have constructor moved to private so that the user cannot access it directly. Make Lepton a friend class of FourMomentum and FourMomentum constructor private - only Lepton can construct FourMomentum object, and not user.
+ - Print which object (particle name) the energy is infinite for (class input checks)
  - Control invalid inputs for DecayMode?
  - Cannot set precision of results because then everything afterwards is set to 2dp - confirm this
- - Different decay outputs for tau & anti tau? Decay output for muon?
+ - Decay output for muon? Base lepton class
  - Time in detector or not? Justify max value.
+ - Daughter products generated as vector? NO
 
  - DIFFERENTIATE TAU & MUO
  - TIME IN DETECTOR - USE DISTANCE / VELOCITY INSTEAD
@@ -113,7 +107,8 @@ A muon decays into electron, antineutrino and muon neutrino at about 100% probab
  - Use generation getter inside constructor for neutrino! And make sure flavour works in the same way! GENERATION IS NOT PROPERTY (DATA MEMBER) OF NEUTRINO - IT IS DERVIVED FROM FLAVOUR
  - Change names of mass to rest mass and charge to relative charge?
  - Do something whith shared pointer to show performance usage (vectors of different particle detectors)
- - Add getters for decay status? NO - USER CAN GET THIS BY PARTICLE.HAS_DECAYED(), AND SINCE THIS CAN BE A DERIVED CALCULATION IT SHOULD NOT BE A PROPERTY And
+ - Add getters for decay status? NO - USER CAN GET THIS BY PARTICLE.HAS_DECAYED(), AND SINCE THIS CAN BE A DERIVED CALCULATION IT SHOULD NOT BE A PROPERTY
+ - Add oscillations to neutrino. While born with a definite flavor, a neutrino's flavor changes as it propagates through space, meaning it is not restricted to one flavour for its entire existence. Neutrinos only fully commit to a specific flavor when they interact with matter, behaving like one of the three standard types upon detection.
 
 
 ## References

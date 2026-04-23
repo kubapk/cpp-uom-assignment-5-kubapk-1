@@ -58,7 +58,7 @@ int Neutrino::get_generation() const
 void Neutrino::info() const
 {
     if(is_antiparticle)
-        std::cout<<"Particle: anti "<<get_flavour()<<" neutrino"<<std::endl;
+        std::cout<<"Particle: "<<get_flavour()<<" anti-neutrino"<<std::endl;
     else
         std::cout<<"Particle: "<<get_flavour()<<" neutrino"<<std::endl;
 

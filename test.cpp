@@ -99,7 +99,7 @@ int main()
 
         //Create anti-tau via parameterised constructor
         std::cout<<"\nCreating anti tau"<<std::endl;
-        Tau antitau{Tau(10, 10, 10, 1e-4, true)};
+        Tau antitau{Tau(10, 10, 10, 0.5, true)};
         antitau.info();
 
         //Create default tau

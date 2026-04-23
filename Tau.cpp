@@ -53,8 +53,14 @@ string Tau::get_decay_mode() const
         case DecayMode::Hadronic: 
             return "Hadronic decay";
         case DecayMode::Electron: 
-            return "tau -> tau neutrino + electron + electron antineutrino";
+            if(is_antiparticle)
+                return "antitau -> tau antineutrino + positron + electron neutrino";
+            else
+                return "tau -> tau neutrino + electron + electron antineutrino";
         case DecayMode::Muon:
+        if(is_antiparticle)
+            return "antitau -> tau antineutrino + antimuon + muon neutrino";
+        else
             return "tau -> tau neutrino + muon + muon antineutrino";
     }
     throw std::logic_error("Invalid tau decay mode");
@@ -72,7 +78,10 @@ void Tau::info() const
         std::cout<<"Particle: tau"<<std::endl;
 
     Lepton::base_info(); //call info function from Lepton
-    std::cout<<(has_decayed()? "Decay type: "+get_decay_mode() : "")<<std::endl;
+    
+    if(has_decayed())
+        std::cout<<"Decay type: "<<get_decay_mode()<<std::endl;
+
     std::cout<<"Mean lifetime: "<<TAU_MEAN_LIFETIME<<"s"<<std::endl;
     std::cout<<"Time in detector: "<<time_in_detector<<"s"<<std::endl;
 }
