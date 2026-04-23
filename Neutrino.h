@@ -47,7 +47,6 @@ public:
 
     //Getters
     string get_flavour() const; //return by value so that string is not temporary
-    //MAKE PARTICLE NAME A PROPERTY - AND ALSO IS_ANTI A PROPERTY?
     int get_generation() const;
     //getters do not have const in front as the string/int which is returned
     //needs to be used - CHECK

@@ -117,7 +117,7 @@ void Lepton::base_info() const
     std::cout<<"Spin: 0.5"<<std::endl;
     std::cout<<"Rest mass: "<<mass<<"MeV"<<std::endl;
     std::cout<<"Relative charge: "<<relative_charge<<"e"<<std::endl;
-    std::cout<<"Four-momentum: "<<std::fixed<<std::setprecision(3)<<*momentum_ptr<<std::endl;
+    std::cout<<"Four-momentum: "<<*momentum_ptr<<std::endl;
     std::cout<<"Decay status: "<<(has_decayed()? "Decayed" : "Not decayed")<<std::endl;
 }
 

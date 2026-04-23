@@ -59,7 +59,7 @@ Shouldn't be `const bool` because we want to print out a specific text in the `i
 The destructor in FourMomentum was not defined (not even as default) in FourMomentum class when changes were made to remove the delete destructor message - this caused there to be an error when the FourMomentum object was attempted to be desrtoyed. This is a result of the line `std::unique_ptr<FourMomentum> momentum_ptr;` which when goes out of scope must have a defined destructor. 
 
 ### Using const for functions (getters)
-In neutrino class used `get_flavour` to output a string for the flavour which is contained. It is also within the info function and the user can also call it (hence why it is public). As it is just returning a string which doesn't exist in memory before, the variable is temporary and so it should not be returned by reference (this would cause an error as the pointer would not have anything to point to once it goes out of scope at the end of the `get_flavour` function). Since the output of the function is temporary, there is no need to use `const get_flavour` as that would just set the temporary inside the function to a const, which goes out of scope anyway.
+In neutrino class used `get_flavour` to output a string for the flavour. It is used within the info function and the user can also call it (hence why it is public). As it is just returning a string which doesn't exist in memory before, the variable is temporary and so it should not be returned by reference (this would cause an error as the pointer would not have anything to point to once it goes out of scope at the end of the `get_flavour` function). Since the output of the function is temporary, there is no need to use `const get_flavour` as that would just set the temporary inside the function to a const, which goes out of scope anyway.
 
 ### Neutrinos
 Default constructor must contain flavour as an input, as all neutrinos are born with a specific flavour.
@@ -75,7 +75,9 @@ Electron and Neutrino have has_decayed=false because they are stable particles s
 Charge of Leptons is always an integer, so charge changed to int everywhere.
 
 ### Decay modes for tau
-Text here
+A muon decays into electron, antineutrino and muon neutrino at about 100% probability. Antimuon also has about 100% probability of decaying into positrion, neutrino and anti muon neutrino. Taus on the other hand have different decay modes, which can be purely hadronic (64.8% of time), or emit electron & electron nuetrino (17.8% of time), or emit muon & muon neutrino (17.4% of the time). Therefore feasible to introduce decay modes to tau class. Use enumerator class to specify these 3 possibilities, and then a function to output one of these according to these probabilities, and then print out what the tau decays to according to the enumerator.
+
+`get_decay_mode` returns a string which didn't exist in memory before. Since the variable is temporary, it should not be returned by reference (this would cause an error as the pointer would not have anything to point to once it goes out of scope at the end of the `get_decay_mode` function). Since the output of the function is temporary, there is also no need to use `const get_decay_mode` as that would just set the temporary inside the function to a const, which goes out of scope anyway.
 
 
 ## Notes 
@@ -96,6 +98,8 @@ Text here
  - Print which object (particle name) the energy is infinite for
  - Make FourMomentum only accessible to lepton class (must declare lepton class in the same line)
  - Check 2dp for all outputs in info func
+ - Control invalid inputs for DecayMode?
+ - Cannot set precision of results because then everything afterwards is set to 2dp - confirm this
 
  - DIFFERENTIATE TAU & MUO
  - TIME IN DETECTOR - USE DISTANCE / VELOCITY INSTEAD
@@ -124,6 +128,18 @@ Text here
  [6] https://www.geeksforgeeks.org/cpp/range-based-loop-c/
 
  [7] https://en.wikipedia.org/wiki/Particle_decay
+
+ [8] https://physics.stackexchange.com/questions/282245/muon-decay-mode
+
+ [9] https://en.wikipedia.org/wiki/Muon
+
+ [10] https://en.wikipedia.org/wiki/Tau_(particle)
+
+ [11] https://tikz.net/sm_decay_matrix/
+
+ [12] https://www.geeksforgeeks.org/cpp/stduniform_real_-distribution-class-in-c-with-examples/
+
+ [13] https://www.w3schools.com/cpp/cpp_switch.asp
 
 
  - Changed Particle class name to Lepton

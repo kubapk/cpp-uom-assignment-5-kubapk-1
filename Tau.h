@@ -21,16 +21,27 @@ using std::string;
 
 class Tau : public Lepton
 {
+public:
+    enum class DecayMode{Hadronic, Electron, Muon};
+
 private:
-    //Constants
+    //Constant expressions
     static constexpr double TAU_MASS{1777};
     static constexpr double TAU_CHARGE{-1};
     static constexpr double TAU_MEAN_LIFETIME{2.9e-13};
     static constexpr double MAX_TIME{1}; //1 second
+
+    static constexpr double PROB_HADRONIC{0.648};
+    static constexpr double PROB_ELECTRON{0.178};
+    static constexpr double PROB_MUON{0.174};
+
+    //Constant functions
     static double validate_time(const double t);
+    static DecayMode generate_decay_mode();
 
     //Variables
     double time_in_detector{0};
+    DecayMode decay_mode;
     
 public:
     //Default constructor
@@ -43,7 +54,8 @@ public:
     void set_time_in_detector(const double& time_in);
 
     //Getters
-    const double& get_time_in_detector() const {return time_in_detector;}
+    const double& get_time_in_detector() const;
+    string get_decay_mode() const;
 
     //Prototyping member functions
     void info() const;

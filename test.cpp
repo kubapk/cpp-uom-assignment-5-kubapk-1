@@ -14,6 +14,7 @@ int main()
 {
     try
     {
+        /*
         //Cannot create a Lepton - it is an abstract class
         //Lepton lepton_test{Lepton(10, 1, 0, 0, 0)};
         
@@ -87,18 +88,30 @@ int main()
 
         //Change muon time in detector
         std::cout<<"\nChanging time in detector"<<std::endl;
-        muon_2.set_time_in_detector(2);
+        muon_2.set_time_in_detector(0);
         muon_2.info();
 
         //Create anti-muon via parameterised constructor
         std::cout<<"\nCreating anti muon"<<std::endl;
         Muon antimuon{Muon(10, 10, 10, 1e-10, true)};
         antimuon.info();
+        */
 
         //Create anti-tau via parameterised constructor
         std::cout<<"\nCreating anti tau"<<std::endl;
-        Tau antitau{Tau(10, 10, 10, 1e-10, true)};
+        Tau antitau{Tau(10, 10, 10, 1e-4, true)};
         antitau.info();
+
+        //Create default tau
+        std::cout<<"\nCreating default tau"<<std::endl;
+        Tau tau_default{Tau()};
+        tau_default.info();
+
+        //Create tau via constructor
+        std::cout<<"\nCreating tau"<<std::endl;
+        Tau tau_2{Tau(0, 0, 1, 1e-14)};
+        tau_2.info();
+
 
         //Create a muon neutrino
         std::cout<<"\nCreating muon neutrino"<<std::endl;
