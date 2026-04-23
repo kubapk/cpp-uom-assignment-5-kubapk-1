@@ -32,7 +32,9 @@ Another issue with the FourMomentum class as it does not verify the invariant ma
 
 The problem with using Lepton as a friend class is that `std::unique_ptr<FourMomentum> momentum_ptr` in Lepton class makes a new FourMomentum object not associated with the Lepton class, and if the constructor for FourMomentum is private, this would not be possible.
 
-A solution to all of this is using a static function inside the FourMomentum object which returns a FourMomentum object but only taking mass, px, py, pz as inputs. The constructors would be private, but the static function could access this as its within the FourMomentum class. The user could then make their own FourMomentum object if they wanted to which would be physically valid (as long as the mass is valid), and the Lepton class could use this function from FourMomentum object. This should enable setters to be used directly within the FourMomentum object, as long as they correctly update the energy value.
+A solution to all of this is using a static function inside the FourMomentum object which returns a FourMomentum object but only taking mass, px, py, pz as inputs. The constructors would be private, but the static function could access this as its within the FourMomentum class. The user could then make their own FourMomentum object if they wanted to which would be physically valid (as long as the mass is valid), and the Lepton class could use this function from FourMomentum object. Setters should still be via Lepton class, as they require updating the FourMomentum object using mass (to find energy component). The FourMomentum object would also require another static function which takes E, px, py, pz as inputs - this checks $m > 0$, i.e. $E^2 > p_x^2 + p_y^2 + p_z^2$.
+
+Using this implementation makes more sense as the FourMomentum class handles all the checks (for mass and energy) - as it is not only the Lepton class which can use it - the user could create a FourMomentum object. By making the constructors private this is discouraged, but still possible via the 2 static functions defined in FourMomentum class. Improvement as if user wanted to create a new derived class, the rest mass they define must be positive.
 
 ### 0/3/5 rule
 The FourMomentum object has the data members E, px, py, pz which are all doubles. As there are no pointers involved (or any other objects of non-class type), we use the rule of 0 - FourMomentum object does not need to have user-defined special member functions. Since the Lepton class involves a smart pointer, we must implement the rule of 3 at least. As the assignment requires `std::move` of Electron (derived from Lepton), we need move semantics and so must implement the rule of 5. All derived classes inherit the constructors and assignment operators defined in Lepton base class, and since they do not have any pointers, we use rule of 0 for derived classes.
@@ -98,6 +100,7 @@ A muon decays into electron, antineutrino and muon neutrino at about 100% probab
  - Decay output for muon? Base lepton class
  - Time in detector or not? Justify max value.
  - Daughter products generated as vector? NO
+ - Check mass input for FourMomentum function
 
  - DIFFERENTIATE TAU & MUO
  - TIME IN DETECTOR - USE DISTANCE / VELOCITY INSTEAD

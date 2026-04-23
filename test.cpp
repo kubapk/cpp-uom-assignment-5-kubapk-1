@@ -14,10 +14,11 @@ int main()
 {
     try
     {
-        /*
+        
         //Cannot create a Lepton - it is an abstract class
         //Lepton lepton_test{Lepton(10, 1, 0, 0, 0)};
         
+        /*
         //Create FourMomentum object
         std::cout<<"\nCreating FourMomentum"<<std::endl;
         FourMomentum test_momentum{FourMomentum(0, 10, 10, 10)};
@@ -25,6 +26,7 @@ int main()
         std::cout<<"px = "<<test_momentum.get_px()<<std::endl;
         std::cout<<"py = "<<test_momentum.get_py()<<std::endl;
         std::cout<<"pz = "<<test_momentum.get_pz()<<std::endl;
+        */
 
         //Create an electron
         std::cout<<"\nCreating new electron"<<std::endl;
@@ -78,7 +80,7 @@ int main()
         Muon muon_1{Muon()};
         muon_1.info();
         std::cout<<"\nMuon decayed? "<<muon_1.has_decayed()<<std::endl;
-        std::cout<<"\nMuon time in detector via getter: "
+        std::cout<<"Muon time in detector via getter: "
         <<muon_1.get_time_in_detector()<<std::endl;
 
         //Create muon via parameterised constructor
@@ -95,7 +97,6 @@ int main()
         std::cout<<"\nCreating anti muon"<<std::endl;
         Muon antimuon{Muon(10, 10, 10, 1e-10, true)};
         antimuon.info();
-        */
 
         //Create anti-tau via parameterised constructor
         std::cout<<"\nCreating anti tau"<<std::endl;

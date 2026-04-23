@@ -24,8 +24,8 @@ Lepton::Lepton(const double mass_in, const int charge_in, const double px_in,
     const double py_in, const double pz_in, bool is_anti) :
         mass{mass_in}, 
         relative_charge{is_anti? -charge_in : charge_in}, //if true, if false
-        momentum_ptr{std::make_unique<FourMomentum>(compute_energy(mass_in, px_in, py_in, pz_in), 
-        px_in, py_in, pz_in)},
+        momentum_ptr{std::make_unique<FourMomentum>(FourMomentum::four_momentum_from_mass(
+            mass_in, px_in, py_in, pz_in))},
         is_antiparticle{is_anti}
         {}
 
@@ -81,8 +81,8 @@ void Lepton::set_px(const double& px_in)
     double pz = (*momentum_ptr).get_pz();
 
     //Set new four momentum with new px_in
-    momentum_ptr = std::make_unique<FourMomentum>(compute_energy(mass, px_in, py, pz), 
-    px_in, py, pz);
+    momentum_ptr = std::make_unique<FourMomentum>(FourMomentum::four_momentum_from_mass(
+            mass, px_in, py, pz));
 }
 
 //Setter for y momentum
@@ -93,8 +93,8 @@ void Lepton::set_py(const double& py_in)
     double pz = (*momentum_ptr).get_pz();
 
     //Set new four momentum with new px_in
-    momentum_ptr = std::make_unique<FourMomentum>(compute_energy(mass, px, py_in, pz), 
-    px, py_in, pz);
+    momentum_ptr = std::make_unique<FourMomentum>(FourMomentum::four_momentum_from_mass(
+            mass, px, py_in, pz));
 }
 
 //Setter for z momentum
@@ -105,8 +105,8 @@ void Lepton::set_pz(const double& pz_in)
     double py = (*momentum_ptr).get_py();
 
     //Set new four momentum with new px_in
-    momentum_ptr = std::make_unique<FourMomentum>(compute_energy(mass, px, py, pz_in), 
-    px, py, pz_in);
+    momentum_ptr = std::make_unique<FourMomentum>(FourMomentum::four_momentum_from_mass(
+            mass, px, py, pz_in));
 }
 
 
@@ -121,28 +121,11 @@ void Lepton::base_info() const
     std::cout<<"Decay status: "<<(has_decayed()? "Decayed" : "Not decayed")<<std::endl;
 }
 
-//Protected function to find energy
-double Lepton::compute_energy(const double mass_in, const double px_in, 
-    const double py_in, const double pz_in)
-    // E^2 = m^2 + p^2
-    {
-        double E = std::sqrt(mass_in*mass_in + px_in*px_in + py_in*py_in
-        + pz_in*pz_in);
-
-        if(!std::isfinite(E))
-            throw std::overflow_error("Momentum values are too large. Energy is infinite.");
-
-        return E;
-    }
-//Static function to ensure the energy cannot be modified by any setters or getters during run time 
-//- belongs to the class rather than any specific object of the class
-
-
 //FRIEND FUNCTIONS
 //Friend function to add FourMomentum of 2 leptons
 FourMomentum sum_momenta(const Lepton& lep1, const Lepton& lep2)
 {
-    return(FourMomentum(
+    return(FourMomentum::four_momentum_from_energy(
         lep1.momentum_ptr->get_E()+lep2.momentum_ptr->get_E(),
         lep1.momentum_ptr->get_px()+lep2.momentum_ptr->get_px(),
         lep1.momentum_ptr->get_py()+lep2.momentum_ptr->get_py(),
