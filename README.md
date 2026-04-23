@@ -100,6 +100,8 @@ A muon decays into electron, antineutrino and muon neutrino at about 100% probab
  - Check 2dp for all outputs in info func
  - Control invalid inputs for DecayMode?
  - Cannot set precision of results because then everything afterwards is set to 2dp - confirm this
+ - Different decay outputs for tau & anti tau? Decay output for muon?
+ - Time in detector or not? Justify max value.
 
  - DIFFERENTIATE TAU & MUO
  - TIME IN DETECTOR - USE DISTANCE / VELOCITY INSTEAD
