@@ -66,15 +66,17 @@ Default constructor must contain flavour as an input, as all neutrinos are born 
 
 Neutrinos cannot be entered with an invalid neutrino - must be called via enumerator which only has 3 options. If however there is an uninitialised variable `NeutrinoFlavour flavour;`, this could be passed through with an invalid (null) flavour. Hence the need for throw logic error if enumerator reaches end.
 
-
-### User input validation
+### Class input validation
 Added check on the user input for time in detector, so they could not enter a negative time, or an arbitarily large time (taken to be 1ms - WHY? CORRESPONDS TO HIGH ENERGY?). The 3-momentum can contain any positive or negative floats, but should not allow infinite values. If a user enters a very large momentum, it may overflow to `inf` which cannot be used in calculations. Infinite values must therefore be checked for and throw an error. This is done via FourMomentum class.
-
 
 ### Assumptions
 Electron and Neutrino have has_decayed=false because they are stable particles so for any time in the detector they are most likely to not have decayed. To ensure this holds, and that the user can't enter arbitrarily large numbers, we set a limit on the time_in_detector. In the program logic, if during the maximum of time_in_detector the Lepton doesn't decay, it doesn't need that property and so it always has has_decayed=false.
 
 Charge of Leptons is always an integer, so charge changed to int everywhere.
+
+### Decay modes for tau
+Text here
+
 
 ## Notes 
  - Check where all consts need to go 
@@ -92,6 +94,8 @@ Charge of Leptons is always an integer, so charge changed to int everywhere.
  - FourMomentum class must have constructor moved to private so that the user cannot access it directly.
  - Can user use FourMomentum? Make Lepton a friend class of FourMomentum and FourMomentum constructor private - only Lepton can construct FourMomentum object, and not user.
  - Print which object (particle name) the energy is infinite for
+ - Make FourMomentum only accessible to lepton class (must declare lepton class in the same line)
+ - Check 2dp for all outputs in info func
 
  - DIFFERENTIATE TAU & MUO
  - TIME IN DETECTOR - USE DISTANCE / VELOCITY INSTEAD
