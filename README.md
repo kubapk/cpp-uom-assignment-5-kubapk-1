@@ -141,5 +141,7 @@ A muon decays into electron, antineutrino and muon neutrino at about 100% probab
  [13] https://www.w3schools.com/cpp/cpp_switch.asp
 
 
- - Changed Particle class name to Lepton
- - Removed checks for particle name & particle name property of Lepton class
+## Important
+ - version_37 uses FourMomentum via constructor (no checks)
+ - version_38, version_39 make FourMomentum constructors private
+ - version_40 comes from version_37, with added features
