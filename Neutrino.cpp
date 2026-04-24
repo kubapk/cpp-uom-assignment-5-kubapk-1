@@ -27,6 +27,14 @@ Neutrino::Neutrino(const double px_in, const double py_in, const double pz_in,
         {}
 
 
+//SETTERS
+//Setter for flavour
+void Neutrino::set_flavour(const NeutrinoFlavour& nf)
+{
+    flavour = nf;
+}
+
+
 //GETTERS
 //Getter for flavour
 string Neutrino::get_flavour() const

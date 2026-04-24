@@ -130,7 +130,13 @@ where $X_0$ is the radiation length, $E_c$ is the critical energy, and $E_0$ is 
 The \verb|Muon| class introduces the data member \verb|time_in_detector()| which, if greater than the constant \verb|MUON_MEAN_LIFETIME| stored as a private data member in the class, sets \verb|has_decayed()| to be true. A \verb|validate_time()| static function is used to check that the time entered by the user is not negative or greater than 1 second.
 
 \subsection{Tau class}
-The \verb|Tau| class  uses \verb|time_in_detector()| and with \verb|TAU_MEAN_LIFETIME| to handle the \verb|has_decayed()| function, akin to the \verb|Muon| class. Unlike the \verb|Muon| class, however, it takes into account the different decay modes of taus. Using the fact that 64$\%$ of the time a taus' decay products are hadronic, 17.8$\%$ of the time they involve electrons, and 17.4$\%$ of the time they involve muons, a private member function \verb|generate_decay_mode()| uses a basic Monte Carlo simulation to set the \verb|decay_mode| data member to one of the named values in the enumerator class for the decay modes.
+The \verb|Tau| class  uses \verb|time_in_detector()| and with \verb|TAU_MEAN_LIFETIME| to handle the \verb|has_decayed()| function, akin to the \verb|Muon| class. Unlike the \verb|Muon| class, however, it takes into account the different decay modes of taus. Using the fact that 64$\%$ of the time a taus' decay products are hadronic, 17.8$\%$ of the time they involve electrons, and 17.4$\%$ of the time they involve muons, a private member function \verb|generate_decay_mode()| uses a basic Monte Carlo simulation to set the \verb|decay_mode| data member to one of the three named values in the enumerator class defined for the decay modes. The getter \verb|get_decay_mode| uses a switch to return the decay products as a string, differing for each named value in the enumerator class, and this is used in the overriden \verb|info()| function.
+
+\subsection{Neutrino class}
+In the neutrino class, the idea of lifetime is discarded and \verb|has_decayed| is always set to false due to the stability of neutrinos. An enumerator class \verb|NeutrinoFlavour| is used with three named values corresponding to the three neutrino flavours. The neutrino flavour is set as a private data member which can be specified via the neutrino constructor or flavour setter. Since a neutrino cannot be flavourless, the default constructor also requires flavour as an input. The \verb|info()| function prints the flavour using a switch returning a string dependent on the named value in the enumerator class, as well as the flavour generation, again dependent on the named value.
+
+\subsection{Main cpp file}
+Text here
 
 \newpage
 \section{References}

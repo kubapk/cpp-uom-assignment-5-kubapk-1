@@ -44,6 +44,9 @@ public:
     //Parameterised constructor (with new data members)
     Neutrino(const double px_in, const double py_in, const double pz_in, 
         const NeutrinoFlavour flavour_in, bool is_anti = false);
+    
+    //Setters
+    void set_flavour(const NeutrinoFlavour& nf);
 
     //Getters
     string get_flavour() const; //return by value so that string is not temporary

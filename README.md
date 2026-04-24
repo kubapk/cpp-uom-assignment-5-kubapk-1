@@ -107,6 +107,7 @@ A muon decays into electron, antineutrino and muon neutrino at about 100% probab
  - Photons released via electron shower (property of electron)
  - Justify max time in detector and detector length (typical values of calorimeter)
  - Max time in detector different for muon & tau?
+ - Check neutrino setter for flavour
 
  ## If extra time
  - Time in detector and all of its checks are repeated in muon & tau - not good
