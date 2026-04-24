@@ -113,9 +113,9 @@ Note to markers: For version history please see the README file for different br
 \vspace{5pt}
 
 \section{Program summary}
-This program is based around a \verb|Lepton| class, which is an abstract base class from which \verb|Electron|, \verb|Muon|, \verb|Tau|, and \verb|Neutrino| are derived classes. The \verb|Lepton| class contains a unique pointer to a \verb|FourMomentum| object, which is an object of a class containing energy, x momentum, y momentum, z momentum, and rest mass, all measured in MeV. The \verb|Lepton| class also contains a rest mass and relative charge, as well as a boolean expression which if true represents an antilepton. The class contains 2 virtual member functions. The first is the \verb|info()| function which prints out the aforementioned properties of the \verb|Lepton| class, and \verb|has_decayed()| which is true if the lepton has decayed.
+This program is based around a \verb|Lepton| class, which is an abstract base class from which \verb|Electron|, \verb|Muon|, \verb|Tau|, and \verb|Neutrino| are derived classes. The \verb|Lepton| class contains a unique pointer to a \verb|FourMomentum| object, whose class has energy, x momentum, y momentum, z momentum, and rest mass, as data members (all measured in MeV). The \verb|Lepton| class also contains a rest mass and relative charge, as well as a boolean expression which if true represents an antilepton by flipping the charge data member. The \verb|Lepton| class contains 2 virtual member functions which makes it abstract. The first is the \verb|info()| function which prints out the aforementioned properties of the \verb|Lepton| class, and \verb|has_decayed()| which is true if the lepton has decayed.
 
-The derived classes inheret all these properties, but also have their own constants or member functions and as a result override the \verb|info()| and \verb|has_decayed()| - where there are additional properties are printed in the \verb|info()| function, and then used to determine the outcome of \verb|has_decayed()|. Figure X is a UML diagram which shows all of the properties of these leptons. All of the derived classes use \verb|static constexpr| to store their mass and charge.
+The derived classes inheret all these properties, but also have their own data members and member functions. These additional properties are printed by overriding the \verb|info()| function (using \verb|base_info()| to print the properties from \verb|Lepton|, and are also used to determine the outcome of \verb|has_decayed()|. Figure X is a UML diagram which shows all of the properties of these leptons. All of the derived classes use \verb|static constexpr| to store their mass and charge.
 
 \subsection{Electron class}
 This class introduces an interaction with a detector, primarily through calculating the shower depth in a tungsten (W) detector via the member function \verb|shower_depth_in_tungsten()|. The equation for shower depth $X$ used was
@@ -130,7 +130,7 @@ where $X_0$ is the radiation length, $E_c$ is the critical energy, and $E_0$ is 
 The \verb|Muon| class introduces \verb|time_in_detector()| which can be specified in a \verb|Muon| object which if it is greater than the constant \verb|MUON_MEAN_LIFETIME| stored as a private data member, sets \verb|has_decayed()| to be true. A \verb|validate_time()| static function is used to check that the time entered by the user is not negative or greater than 1 second.
 
 \subsection{Tau class}
-The \verb|Tau| class uses identical functions as the \verb|Muon| class along with \verb|TAU_MEAN_LIFETIME| to handle the \verb|has_decayed()| function. It also takes into account the possible decay channels using an enumerator class.
+The \verb|Tau| class also uses \verb|time_in_detector()| along with \verb|TAU_MEAN_LIFETIME| to handle the \verb|has_decayed()| function. Unlike the \verb|Muon| classes, it takes into account the different decay modes of taus, given that 64$\%$ of the time its decay products are hadronic, 17.8$\%$ of the time they involve electrons, and 17.4$\%$ of the time they involve muons.
 
 \newpage
 \section{References}
