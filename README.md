@@ -38,7 +38,9 @@ In reality this makes the FourMomentum class redundant, as it is completely cont
 
 The assignment also requires that FourMomentum is a usable class, and as such its constructors cannot be private. All checks for invariant mass must be enforced in the FourMomentum class.
 
-Note that giving 2 possible constructors requires each constructor to have a different number or type of parameters, so the compiler knows which one to use when you create an object (constructor overloading)
+Note that giving 2 possible constructors requires each constructor to have a different number or type of parameters, so the compiler knows which one to use when you create an object (constructor overloading).
+
+Option to use factor with E, px, py, pz and private constructor with E, px, py, pz - why not?
 
 ### 0/3/5 rule
 The FourMomentum object has the data members E, px, py, pz which are all doubles. As there are no pointers involved (or any other objects of non-class type), we use the rule of 0 - FourMomentum object does not need to have user-defined special member functions. Since the Lepton class involves a smart pointer, we must implement the rule of 3 at least. As the assignment requires `std::move` of Electron (derived from Lepton), we need move semantics and so must implement the rule of 5. All derived classes inherit the constructors and assignment operators defined in Lepton base class, and since they do not have any pointers, we use rule of 0 for derived classes.

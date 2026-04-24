@@ -146,7 +146,8 @@ FourMomentum sum_momenta(const Lepton& lep1, const Lepton& lep2)
         lep1.momentum_ptr->get_E()+lep2.momentum_ptr->get_E(),
         lep1.momentum_ptr->get_px()+lep2.momentum_ptr->get_px(),
         lep1.momentum_ptr->get_py()+lep2.momentum_ptr->get_py(),
-        lep1.momentum_ptr->get_pz()+lep2.momentum_ptr->get_pz()));
+        lep1.momentum_ptr->get_pz()+lep2.momentum_ptr->get_pz(),
+        lep1.get_mass()));
 }
 
 

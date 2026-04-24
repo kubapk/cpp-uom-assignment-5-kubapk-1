@@ -19,7 +19,7 @@ Created on Tue 24 Mar 2026
 //Default constructor
 FourMomentum::FourMomentum() :
     //Set momentum objects to be 0
-    energy{0}, x_momentum{0}, y_momentum{0}, z_momentum{0} {}
+    energy{0}, x_momentum{0}, y_momentum{0}, z_momentum{0}, rest_mass{0} {}
     //Uses intialiser list (in case of consts)
 
 
@@ -28,13 +28,8 @@ FourMomentum::FourMomentum(const double mass_in, const double px_in, const doubl
         const double pz_in) :
     energy{compute_energy(mass_in, px_in, py_in, pz_in)}, x_momentum{px_in}, 
     y_momentum{py_in}, z_momentum{pz_in}
-    {
-        //Check momentum & mass values are valid
-        validate_finite(px_in);
-        validate_finite(py_in);
-        validate_finite(pz_in);
-        validate_mass(mass_in);
-    }
+    {}
+    //Validation checks via compute_energy function
 
 //Overloaded constructor with energy & mass
 FourMomentum::FourMomentum(const double energy_in, const double px_in, const double py_in, 
@@ -87,7 +82,11 @@ void FourMomentum::validate_invariant_mass(const double energy_in, const double 
 double FourMomentum::compute_energy(const double mass_in, const double px_in, 
     const double py_in, const double pz_in)
     // E^2 = m^2 + p^2
+    //Function used by 
     {
+        validate_finite(px_in);
+        validate_finite(py_in);
+        validate_finite(pz_in);
         validate_mass(mass_in);
 
         double E = std::sqrt(mass_in*mass_in + px_in*px_in + py_in*py_in
