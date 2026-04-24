@@ -36,6 +36,10 @@ A solution to all of this is using a static function inside the FourMomentum obj
 
 In reality this makes the FourMomentum class redundant, as it is completely controlled via the Lepton class (which contains the momentum setters). The only solution to this, and to ensure there are setters to all quantities as required for this asssignment, the FourMomentum class must include a mass private variable which the Lepton can pass into. This does modify the FourMomentum object to include mass as an additional parameter to E, px, py, pz, which is unfortunate as it makes it not a "proper" FourMomentum object, but the mass property can be thought of just a check, and should be defaulted to 0 if not specified. The beneift of this solution is that energy is computed from the FourMomentum class, which makes more sense as this is something which is not unique to the Lepton class. If the user then wished to make more particle classes which weren't leptons, this check would remain - as it should, making the program more robust. The code is therefore well suited for extensions (inheritance-safe design).
 
+The assignment also requires that FourMomentum is a usable class, and as such its constructors cannot be private. All checks for invariant mass must be enforced in the FourMomentum class.
+
+Note that giving 2 possible constructors requires each constructor to have a different number or type of parameters, so the compiler knows which one to use when you create an object (constructor overloading)
+
 ### 0/3/5 rule
 The FourMomentum object has the data members E, px, py, pz which are all doubles. As there are no pointers involved (or any other objects of non-class type), we use the rule of 0 - FourMomentum object does not need to have user-defined special member functions. Since the Lepton class involves a smart pointer, we must implement the rule of 3 at least. As the assignment requires `std::move` of Electron (derived from Lepton), we need move semantics and so must implement the rule of 5. All derived classes inherit the constructors and assignment operators defined in Lepton base class, and since they do not have any pointers, we use rule of 0 for derived classes.
 
@@ -100,6 +104,7 @@ A muon decays into electron, antineutrino and muon neutrino at about 100% probab
  - Decay output for muon? Base lepton class
  - Time in detector or not? Justify max value.
  - Allow user to construct FourMomentum using energy and get invariant mass?
+ - Photons released via electron shower (property of electron)
 
  - DIFFERENTIATE TAU & MUO
  - TIME IN DETECTOR - USE DISTANCE / VELOCITY INSTEAD

@@ -14,8 +14,6 @@ Created on Sun 22 Mar 2026
 #define FOURMOMENTUM_H
 
 #include<iostream>
-#include<vector>
-using std::vector;
 
 
 class FourMomentum
@@ -23,16 +21,32 @@ class FourMomentum
 private:
     double energy, x_momentum, y_momentum, z_momentum, rest_mass;
     
-    //Private function to check energy is not negative
-    static void validate_3_momentum(const double px, const double py, const double pz);
+    //Private function to check input is not infinite
+    static void validate_finite(const double x);
+
+    //Private function to check mass is valid
+    static void validate_mass(const double mass_in);
+
+    //Private function to check invariant mass equation
+    static void validate_mass_energy(const double energy_in, const double px_in, 
+    const double py_in, const double pz_in, const double mass_in);
+
+    //Private function to find energy given 3-momentum & mass
+    static double compute_energy(const double mass_in, const double px_in, 
+    const double py_in, const double pz_in);
 
 public:
     //Declare default constructor
     FourMomentum();
 
     //Declare parameterised constructor
-    FourMomentum(const double energy_in, const double x_momentum_in, const double y_momentum_in, 
-        const double z_momentum_in);
+    FourMomentum(const double mass_in, const double px_in, const double py_in, 
+        const double pz_in);
+
+    //Declare overloaded constructor with energy & mass
+    FourMomentum(const double energy_in, const double px_in, const double py_in, 
+        const double pz_in, const double mass_in);
+        //Must have different number of components to overload constructor
 
     //Declare destructor
     ~FourMomentum() = default;
