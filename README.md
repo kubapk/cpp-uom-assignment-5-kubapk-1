@@ -101,20 +101,19 @@ A muon decays into electron, antineutrino and muon neutrino at about 100% probab
  - Check where all consts need to go 
  - If something can be derived, don’t store it as a property of a class
  - Should bool be const? 
+ - Control invalid inputs for DecayMode?
+ - Cannot set precision of results because then everything afterwards is set to 2dp - confirm this
+ - Decay output for muon? Base lepton class
+ - Photons released via electron shower (property of electron)
+ - Justify max time in detector and detector length (typical values of calorimeter)
+ - Max time in detector different for muon & tau?
+
+ ## If extra time
  - Time in detector and all of its checks are repeated in muon & tau - not good
  - Time in detector doesn't make sense - cannot measure 10^-6 seconds of existence - see random decay times above
  - Random generator to generate a specific lifetime about mean lifetime - then this decay time becomes a property of the class
  - Is there something you can do with gamma / beta or relativity as "time in detector" doesn't really make sense - at least be more specific about what you mean by this
  - Print which object (particle name) the energy is infinite for (class input checks)
- - Control invalid inputs for DecayMode?
- - Cannot set precision of results because then everything afterwards is set to 2dp - confirm this
- - Decay output for muon? Base lepton class
- - Time in detector or not? Justify max value.
- - Photons released via electron shower (property of electron)
- - Justify max time in detector and detector length (typical values of calorimeter)
- - Time in detector different for muon & tau?
-
-
  - TIME IN DETECTOR - USE DISTANCE / VELOCITY INSTEAD
  - DITRIBUTION AWAY FROM MEAN LIFETIME TO USE AS ACTUAL LIFETIME?
 
