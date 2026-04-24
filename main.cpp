@@ -34,14 +34,14 @@ int main()
         vector<std::unique_ptr<Lepton>> particles;
 
         //Add 2 electrons by pointer
-        particles.push_back(std::make_unique<Electron>(10, 20, 0));
-        particles.push_back(std::make_unique<Electron>(0, 5, 0));
+        particles.push_back(std::make_unique<Electron>(10, 20, 0, 1));
+        particles.push_back(std::make_unique<Electron>(0, 5, 0, 1));
 
         //Add 4 muons
         for(size_t i=0; i<4; ++i) {particles.push_back(std::make_unique<Muon>());}
 
         //Add 1 antielectron & 1 antimuon
-        particles.push_back(std::make_unique<Electron>(5, 10, 5, true));
+        particles.push_back(std::make_unique<Electron>(5, 10, 5, 5, true));
         particles.push_back(std::make_unique<Muon>(0.5, 1, 0, 0, true));
 
         //Add muon neutrino & electron neutrino
@@ -49,8 +49,10 @@ int main()
         particles.push_back(std::make_unique<Neutrino>(Neutrino::NeutrinoFlavour::Electron));
 
         //Add tau & anti tau
-        particles.push_back(std::make_unique<Tau>());
+        particles.push_back(std::make_unique<Tau>(0.1, 0, 0.5, 1e-6));
         particles.push_back(std::make_unique<Tau>(0, 0, 0, 0, true));
+
+
         //PRINT PARTICLES INFO
         //Iterate through vector & print out info
         for(const auto& i : particles)
@@ -87,7 +89,7 @@ int main()
 
         //MOVE ELECTRONS
         //Create electron object
-        Electron fast_electron(10, 10, 10);
+        Electron fast_electron(10, 10, 10, 0.5);
         //Declare unique pointer to Electron object
         std::unique_ptr<Electron> electron_ptr;
         //Assign pointer to address of an electron

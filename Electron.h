@@ -28,6 +28,7 @@ private:
     static constexpr double ELECTRON_MASS{0.511};
     static constexpr double ELECTRON_CHARGE{-1};
     //This is best to have as a property which can be printed in Lepton already
+    static void validate_detector_length(const double detector_length_in);
 
     //Variables
     double detector_length; //cm
@@ -40,11 +41,17 @@ public:
     Electron(const double px_in, const double py_in, const double pz_in, 
         const double detector_length_in, bool is_anti = false);
 
+    //Setters
+    void set_detector_length(const double& detector_length_in);
+
+    //Getters
+    const double& get_detector_length() const {return detector_length;}
+
     //Prototyping member functions
     void info() const; //override Lepton class info() function
     bool has_decayed() const {return false;}
     double shower_depth_in_tungsten() const;
-    bool shower_contained(const double detector_length_in) const;
+    string shower_contained(const double detector_length_in) const;
 
 };
 

@@ -32,6 +32,9 @@ int main()
         std::cout<<"Mass: "<<electron_test.get_mass()<<std::endl;
         std::cout<<"Charge: "<<electron_test.get_charge()<<std::endl;
         std::cout<<"Four momentum: "<<electron_test.get_four_momentum()<<std::endl;
+        std::cout<<"Detector length: "<<electron_test.get_detector_length()<<std::endl;
+        std::cout<<"Shower depth in tungsten: "<<electron_test.shower_depth_in_tungsten()<<std::endl;
+        std::cout<<"Shower contained? "<<electron_test.shower_contained(electron_test.get_detector_length())<<std::endl;
 
         //Four momentum getters
         std::cout<<"\nGetters of four momentum of electron"<<std::endl;
@@ -54,7 +57,7 @@ int main()
         electron_test.get_four_momentum().set_pz(0.1);
         electron_test.info();
 
-        /*
+        
         //Set 
         //electron_test.get_four_momentum().set_px();
 
@@ -65,9 +68,10 @@ int main()
 
         //Create a positron
         std::cout<<"\nCreate positron"<<std::endl;
-        Electron positron_1{Electron(0.0, 0.0, 0.0, true)};
+        Electron positron_1{Electron(10, 10, 10, 0.01, true)};
         positron_1.info();
 
+        
         //Create a default muon
         std::cout<<"\nCreating a muon"<<std::endl;
         Muon muon_1{Muon()};
@@ -115,7 +119,6 @@ int main()
         //Create invalid neutrino
         //Neutrino neutrino_test{Neutrino(10, 0, 1, Neutrino::NeutrinoFlavour::Test)};
         
-        /*
         //Create FourMomentum object
         std::cout<<"Creating FM object using default constructor"<<std::endl;
         FourMomentum fm = FourMomentum::default_four_momentum();
@@ -146,7 +149,7 @@ int main()
         std::cout<<"E = "<<fm_3.get_E()<<"\npx = "<<fm_3.get_px()<<"\npy = "<<fm_3.get_py()<<
         "\npz = "<<fm_3.get_pz()<<"\nm = "<<fm_3.get_rest_mass()<<std::endl;
         std::cout<<fm_3<<std::endl;
-        */
+    
 
     }
     catch(const std::exception& e)
