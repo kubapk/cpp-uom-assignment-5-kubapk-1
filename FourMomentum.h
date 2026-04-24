@@ -53,7 +53,8 @@ public:
     void set_px(const double& px_in);
     void set_py(const double& py_in);
     void set_pz(const double& pz_in);
-    //Do not allow user to set energy, as this would break invariant mass equation
+    //Do not allow user to set energy, as this would change invariant mass 
+    //(not allowed for defined particles)
     //DO not allow user to set mass, as a particle's mass cannot be changed
 
     //Getters

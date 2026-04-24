@@ -18,18 +18,11 @@ int main()
         /*
         //Cannot create a Lepton - it is an abstract class
         //Lepton lepton_test{Lepton(10, 1, 0, 0, 0)};
-        
-        //Create FourMomentum object
-        std::cout<<"\nCreating FourMomentum"<<std::endl;
-        FourMomentum test_momentum{FourMomentum(0, 10, 10, 10)};
-        std::cout<<"E = "<<test_momentum.get_E()<<std::endl;
-        std::cout<<"px = "<<test_momentum.get_px()<<std::endl;
-        std::cout<<"py = "<<test_momentum.get_py()<<std::endl;
-        std::cout<<"pz = "<<test_momentum.get_pz()<<std::endl;
+        */
 
         //Create an electron
         std::cout<<"\nCreating new electron"<<std::endl;
-        Electron electron_test{Electron(20, -10, -10)};
+        Electron electron_test{Electron(20, -10, -10, 10)};
 
         //Print out electron info
         electron_test.info();
@@ -50,18 +43,19 @@ int main()
 
         //Setters
         std::cout<<"\nChange px"<<std::endl;
-        electron_test.set_px(100);
+        electron_test.get_four_momentum().set_px(100);
         electron_test.info();
 
         std::cout<<"\nChange py"<<std::endl;
-        electron_test.set_py(-10);
+        electron_test.get_four_momentum().set_py(-10);
         electron_test.info();
 
         std::cout<<"\nChange pz"<<std::endl;
-        electron_test.set_pz(0.1);
+        electron_test.get_four_momentum().set_pz(0.1);
         electron_test.info();
 
-        //Cannot set anything through FourMomentum object
+        /*
+        //Set 
         //electron_test.get_four_momentum().set_px();
 
         //Create an electron through default constructor
@@ -120,8 +114,8 @@ int main()
 
         //Create invalid neutrino
         //Neutrino neutrino_test{Neutrino(10, 0, 1, Neutrino::NeutrinoFlavour::Test)};
-        */
-
+        
+        /*
         //Create FourMomentum object
         std::cout<<"Creating FM object using default constructor"<<std::endl;
         FourMomentum fm = FourMomentum::default_four_momentum();
@@ -152,6 +146,7 @@ int main()
         std::cout<<"E = "<<fm_3.get_E()<<"\npx = "<<fm_3.get_px()<<"\npy = "<<fm_3.get_py()<<
         "\npz = "<<fm_3.get_pz()<<"\nm = "<<fm_3.get_rest_mass()<<std::endl;
         std::cout<<fm_3<<std::endl;
+        */
 
     }
     catch(const std::exception& e)

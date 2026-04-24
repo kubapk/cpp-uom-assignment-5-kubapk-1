@@ -24,22 +24,28 @@ class Electron : public Lepton
 //remain private
 {
 private:
-    //Data members unique to the Electron
+    //Constants
     static constexpr double ELECTRON_MASS{0.511};
     static constexpr double ELECTRON_CHARGE{-1};
-    //static constexpr bool is_stable{true};
     //This is best to have as a property which can be printed in Lepton already
+
+    //Variables
+    double detector_length; //cm
     
 public:
     //Default constructor
     Electron(); //electron at rest (px=py=pz=0)
 
     //Parameterised constructor (with new data members)
-    Electron(const double px_in, const double py_in, const double pz_in, bool is_anti = false);
+    Electron(const double px_in, const double py_in, const double pz_in, 
+        const double detector_length_in, bool is_anti = false);
 
     //Prototyping member functions
     void info() const; //override Lepton class info() function
     bool has_decayed() const {return false;}
+    double shower_depth_in_tungsten() const;
+    bool shower_contained(const double detector_length_in) const;
+
 };
 
 
