@@ -115,10 +115,22 @@ Note to markers: For version history please see the README file for different br
 \section{Program summary}
 This program is based around a \verb|Lepton| class, which is an abstract base class from which \verb|Electron|, \verb|Muon|, \verb|Tau|, and \verb|Neutrino| are derived classes. The \verb|Lepton| class contains a unique pointer to a \verb|FourMomentum| object, which is an object of a class containing energy, x momentum, y momentum, z momentum, and rest mass, all measured in MeV. The \verb|Lepton| class also contains a rest mass and relative charge, as well as a boolean expression which if true represents an antilepton. The class contains 2 virtual member functions. The first is the \verb|info()| function which prints out the aforementioned properties of the \verb|Lepton| class, and \verb|has_decayed()| which is true if the lepton has decayed.
 
-The derived classes inheret all these properties, but also have their own constants or member functions and as a result override the \verb|info()| and \verb|has_decayed()| functions according to their properties. Figure X is a UML diagram which shows all of the properties of these leptons.
+The derived classes inheret all these properties, but also have their own constants or member functions and as a result override the \verb|info()| and \verb|has_decayed()| - where there are additional properties are printed in the \verb|info()| function, and then used to determine the outcome of \verb|has_decayed()|. Figure X is a UML diagram which shows all of the properties of these leptons. All of the derived classes use \verb|static constexpr| to store their mass and charge.
 
+\subsection{Electron class}
+This class introduces an interaction with a detector, primarily through calculating the shower depth in a tungsten (W) detector via the member function \verb|shower_depth_in_tungsten()|. The equation for shower depth $X$ used was
 
+\begin{equation} \label{eq:gibbs}
+	X = X_0 \frac{ln(E_0/E_c)}{ln2},
+ \end{equation}
 
+where $X_0$ is the radiation length, $E_c$ is the critical energy, and $E_0$ is the initial energy of the electron (from its \verb|FourMomentum|). The first 2 are defined within the function, and are set values for tungsten. $E_0$ is accessed via the pointer to the \verb|FourMomnetum| from the Lepton base class. \verb|Electron| also has the function \verb|shower_contained(const double detector_length_in)| which, given a detector length, determines if the shower is contained within the detector.
+
+\subsection{Muon class}
+The \verb|Muon| class introduces \verb|time_in_detector()| which can be specified in a \verb|Muon| object which if it is greater than the constant \verb|MUON_MEAN_LIFETIME| stored as a private data member, sets \verb|has_decayed()| to be true. A \verb|validate_time()| static function is used to check that the time entered by the user is not negative or greater than 1 second.
+
+\subsection{Tau class}
+The \verb|Tau| class uses identical functions as the \verb|Muon| class along with \verb|TAU_MEAN_LIFETIME| to handle the \verb|has_decayed()| function. It also takes into account the possible decay channels using an enumerator class.
 
 \newpage
 \section{References}
