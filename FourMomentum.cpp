@@ -95,9 +95,11 @@ void FourMomentum::validate_mass(const double mass_in)
 void FourMomentum::validate_invariant_mass(const double energy_in, const double px_in, 
     const double py_in, const double pz_in, const double mass_in)
     {
-        double invariant_mass = energy_in*energy_in - px_in*px_in - py_in*py_in - pz_in*pz_in;
-        if(invariant_mass != mass_in)
-            throw std::invalid_argument("Unphysical four momentum. Check invariant mass equation.");
+        double invariant_mass_squared = energy_in*energy_in - px_in*px_in - py_in*py_in - pz_in*pz_in;
+        if(invariant_mass_squared != mass_in*mass_in)
+            throw std::invalid_argument("FourMomentum with (E="+std::to_string(energy_in)+", px="+std::to_string(px_in)+
+            ", py="+std::to_string(py_in)+", pz="+std::to_string(pz_in)+", m="+std::to_string(mass_in)+
+            ") is unphysical. Check invariant mass equation.");
     }
 
 //Private member function to find energy given 3-momentum & mass

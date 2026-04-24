@@ -132,7 +132,7 @@ int main()
         std::cout<<"E = "<<fm.get_E()<<"\npx = "<<fm.get_px()<<"\npy = "<<fm.get_py()<<
         "\npz = "<<fm.get_pz()<<"\nm = "<<fm.get_rest_mass()<<std::endl;
 
-        //Creating 2nd FourMomentum object
+        //Creating FourMomentum object via mass constructor
         std::cout<<"\nCreating FM object using mass constructor"<<std::endl;
         FourMomentum fm_2 = FourMomentum(0.5, 0, 1, 0);
         std::cout<<"E = "<<fm_2.get_E()<<"\npx = "<<fm_2.get_px()<<"\npy = "<<fm_2.get_py()<<
@@ -145,6 +145,12 @@ int main()
         "\npz = "<<fm_2.get_pz()<<"\nm = "<<fm_2.get_rest_mass()<<std::endl;
         std::cout<<fm_2<<std::endl;
 
+        //Create FourMomentum object via mass & energy constructor
+        std::cout<<"\nCreating FM object using mass & energy constructor"<<std::endl;
+        FourMomentum fm_3 = FourMomentum(100, 0, 0, 0, 100);
+        std::cout<<"E = "<<fm_3.get_E()<<"\npx = "<<fm_3.get_px()<<"\npy = "<<fm_3.get_py()<<
+        "\npz = "<<fm_3.get_pz()<<"\nm = "<<fm_3.get_rest_mass()<<std::endl;
+        std::cout<<fm_3<<std::endl;
 
     }
     catch(const std::exception& e)
