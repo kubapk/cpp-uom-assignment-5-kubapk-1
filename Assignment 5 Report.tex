@@ -113,7 +113,11 @@ Note to markers: For version history please see the README file for different br
 \vspace{5pt}
 
 \section{Program summary}
-This program is based around a \verb|Lepton| class, which is an abstract base class from which \verb|Electron|, \verb|Muon|, \verb|Tau|, \verb|Neutrino| are derived classes. The \verb|Lepton| class contains a unique pointer to a \verb|FourMomentum| object, which is an object of a class containing energy, x momentum, y momentum, z momentum, and rest mass, all measured in MeV.
+This program is based around a \verb|Lepton| class, which is an abstract base class from which \verb|Electron|, \verb|Muon|, \verb|Tau|, and \verb|Neutrino| are derived classes. The \verb|Lepton| class contains a unique pointer to a \verb|FourMomentum| object, which is an object of a class containing energy, x momentum, y momentum, z momentum, and rest mass, all measured in MeV. The \verb|Lepton| class also contains a rest mass and relative charge, as well as a boolean expression which if true represents an antilepton. The class contains 2 virtual member functions. The first is the \verb|info()| function which prints out the aforementioned properties of the \verb|Lepton| class, and \verb|has_decayed()| which is true if the lepton has decayed.
+
+The derived classes inheret all these properties, but also have their own constants or member functions and as a result override the \verb|info()| and \verb|has_decayed()| functions according to their properties. Figure X is a UML diagram which shows all of the properties of these leptons.
+
+
 
 
 \newpage
