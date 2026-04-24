@@ -95,7 +95,6 @@ int main()
         std::cout<<"\nCreating anti muon"<<std::endl;
         Muon antimuon{Muon(10, 10, 10, 1e-10, true)};
         antimuon.info();
-        */
 
         //Create anti-tau via parameterised constructor
         std::cout<<"\nCreating anti tau"<<std::endl;
@@ -120,6 +119,32 @@ int main()
 
         //Create invalid neutrino
         //Neutrino neutrino_test{Neutrino(10, 0, 1, Neutrino::NeutrinoFlavour::Test)};
+        */
+
+        //Create FourMomentum object
+        std::cout<<"Creating FM object using default constructor"<<std::endl;
+        FourMomentum fm = FourMomentum();
+        std::cout<<"E = "<<fm.get_E()<<"\npx = "<<fm.get_px()<<"\npy = "<<fm.get_py()<<
+        "\npz = "<<fm.get_pz()<<"\nm = "<<fm.get_rest_mass()<<std::endl;
+
+        std::cout<<"\nSet px"<<std::endl;
+        fm.set_px(10);
+        std::cout<<"E = "<<fm.get_E()<<"\npx = "<<fm.get_px()<<"\npy = "<<fm.get_py()<<
+        "\npz = "<<fm.get_pz()<<"\nm = "<<fm.get_rest_mass()<<std::endl;
+
+        //Creating 2nd FourMomentum object
+        std::cout<<"\nCreating FM object using mass constructor"<<std::endl;
+        FourMomentum fm_2 = FourMomentum(0.5, 0, 1, 0);
+        std::cout<<"E = "<<fm_2.get_E()<<"\npx = "<<fm_2.get_px()<<"\npy = "<<fm_2.get_py()<<
+        "\npz = "<<fm_2.get_pz()<<"\nm = "<<fm_2.get_rest_mass()<<std::endl;
+        std::cout<<fm_2<<std::endl;
+
+        std::cout<<"\nSet px"<<std::endl;
+        fm_2.set_px(10);
+        std::cout<<"E = "<<fm_2.get_E()<<"\npx = "<<fm_2.get_px()<<"\npy = "<<fm_2.get_py()<<
+        "\npz = "<<fm_2.get_pz()<<"\nm = "<<fm_2.get_rest_mass()<<std::endl;
+        std::cout<<fm_2<<std::endl;
+
 
     }
     catch(const std::exception& e)

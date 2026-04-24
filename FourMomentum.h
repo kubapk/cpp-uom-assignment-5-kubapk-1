@@ -63,6 +63,7 @@ public:
     const double& get_px() const {return x_momentum;}
     const double& get_py() const {return y_momentum;}
     const double& get_pz() const {return z_momentum;}
+    const double& get_rest_mass() const {return rest_mass;}
 
     //Prototyping friend functions
     friend std::ostream& operator<<(std::ostream& os, const FourMomentum& fm);

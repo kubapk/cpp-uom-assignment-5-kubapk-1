@@ -43,7 +43,7 @@ Note that giving 2 possible constructors requires each constructor to have a dif
 Option to use factor with E, px, py, pz and private constructor with E, px, py, pz - why not?
 
 ### Setters for FourMomentum
-Given FourMomentum now contains mass, it is possible to create setters. No setter for energy as this would result in a change in in px, py, or pz, since m is constant - but cannot know which of px, py, pz changes.
+Given FourMomentum now contains mass, it is possible to create setters. No setter for energy as this would result in a change in in px, py, or pz, since m is constant - but cannot know which of px, py, pz changes. Does not make much sense either as energy is something which is computed from mass, px, py, pz.
 
 ### 0/3/5 rule
 The FourMomentum object has the data members E, px, py, pz which are all doubles. As there are no pointers involved (or any other objects of non-class type), we use the rule of 0 - FourMomentum object does not need to have user-defined special member functions. Since the Lepton class involves a smart pointer, we must implement the rule of 3 at least. As the assignment requires `std::move` of Electron (derived from Lepton), we need move semantics and so must implement the rule of 5. All derived classes inherit the constructors and assignment operators defined in Lepton base class, and since they do not have any pointers, we use rule of 0 for derived classes.
