@@ -116,6 +116,11 @@ int main()
         Neutrino muon_neutrino{Neutrino(10, 0, 1, Neutrino::NeutrinoFlavour::Muon)};
         muon_neutrino.info();
 
+        //Set neutrino flavour
+        std::cout<<"\nSetting neutrino flavour"<<std::endl;
+        muon_neutrino.set_flavour(Neutrino::NeutrinoFlavour::Electron);
+        muon_neutrino.info();
+
         //Create invalid neutrino
         //Neutrino neutrino_test{Neutrino(10, 0, 1, Neutrino::NeutrinoFlavour::Test)};
         
