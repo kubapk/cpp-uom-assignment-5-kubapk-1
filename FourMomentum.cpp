@@ -23,29 +23,11 @@ FourMomentum::FourMomentum() :
     //Uses intialiser list (in case of consts)
 
 
-//Parameterised constructor (via mass)
-FourMomentum::FourMomentum(const double mass_in, const double px_in, const double py_in, 
-        const double pz_in) :
-    energy{compute_energy(mass_in, px_in, py_in, pz_in)}, x_momentum{px_in}, 
-    y_momentum{py_in}, z_momentum{pz_in}, rest_mass{mass_in}
-    {}
-    //Validation checks via compute_energy function
-
-//Overloaded constructor (via energy)
+//Parameterised constructor
 FourMomentum::FourMomentum(const double energy_in, const double px_in, const double py_in, 
-    const double pz_in) :
+        const double pz_in, const double mass_in) :
     energy{energy_in}, x_momentum{px_in}, y_momentum{py_in}, z_momentum{pz_in}, rest_mass{mass_in}
-    {
-        //Check values are valid
-        validate_finite(energy_in);
-        validate_finite(px_in);
-        validate_finite(py_in);
-        validate_finite(pz_in);
-        validate_mass(mass_in);
-
-        //Check invariant mass equation
-        validate_invariant_mass(energy_in, px_in, py_in, pz_in, mass_in);
-    }
+    {}
 
 
 //SETTERS
@@ -74,7 +56,7 @@ void FourMomentum::set_pz(const double& pz_in)
 }
 
 
-//MEMBER FUNCTIONS
+//PRIVATE MEMBER FUNCTIONS
 //Private member function to check px, py, pz are not infinite
 void FourMomentum::validate_finite(const double x)
 {
@@ -91,22 +73,10 @@ void FourMomentum::validate_mass(const double mass_in)
         throw std::invalid_argument("Mass must be between 0 MeV and 1 TeV (1e6MeV)");
 }
 
-//Private member function to check invariant mass equation
-void FourMomentum::validate_invariant_mass(const double energy_in, const double px_in, 
-    const double py_in, const double pz_in, const double mass_in)
-    {
-        double invariant_mass_squared = energy_in*energy_in - px_in*px_in - py_in*py_in - pz_in*pz_in;
-        if(invariant_mass_squared != mass_in*mass_in)
-            throw std::invalid_argument("FourMomentum with (E="+std::to_string(energy_in)+", px="+std::to_string(px_in)+
-            ", py="+std::to_string(py_in)+", pz="+std::to_string(pz_in)+", m="+std::to_string(mass_in)+
-            ") is unphysical. Check invariant mass equation.");
-    }
-
 //Private member function to find energy given 3-momentum & mass
 double FourMomentum::compute_energy(const double mass_in, const double px_in, 
     const double py_in, const double pz_in)
     // E^2 = m^2 + p^2
-    //Function used by 
     {
         validate_finite(px_in);
         validate_finite(py_in);
@@ -122,6 +92,44 @@ double FourMomentum::compute_energy(const double mass_in, const double px_in,
         return E;
     }
 
+//Private member function to find mass given 3-momentum & energy
+double FourMomentum::compute_mass(const double energy_in, const double px_in, 
+    const double py_in, const double pz_in) 
+    // m^2 = E^2 - p^2
+    {
+        validate_finite(px_in);
+        validate_finite(py_in);
+        validate_finite(pz_in);
+        validate_finite(energy_in);
+
+        double m = std::sqrt(energy_in*energy_in - px_in*px_in - py_in*py_in
+        - pz_in*pz_in);
+
+        if(!std::isfinite(m))
+            throw std::overflow_error("Momentum or energy values are too large. Mass is infinite.");
+
+        return m;
+    }
+
+//PUBLIC MEMBER FUNCTIONS
+//Public member function to find FourMomentum from mass
+FourMomentum FourMomentum::four_momentum_from_mass(const double mass_in, const double px_in, 
+        const double py_in, const double pz_in)
+        {
+            return FourMomentum(compute_energy(mass_in, px_in, py_in, pz_in), px_in, py_in, pz_in, mass_in);
+        }
+
+//Public member function to find FourMomentum from energy
+FourMomentum FourMomentum::four_momentum_from_energy(const double energy_in, const double px_in, 
+        const double py_in, const double pz_in)
+        {
+            return FourMomentum(energy_in, px_in, py_in, pz_in, compute_mass(energy_in, px_in, py_in, pz_in));
+        }        
+
+FourMomentum FourMomentum::default_four_momentum()
+{
+    return FourMomentum();
+}
 
 //FRIEND FUNCTIONS
 //Friend function to print FourMomentum

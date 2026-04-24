@@ -24,7 +24,8 @@ Lepton::Lepton(const double mass_in, const int charge_in, const double px_in,
     const double py_in, const double pz_in, bool is_anti) :
         mass{mass_in}, 
         relative_charge{is_anti? -charge_in : charge_in}, //if true, if false
-        momentum_ptr{std::make_unique<FourMomentum>(mass_in, px_in, py_in, pz_in)},
+        momentum_ptr{std::make_unique<FourMomentum>(FourMomentum::four_momentum_from_mass(mass_in,
+        px_in, py_in, pz_in))},
         is_antiparticle{is_anti}
         {}
 
@@ -91,12 +92,11 @@ void Lepton::base_info() const
 //Friend function to add FourMomentum of 2 leptons
 FourMomentum sum_momenta(const Lepton& lep1, const Lepton& lep2)
 {
-    return(FourMomentum(
+    return(FourMomentum::four_momentum_from_energy(
         lep1.momentum_ptr->get_E()+lep2.momentum_ptr->get_E(),
         lep1.momentum_ptr->get_px()+lep2.momentum_ptr->get_px(),
         lep1.momentum_ptr->get_py()+lep2.momentum_ptr->get_py(),
-        lep1.momentum_ptr->get_pz()+lep2.momentum_ptr->get_pz(),
-        lep1.get_mass()));
+        lep1.momentum_ptr->get_pz()+lep2.momentum_ptr->get_pz()));
 }
 
 

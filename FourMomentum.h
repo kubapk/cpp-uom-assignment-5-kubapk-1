@@ -20,6 +20,13 @@ class FourMomentum
 {
 private:
     double energy, x_momentum, y_momentum, z_momentum, rest_mass;
+
+    //Declare private default constructor
+    FourMomentum();
+
+    //Declare private parameterised constructor
+    FourMomentum(const double energy_in, const double px_in, const double py_in, 
+        const double pz_in, const double mass_in);
     
     //Private function to check input is not infinite
     static void validate_finite(const double x);
@@ -28,26 +35,17 @@ private:
     static void validate_mass(const double mass_in);
 
     //Private function to check invariant mass equation
-    static void validate_invariant_mass(const double energy_in, const double px_in, 
-    const double py_in, const double pz_in, const double mass_in);
+    //NOT NEEDED - WILL ALWAYS BE FOLLOWED DUE TO FUNCTIONS BELOW
 
     //Private function to find energy given 3-momentum & mass
     static double compute_energy(const double mass_in, const double px_in, 
     const double py_in, const double pz_in);
 
+    //Private function to find mass given 3-momentum & energy
+    static double compute_mass(const double energy_in, const double px_in, 
+    const double py_in, const double pz_in);
+
 public:
-    //Declare default constructor
-    FourMomentum();
-
-    //Declare parameterised constructor
-    FourMomentum(const double mass_in, const double px_in, const double py_in, 
-        const double pz_in);
-
-    //Declare overloaded constructor with energy & mass
-    FourMomentum(const double energy_in, const double px_in, const double py_in, 
-        const double pz_in, const double mass_in);
-        //Must have different number of components to overload constructor
-
     //Declare destructor
     ~FourMomentum() = default;
 
@@ -64,6 +62,18 @@ public:
     const double& get_py() const {return y_momentum;}
     const double& get_pz() const {return z_momentum;}
     const double& get_rest_mass() const {return rest_mass;}
+
+    //Member functions
+    //FourMomentum from mass
+    static FourMomentum four_momentum_from_mass(const double mass_in, const double px_in, 
+        const double py_in, const double pz_in);
+
+    //FourMomentum from energy
+    static FourMomentum four_momentum_from_energy(const double energy_in, const double px_in, 
+        const double py_in, const double pz_in);
+
+    //FourMomentum default
+    static FourMomentum default_four_momentum();
 
     //Prototyping friend functions
     friend std::ostream& operator<<(std::ostream& os, const FourMomentum& fm);

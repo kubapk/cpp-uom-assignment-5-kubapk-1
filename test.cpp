@@ -7,6 +7,7 @@
 #include "Muon.h"
 #include "Tau.h"
 #include "Neutrino.h"
+#include "FourMomentum.h"
 using std::vector;
 
 
@@ -123,7 +124,7 @@ int main()
 
         //Create FourMomentum object
         std::cout<<"Creating FM object using default constructor"<<std::endl;
-        FourMomentum fm = FourMomentum();
+        FourMomentum fm = FourMomentum::default_four_momentum();
         std::cout<<"E = "<<fm.get_E()<<"\npx = "<<fm.get_px()<<"\npy = "<<fm.get_py()<<
         "\npz = "<<fm.get_pz()<<"\nm = "<<fm.get_rest_mass()<<std::endl;
 
@@ -134,7 +135,7 @@ int main()
 
         //Creating FourMomentum object via mass constructor
         std::cout<<"\nCreating FM object using mass constructor"<<std::endl;
-        FourMomentum fm_2 = FourMomentum(0.5, 0, 1, 0);
+        FourMomentum fm_2 = FourMomentum::four_momentum_from_mass(0.5, 0, 1, 0);
         std::cout<<"E = "<<fm_2.get_E()<<"\npx = "<<fm_2.get_px()<<"\npy = "<<fm_2.get_py()<<
         "\npz = "<<fm_2.get_pz()<<"\nm = "<<fm_2.get_rest_mass()<<std::endl;
         std::cout<<fm_2<<std::endl;
@@ -146,8 +147,8 @@ int main()
         std::cout<<fm_2<<std::endl;
 
         //Create FourMomentum object via mass & energy constructor
-        std::cout<<"\nCreating FM object using mass & energy constructor"<<std::endl;
-        FourMomentum fm_3 = FourMomentum(100, 0, 0, 0, 100);
+        std::cout<<"\nCreating FM object using energy constructor"<<std::endl;
+        FourMomentum fm_3 = FourMomentum::four_momentum_from_energy(100, 0, 10, 0);
         std::cout<<"E = "<<fm_3.get_E()<<"\npx = "<<fm_3.get_px()<<"\npy = "<<fm_3.get_py()<<
         "\npz = "<<fm_3.get_pz()<<"\nm = "<<fm_3.get_rest_mass()<<std::endl;
         std::cout<<fm_3<<std::endl;
