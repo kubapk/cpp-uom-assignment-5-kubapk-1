@@ -56,11 +56,6 @@ public:
     //Setters
     //Should not have setters for mass and charge as they are fixed properties of a 
     //specific Lepton
-    void set_px(const double& px_in);
-    void set_py(const double& py_in);
-    void set_pz(const double& pz_in);
-    //Cannot have setter for FourMomentum as mass is a defined property and should not
-    //be entered by the user
 
     //Getters
     const FourMomentum& get_four_momentum() const {return *momentum_ptr;}

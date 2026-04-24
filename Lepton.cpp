@@ -73,41 +73,7 @@ Lepton& Lepton::operator=(Lepton&& lep)
 }
 
 //SETTERS
-//Setter for x momentum
-void Lepton::set_px(const double& px_in)
-{
-    //Get current py and pz
-    double py = (*momentum_ptr).get_py();
-    double pz = (*momentum_ptr).get_pz();
-
-    //Set new four momentum with new px_in
-    momentum_ptr = std::make_unique<FourMomentum>(compute_energy(mass, px_in, py, pz), 
-    px_in, py, pz);
-}
-
-//Setter for y momentum
-void Lepton::set_py(const double& py_in)
-{
-    //Get current px and pz
-    double px = (*momentum_ptr).get_px();
-    double pz = (*momentum_ptr).get_pz();
-
-    //Set new four momentum with new px_in
-    momentum_ptr = std::make_unique<FourMomentum>(compute_energy(mass, px, py_in, pz), 
-    px, py_in, pz);
-}
-
-//Setter for z momentum
-void Lepton::set_pz(const double& pz_in)
-{
-    //Get current px and pz
-    double px = (*momentum_ptr).get_px();
-    double py = (*momentum_ptr).get_py();
-
-    //Set new four momentum with new px_in
-    momentum_ptr = std::make_unique<FourMomentum>(compute_energy(mass, px, py, pz_in), 
-    px, py, pz_in);
-}
+//No setters
 
 
 //MEMBER FUNCTIONS

@@ -28,7 +28,7 @@ private:
     static void validate_mass(const double mass_in);
 
     //Private function to check invariant mass equation
-    static void validate_mass_energy(const double energy_in, const double px_in, 
+    static void validate_invariant_mass(const double energy_in, const double px_in, 
     const double py_in, const double pz_in, const double mass_in);
 
     //Private function to find energy given 3-momentum & mass
@@ -52,7 +52,11 @@ public:
     ~FourMomentum() = default;
 
     //Setters
-    //Do not allow user to set components of FourMomentum object
+    void set_px(const double& px_in);
+    void set_py(const double& py_in);
+    void set_pz(const double& pz_in);
+    //Do not allow user to set energy, as this would break invariant mass equation
+    //DO not allow user to set mass, as a particle's mass cannot be changed
 
     //Getters
     const double& get_E() const {return energy;}

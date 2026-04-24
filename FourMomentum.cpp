@@ -49,7 +49,29 @@ FourMomentum::FourMomentum(const double energy_in, const double px_in, const dou
 
 
 //SETTERS
-//No setters
+//Setter for x momentum
+void FourMomentum::set_px(const double& px_in)
+{
+    validate_finite(px_in);
+    energy = compute_energy(rest_mass, px_in, y_momentum, z_momentum);
+    x_momentum = px_in;
+}
+
+//Setter for y momentum
+void FourMomentum::set_py(const double& py_in)
+{
+    validate_finite(py_in);
+    energy = compute_energy(rest_mass, x_momentum, py_in, z_momentum);
+    y_momentum = py_in;
+}
+
+//Setter for z momentum
+void FourMomentum::set_pz(const double& pz_in)
+{
+    validate_finite(pz_in);
+    energy = compute_energy(rest_mass, x_momentum, y_momentum, pz_in);
+    z_momentum = pz_in;
+}
 
 
 //MEMBER FUNCTIONS
