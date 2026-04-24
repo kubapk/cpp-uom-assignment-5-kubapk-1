@@ -21,7 +21,7 @@ using std::vector;
 class FourMomentum
 {
 private:
-    double energy, x_momentum, y_momentum, z_momentum; //MeV
+    double energy, x_momentum, y_momentum, z_momentum, rest_mass;
     
     //Private function to check energy is not negative
     static void validate_3_momentum(const double px, const double py, const double pz);

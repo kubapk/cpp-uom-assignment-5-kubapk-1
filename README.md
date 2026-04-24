@@ -32,7 +32,9 @@ Another issue with the FourMomentum class as it does not verify the invariant ma
 
 The problem with using Lepton as a friend class is that `std::unique_ptr<FourMomentum> momentum_ptr` in Lepton class makes a new FourMomentum object not associated with the Lepton class, and if the constructor for FourMomentum is private, this would not be possible.
 
-A solution to all of this is using a static function inside the FourMomentum object which returns a FourMomentum object but only taking mass, px, py, pz as inputs. The constructors would be private, but the static function could access this as its within the FourMomentum class. The user could then make their own FourMomentum object if they wanted to which would be physically valid (as long as the mass is valid), and the Lepton class could use this function from FourMomentum object. This should enable setters to be used directly within the FourMomentum object, as long as they correctly update the energy value.
+A solution to all of this is using a static function inside the FourMomentum object which returns a FourMomentum object but only taking mass, px, py, pz as inputs. The constructors would be private, but the static function could access this as its within the FourMomentum class. The user could then make their own FourMomentum object if they wanted to which would be physically valid (as long as the mass is valid), and the Lepton class could use this function from FourMomentum object. This however does not enable setters to be used in the FourMomentum class, as the mass from the Lepton class is inacessible.
+
+In reality this makes the FourMomentum class redundant, as it is completely controlled via the Lepton class (which contains the momentum setters). The only solution to this, and to ensure there are setters to all quantities as required for this asssignment, the FourMomentum class must include a mass private variable which the Lepton can pass into. This does modify the FourMomentum object to include mass as an additional parameter to E, px, py, pz, which is unfortunate as it makes it not a "proper" FourMomentum object, but the mass property can be thought of just a check, and should be defaulted to 0 if not specified. The beneift of this solution is that energy is computed from the FourMomentum class, which makes more sense as this is something which is not unique to the Lepton class. If the user then wished to make more particle classes which weren't leptons, this check would remain - as it should, making the program more robust. The code is therefore well suited for extensions (inheritance-safe design).
 
 ### 0/3/5 rule
 The FourMomentum object has the data members E, px, py, pz which are all doubles. As there are no pointers involved (or any other objects of non-class type), we use the rule of 0 - FourMomentum object does not need to have user-defined special member functions. Since the Lepton class involves a smart pointer, we must implement the rule of 3 at least. As the assignment requires `std::move` of Electron (derived from Lepton), we need move semantics and so must implement the rule of 5. All derived classes inherit the constructors and assignment operators defined in Lepton base class, and since they do not have any pointers, we use rule of 0 for derived classes.
@@ -97,7 +99,7 @@ A muon decays into electron, antineutrino and muon neutrino at about 100% probab
  - Cannot set precision of results because then everything afterwards is set to 2dp - confirm this
  - Decay output for muon? Base lepton class
  - Time in detector or not? Justify max value.
- - Daughter products generated as vector? NO
+ - Allow user to construct FourMomentum using energy and get invariant mass?
 
  - DIFFERENTIATE TAU & MUO
  - TIME IN DETECTOR - USE DISTANCE / VELOCITY INSTEAD
@@ -111,35 +113,6 @@ A muon decays into electron, antineutrino and muon neutrino at about 100% probab
  - Do something whith shared pointer to show performance usage (vectors of different particle detectors)
  - Add getters for decay status? NO - USER CAN GET THIS BY PARTICLE.HAS_DECAYED(), AND SINCE THIS CAN BE A DERIVED CALCULATION IT SHOULD NOT BE A PROPERTY
  - Add oscillations to neutrino. While born with a definite flavor, a neutrino's flavor changes as it propagates through space, meaning it is not restricted to one flavour for its entire existence. Neutrinos only fully commit to a specific flavor when they interact with matter, behaving like one of the three standard types upon detection.
-
-
-## References
- [1] https://www.geeksforgeeks.org/cpp/pure-virtual-functions-and-abstract-classes/
-
- [2] https://en.cppreference.com/w/cpp/language/rule_of_three.html
-
- [3] https://www.geeksforgeeks.org/cpp/understanding-constexper-specifier-in-cpp/
-
- [4] https://www.geeksforgeeks.org/cpp/sqrt-sqrtl-sqrtf-cpp/
-
- [5] https://www.geeksforgeeks.org/cpp/enum-classes-in-c-and-their-advantage-over-enum-datatype/
-
- [6] https://www.geeksforgeeks.org/cpp/range-based-loop-c/
-
- [7] https://en.wikipedia.org/wiki/Particle_decay
-
- [8] https://physics.stackexchange.com/questions/282245/muon-decay-mode
-
- [9] https://en.wikipedia.org/wiki/Muon
-
- [10] https://en.wikipedia.org/wiki/Tau_(particle)
-
- [11] https://tikz.net/sm_decay_matrix/
-
- [12] https://www.geeksforgeeks.org/cpp/stduniform_real_-distribution-class-in-c-with-examples/
-
- [13] https://www.w3schools.com/cpp/cpp_switch.asp
-
 
 ## Important
  - version_37 uses FourMomentum via constructor (no checks)
