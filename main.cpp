@@ -51,7 +51,6 @@ int main()
         //Add tau & anti tau
         particles.push_back(std::make_unique<Tau>());
         particles.push_back(std::make_unique<Tau>(0, 0, 0, 0, true));
-
         //PRINT PARTICLES INFO
         //Iterate through vector & print out info
         for(const auto& i : particles)

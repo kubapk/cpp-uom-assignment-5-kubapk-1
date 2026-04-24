@@ -23,7 +23,7 @@ FourMomentum::FourMomentum() :
     //Uses intialiser list (in case of consts)
 
 
-//Parameterised constructor
+//Parameterised constructor (via mass)
 FourMomentum::FourMomentum(const double mass_in, const double px_in, const double py_in, 
         const double pz_in) :
     energy{compute_energy(mass_in, px_in, py_in, pz_in)}, x_momentum{px_in}, 
@@ -31,9 +31,9 @@ FourMomentum::FourMomentum(const double mass_in, const double px_in, const doubl
     {}
     //Validation checks via compute_energy function
 
-//Overloaded constructor with energy & mass
+//Overloaded constructor (via energy)
 FourMomentum::FourMomentum(const double energy_in, const double px_in, const double py_in, 
-    const double pz_in, const double mass_in) :
+    const double pz_in) :
     energy{energy_in}, x_momentum{px_in}, y_momentum{py_in}, z_momentum{pz_in}, rest_mass{mass_in}
     {
         //Check values are valid

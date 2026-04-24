@@ -30,10 +30,6 @@ protected:
     //Protected function to print info in base Lepton class which can be reused
     void base_info() const;
 
-    //Protected function to find energy given 3-momentum
-    static double compute_energy(const double mass_in, const double px_in, 
-    const double py_in, const double pz_in);
-
 public:
     //Default constructor
     Lepton() = delete; //no "default lepton"
