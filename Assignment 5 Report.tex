@@ -187,10 +187,42 @@ The \verb|FourMomentum| object has the data members E, px, py, pz which are all 
 
 
 \subsection{Class input validation}
-//
+All of the derived classes introduce private member functions which need to be specified via the constructors (or setters). These inputs must be checked so that they are physically correct. This is usually done via a static private member function starting with \verb|validate| which performs the checks and throws an invalid argument error, so that it can be reused in both constructors and setters within the class. The details of the validation checks for all classes in this program is shown below.
 
-\subsection{Using const for functions}
-//
+\begin{longtable}[c]{| c | c | c |}
+ \hline
+ \textbf{Data member} & \textbf{Validation function} & \textbf{Validation checks}\\
+ \hline
+ \multicolumn{3}{| c |}{Electron class}\\
+ \hline
+ \verb|detector_length| & \verb|validate_detector_length|  & Between 0 and 15cm inclusive\\
+\hline
+ \endfirsthead
+
+ \hline
+ \multicolumn{3}{| c |}{Muon class}\\
+ \hline
+ \verb|time_in_detector| & \verb|validate_time|  & Between 0 and 1s inclusive\\
+\hline
+
+ \hline
+ \multicolumn{3}{| c |}{Tau class}\\
+ \hline
+ \verb|time_in_detector| & \verb|validate_time|  & Between 0 and 1s inclusive\\
+\hline
+
+ \hline
+ \multicolumn{3}{| c |}{FourMomentum class}\\
+ \hline
+ E, px, py, pz & \verb|validate_finite|  & Not infinite\\
+\hline
+ m & \verb|validate_mass|  & Between 0 and $1\times10^6$ MeV\\
+\hline
+
+
+ \end{longtable}
+
+The maximum values for \verb|detector_length| and \verb|time_in_detector| were chosen to be as large as possible to give the user freedom, even if they may not correspond to typical values. Of course, \verb|time_in_detector| is not really an accurate measurement which can be done via detectors at the moment, and an ideal program would also have the muon class consider how far the particle travels in the detector and use relativistic velocity to compute the time the particle decays for in the detector, in its own frame of reference.
 
 
 
