@@ -175,6 +175,8 @@ Unique or shared smart pointer.
 Friend functions moved to lepton class.
 
 \subsection{Lepton class}
+In the main function for this assignment, we are never required to deal with just a lepton, but rather some specific type of lepton. Also, there is no need to work with lepton object - anything that is a lepton has a more specific particle category (e.g. electron, muon) with defined properties. Making \verb|Lepton| an abstract class therefore makes most sense. To make \verb|Lepton| an abstract class, at least one virtual function needs to be pure virtual. To adhere to this required making the \verb|info()| function print only additional features which \verb|Lepton| doesn't have, this allowing the info function to be pure virtual. To avoid repeating code, the \verb|base_info()| function was added to print out features which \verb|Lepton| does have, which can then be reused in all derived classes.
+
 Charge was changed to be \verb|int| given that all charges of leptons are either 1 or -1.
 
 
