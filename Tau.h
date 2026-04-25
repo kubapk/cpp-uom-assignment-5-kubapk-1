@@ -27,9 +27,9 @@ public:
 private:
     //Constant expressions
     static constexpr double TAU_MASS{1777};
-    static constexpr double TAU_CHARGE{-1};
+    static constexpr int TAU_CHARGE{-1};
     static constexpr double TAU_MEAN_LIFETIME{2.9e-13};
-    static constexpr double MAX_TIME{1}; //1 second
+    static constexpr double MAX_TIME{1.0}; //1 second
 
     static constexpr double PROB_HADRONIC{0.648};
     static constexpr double PROB_ELECTRON{0.178};

@@ -117,6 +117,9 @@ A muon decays into electron, antineutrino and muon neutrino at about 100% probab
  - Print which object (particle name) the energy is infinite for (class input checks)
  - TIME IN DETECTOR - USE DISTANCE / VELOCITY INSTEAD
  - DITRIBUTION AWAY FROM MEAN LIFETIME TO USE AS ACTUAL LIFETIME?
+ - All consts in UML? e.g. fm: FourMomentum& const
+ - Virtual in italics & static underlined so no need to specify?
+ - Change electron charge to be int everywhere
 
 
 ## Resolved

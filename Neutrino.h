@@ -31,7 +31,7 @@ public:
 private:
     //Constants
     static constexpr double NEUTRINO_MASS{0}; //Do something about this!
-    static constexpr double NEUTRINO_CHARGE{-1};
+    static constexpr int NEUTRINO_CHARGE{-1};
 
     //Variables
     NeutrinoFlavour flavour;

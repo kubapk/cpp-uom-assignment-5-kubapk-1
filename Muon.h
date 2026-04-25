@@ -26,9 +26,9 @@ class Muon : public Lepton
 private:
     //Static expressions
     static constexpr double MUON_MASS{105.7};
-    static constexpr double MUON_CHARGE{-1};
+    static constexpr int MUON_CHARGE{-1};
     static constexpr double MUON_MEAN_LIFETIME{2.2e-6};
-    static constexpr double MAX_TIME{1}; //1 second
+    static constexpr double MAX_TIME{1.0}; //1 second
     static double validate_time(const double t);
 
     //Variables

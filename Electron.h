@@ -26,7 +26,7 @@ class Electron : public Lepton
 private:
     //Constants
     static constexpr double ELECTRON_MASS{0.511};
-    static constexpr double ELECTRON_CHARGE{-1};
+    static constexpr int ELECTRON_CHARGE{-1};
     //This is best to have as a property which can be printed in Lepton already
     static void validate_detector_length(const double detector_length_in);
 

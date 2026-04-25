@@ -34,9 +34,6 @@ private:
     //Private function to check mass is valid
     static void validate_mass(const double mass_in);
 
-    //Private function to check invariant mass equation
-    //NOT NEEDED - WILL ALWAYS BE FOLLOWED DUE TO FUNCTIONS BELOW
-
     //Private function to find energy given 3-momentum & mass
     static double compute_energy(const double mass_in, const double px_in, 
     const double py_in, const double pz_in);
