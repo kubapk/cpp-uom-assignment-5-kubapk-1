@@ -120,6 +120,7 @@ A muon decays into electron, antineutrino and muon neutrino at about 100% probab
  - All consts in UML? e.g. fm: FourMomentum& const
  - Virtual in italics & static underlined so no need to specify?
  - Change electron charge to be int everywhere
+ - Add to report: consts, program improvements
 
 
 ## Resolved
