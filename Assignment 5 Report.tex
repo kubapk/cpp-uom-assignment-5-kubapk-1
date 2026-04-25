@@ -117,10 +117,12 @@ This program is based around a \verb|Lepton| class, which is an abstract base cl
 
 The derived classes inheret all these properties, but also have their own data members and member functions. These additional properties are printed by overriding the \verb|info()| function (using \verb|base_info()| to print the properties from \verb|Lepton|), and are used to determine the outcome of \verb|has_decayed()|. Figure \ref{fig:UML} is a UML diagram which shows the heirarcy of the derived classes, and their properties. All of the derived classes use \verb|static constexpr| to store their mass and charge as constants which cannot be modified during compilation or run time, which are printed via \verb|base_info()|.
 
-\begin{figure}[H]
+The lepton class also contains 2 friend functions - one to sum the four momenta of 2 leptons, and the other to compute their dot product.
+
+\begin{figure}
     \centering
-    \includegraphics[width=15cm]{assignment_5_uml.pdf}
-    \caption{UML diagram of assignment 5 program, depicting all the classes in the program. Access online via \url{https://lucid.app/lucidchart/1bbac6b7-964d-4fed-86ef-e02a48e03f28/view}. Enumerator classes represented as nested classes, and FourMomentum as composition of Lepton (the instance in FourMomentum lives and dies via the unique pointer in the Lepton class). Electron, Muon, Tau, Neutrino are derived classes of Lepton.}
+    \includegraphics[width=15cm]{assignment_5_uml_report.pdf}
+    \caption{UML diagram of assignment 5 program, depicting all the classes in the program. Access online via \url{https://lucid.app/lucidchart/1bbac6b7-964d-4fed-86ef-e02a48e03f28/view}. Enumerator classes represented as nested classes, and FourMomentum as composition of Lepton (the instance in FourMomentum lives and dies via the unique pointer in the Lepton class). Electron, Muon, Tau, Neutrino are derived classes of Lepton. Virtual functions are denotes in italics, while static functions are underlined. Friends functions are denoted using <<friend>>.}
     \label{fig:UML}
 \end{figure}
 
@@ -143,10 +145,12 @@ The \verb|Tau| class  uses \verb|time_in_detector()| and with \verb|TAU_MEAN_LIF
 In the neutrino class, the idea of lifetime is discarded and \verb|has_decayed| is always set to false due to the stability of neutrinos. An enumerator class \verb|NeutrinoFlavour| is used with three named values corresponding to the three neutrino flavours. The neutrino flavour is set as a private data member which can be specified via the neutrino constructor or flavour setter. Since a neutrino cannot be flavourless, the default constructor also requires flavour as an input. The \verb|info()| function prints the flavour using a switch returning a string dependent on the named value in the enumerator class, as well as the flavour generation, again dependent on the named value.
 
 \subsection{Main cpp file}
-Text here
+The main file is split into 6 parts. The first part creates a vector of different leptons called \verb|particles| via unique pointers to the base \verb|Lepton| class, and then prints out all of their info using an iterator through all elements in the vector. The second part accesses 2 electrons by dereferencing the first two elements and sums their four momenta. The third part accesses the anti electron and anti muon and takes the dot product of  their four momenta. The fourth part creates a unique pointer to an electron and moves it to a second pointer. The fifth part creates a shared pointer for a tau lepton and assigns into to 2 other pointers. The final part creates 2 vectors of shared particles ("detectors"), and gives them the same tau lepton pointer, which is shown by printing out all elements in both of the vectors.
 
 \newpage
 \section{Code design}
+\subsection{Four momentum class}
+The \verb|FourMomentum| class was changed so that, unlike, 
 
 
 \newpage
@@ -215,7 +219,7 @@ Responsibility for the final manuscript lies entirely with the author.
 GAI tools are not listed as authors and do not bear responsibility for the final outcomes.
 
 \subsection{GAI prompts}
-While no AI-generated code was directly used in this project, a list of the prompts used in ChatGPT-5.2 relevant to this project can be found below.
+While no AI-generated code was directly used in this project, a list of the prompts used in ChatGPT-5.2 which suggested code relevant to this project can be found below.
 
 \begin{itemize}
 	\item \textit{Shared pointers allow multiple pointers to point to the same object, and only when the last pointer goes out of scope does the memory become freed. Does this mean if you want to change FourMomentum object you need to wait until all pointers which are shared go out of scope?}
