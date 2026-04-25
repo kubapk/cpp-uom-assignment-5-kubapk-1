@@ -187,7 +187,10 @@ The \verb|FourMomentum| object has the data members E, px, py, pz which are all 
 
 
 \subsection{Class input validation}
+//
 
+\subsection{Using const for functions}
+//
 
 
 
@@ -261,9 +264,34 @@ While no AI-generated code was directly used in this project, a list of the prom
 
 \begin{itemize}
 	\item \textit{Shared pointers allow multiple pointers to point to the same object, and only when the last pointer goes out of scope does the memory become freed. Does this mean if you want to change FourMomentum object you need to wait until all pointers which are shared go out of scope?}
-	\item Code generation
-	\item Code optimisation
-	\item Code debugging
+	\item \textit{Why not the particle class just contain a four momentum object whose contains a smart pointer to E, px, px, pz?}
+	\item \textit{How to define print function in base class so that can Call the base class function from the derived class one to avoid code duplication?}
+	\item \textit{Why do these need to be friend functions?}
+	\item \textit{Why could it not just be a member function of the Particle class?}
+	\item \textit{Just so you know I have renamed my Particle class to Lepton. If Lepton is abstract class, shouldn't the info function be 0? Don't all member functions need to be pure virtual?}
+	\item \textit{Should it be abstract though? A lepton can exist on its own}
+	\item \textit{So let's say user sets an electron (px, py, pz) and we calculate energy for them to construct FourMomentum object. But then they use FourMomentum setter to change px. This should also change E. How to enforce this?}
+	\item \textit{So could you give example of how to implement positron?}
+	\item \textit{So lets say I want to add a function to calculate the energy given the 3 momenta, where should I add that in the Lepton class?}
+	\item \textit{Can you use rule of 5 for Lepton class?}
+	\item \textit{Why for copy constructor do not need to make old pointer null first?}
+	\item \textit{But if it is a raw pointer we do need to use null? Why and why not for unique pointer?}
+	\item \textit{Why compute energy cannot be static?}
+	\item \textit{Is there a property I could use which, e.g. a tau has which is a number the user can enter (it is not a fixed property of tau)?}
+	\item \textit{Should has decayed be static function in muon class?}
+	\item \textit{Would has decayed go in private or public}
+	\item \textit{Is it better to also make has decayed a member of the Muon?}
+	\item \textit{Why when I do Muon muon 1{Muon()}; muon 1.info(); in main does it print anti muon?}
+	\item \textit{When I declared a destructor in FourMomentum, but did not define it. Why was this not a problem when I just had Electron class, and suddenly became a problem for Muon class?}
+	\item \textit{But then should bool Muon::has decayed() const be static?}
+	\item \textit{Is it not better to have "have decayed" as a property of a muon?}
+	\item \textit{What can I do for neutrino class?}
+	\item \textit{What can I do about the mass for the neutrino? Each flavour has different mass? But cannot treat as 0 as that would always set E=0 in four momentum}
+	\item \textit{Can you give example of neutrino class with flavour and also neutrino behaviour (like oscillations)?}
+	\item \textit{I understand why not int$\&$, but why not "const int"?}
+	\item \textit{Or what about FourMomentum as nested class inside Lepton class?}
+	\item \textit{For the classes derived from lepton, do they need to use rule of 5/3/0?}
+	\item \textit{How to represent unique ptr in UML diagram?}
 \end{itemize}
 
 \end{document}
