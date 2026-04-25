@@ -129,7 +129,7 @@ The lepton class also contains 2 friend functions - one to sum the four momenta 
 \subsection{Electron class}
 This class introduces an interaction with a detector, primarily through calculating the shower depth in a tungsten (W) detector via the member function  \verb|shower_depth_in| \verb|_tungsten()|. This function calculates the shower depth $X$ using the equation
 
-\begin{equation} \label{eq:gibbs}
+\begin{equation} \label{eq:shower_depth}
 	X = X_0 \frac{ln(E_0/E_c)}{ln2},
  \end{equation}
 
@@ -150,9 +150,32 @@ The main file is split into 6 parts. The first part creates a vector of differen
 \newpage
 \section{Code design}
 \subsection{Four momentum class}
-The \verb|FourMomentum| class was changed so that, unlike in assignment 4 where its only data member was a unique pointer to a 4-vector containing energy and the 3-momentum components, it contained each component as a separate data member. This made the object easier to deal with as its components could be directly accessed and set without dealing with pointers
+The \verb|FourMomentum| class was changed so that, unlike in assignment 4 where its only data member was a unique pointer to a 4-vector containing energy E and the 3-momentum components (px, py, pz), it contained each component as a separate data member. This made the object easier to deal with when performing checks for invariant mass, since it relates to the four momentum components via the equation
+
+\begin{equation} \label{eq:fm}
+	m^2  = E^2 - \mathbf{p}^2,
+ \end{equation}
+
+where $m$ is the particle's rest mass (also known as invariant mass) and $\mathbf{p}$ is the 3-momentum. 
+
+The desire to include invariant mass originates from distinguishing different derived classes of \verb|Lepton| with the particle mass, and therefore any \verb|FourMomentum| object which the derived classes deal with must give an invariant mass which matches the rest mass of that specific particle. The issue with \verb|FourMomentum| class as in assignment 4 was that it required the user to specify E, px, py, pz in one go to generate the 4-vector. This was resolved by making the FourMomentum class have E, px, py, pz as data members themselves, allowing the 3-momentum to be set by the user, and then using the invariant mass equation to determine the energy and define the FourMomentum object.
+
+Setters for E, px, py, pz would allow the user to modify the \verb|FourMomentum| object and change the invariant mass, completely breaking checks for invariant mass. This was first resolved by removing all setters from the \verb|FourMomentum| class, and only allowing (px, py, pz) to be set via the \verb|Lepton| base class (through its constructors). Since \verb|Lepton| contained a mass data member, the energy could then be computed using equation \ref{eq:fm}, creating a valid \verb|FourMomentum| object. Individual setters for px, py, pz were then possible by re-computing the energy.
+
+This however made the \verb|FourMomentum| object completely redundant, as it was mostly controlled by the \verb|Lepton| class, and the user could make a \verb|FourMomentum| object which completely broke these checks. To avoid this, the code was redesigned to keep the control of the \verb|FourMomentum| object completely within the \verb|FourMomentum| class, thus disallowing a \verb|FourMomentum| object to be created which didn't obey equation \ref{eq:fm}. One idea was to make \verb|Lepton| a friend class of \verb|FourMomentum| and making the constructors private such that a \verb|FourMomentum| object could not be created outside of that class. This didn't work, however, due to the unique pointer in the \verb|Lepton| class, as it makes a new FourMomentum object not associated with the Lepton class, which wouldn't be possible.
+
+The solution used was to redesign the \verb|FourMomentum| class to also include a mass as a data member which could be used to perform check. The \verb|Lepton| class can then pass its mass into the constructor of the form (m, px, py, pz). This is more robust, as if the user wanted to make another base class, e.g. quarks, using \verb|FourMomentum|, they wouldn't need to worry about checking that invariant mass is conserved, as all checks would be handled by the \verb|FourMomentum| class. One issue that came up was with the friend function which summed the four momenta of 2 leptons, as this required a constructor in \verb|FourMomentum| of the form (E, px, py, pz), which could not be overloaded as it contained the same elements of the same type as the (m, px, py, pz) constructor.
+
+To get around this, a constructor of the form (E, px, py, pz, m) was made private, and two static functions \verb|four_momentum_from_mass| and \verb|four_momentum_from_energy| were introduced, where the latter allowed for the four momenta sum to be computed. This also gave the benefit that a user, who may not know the mass of a particle but does know its initial energy, could find its invariant mass and still construct a \verb|FourMomentum| object (although this is not relevant to this assignment where mass is a fixed property of leptons). Setters for px, py, pz were added in the \verb|FourMomentum| class, which assumed the invariant mass was conserved (and energy changed) to keep in line with requirements for the \verb|Lepton| class. Setters for mass and energy were not possible as both would allow the user to modify the rest mass.
+
+robust
+
+Unique or shared smart pointer.
+
+Friend functions moved to lepton class.
 
 \subsection{Lepton class}
+Charge was changed to be \verb|int| given that all charges of leptons are either 1 or -1.
 
 
 \newpage
